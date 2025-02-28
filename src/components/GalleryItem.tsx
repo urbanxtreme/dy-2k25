@@ -12,7 +12,11 @@ const GalleryItem = ({ image, title, description }: GalleryItemProps) => {
   
   return (
     <div 
-      className="relative overflow-hidden bg-minecraft-stone border-4 border-minecraft-stone rounded shadow-lg"
+      className="relative overflow-hidden bg-minecraft-obsidian-light border-4 border-minecraft-stone-dark rounded shadow-minecraft minecraft-3d transform transition-all duration-300"
+      style={{ 
+        transform: isHovered ? 'translateZ(20px) scale(1.03)' : 'translateZ(0)',
+        boxShadow: isHovered ? '0 20px 25px rgba(0,0,0,0.4)' : undefined
+      }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -25,7 +29,7 @@ const GalleryItem = ({ image, title, description }: GalleryItemProps) => {
       </div>
       
       <div 
-        className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-minecraft-dirt to-minecraft-dirt/80 p-4 transform transition-transform duration-300 ${
+        className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-minecraft-obsidian to-minecraft-obsidian/80 p-4 transform transition-transform duration-300 ${
           isHovered ? 'translate-y-0' : 'translate-y-full'
         }`}
       >
@@ -35,11 +39,16 @@ const GalleryItem = ({ image, title, description }: GalleryItemProps) => {
       
       {/* Pixelated corner effect on hover */}
       <div className={`absolute inset-0 pointer-events-none transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="absolute top-0 left-0 w-4 h-4 border-t-4 border-l-4 border-white/40"></div>
-        <div className="absolute top-0 right-0 w-4 h-4 border-t-4 border-r-4 border-white/40"></div>
-        <div className="absolute bottom-0 left-0 w-4 h-4 border-b-4 border-l-4 border-white/40"></div>
-        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-4 border-r-4 border-white/40"></div>
+        <div className="absolute top-0 left-0 w-4 h-4 border-t-4 border-l-4 border-minecraft-grass"></div>
+        <div className="absolute top-0 right-0 w-4 h-4 border-t-4 border-r-4 border-minecraft-grass"></div>
+        <div className="absolute bottom-0 left-0 w-4 h-4 border-b-4 border-l-4 border-minecraft-grass"></div>
+        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-4 border-r-4 border-minecraft-grass"></div>
       </div>
+      
+      {/* Add a glowing effect */}
+      {isHovered && (
+        <div className="absolute inset-0 pointer-events-none border-2 border-minecraft-grass/30 rounded"></div>
+      )}
     </div>
   );
 };

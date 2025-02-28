@@ -62,35 +62,35 @@
   }
 
   .dark {
-    --background: 35 10% 10%;
-    --foreground: 35 10% 95%;
+    --background: 220 14% 10%;
+    --foreground: 220 10% 90%;
 
-    --card: 35 10% 15%;
-    --card-foreground: 35 10% 95%;
+    --card: 224 14% 15%;
+    --card-foreground: 220 10% 90%;
 
-    --popover: 35 10% 15%;
-    --popover-foreground: 35 10% 95%;
+    --popover: 224 14% 15%;
+    --popover-foreground: 220 10% 90%;
 
-    --primary: 100 75% 40%;
+    --primary: 142 70% 45%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 30 60% 35%;
+    --secondary: 34 70% 35%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 30% 20%;
-    --muted-foreground: 35 10% 70%;
+    --muted: 225 14% 20%;
+    --muted-foreground: 220 10% 60%;
 
-    --accent: 210 75% 60%;
+    --accent: 198 93% 60%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 85% 50%;
+    --destructive: 0 85% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 35 10% 25%;
-    --input: 35 10% 25%;
-    --ring: 100 75% 40%;
+    --border: 240 3.7% 25%;
+    --input: 240 3.7% 25%;
+    --ring: 142 70% 45%;
 
-    --sidebar-background: 240 5.9% 10%;
+    --sidebar-background: 240 5.9% 12%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
     --sidebar-primary-foreground: 0 0% 100%;
@@ -101,6 +101,11 @@
   }
 }
 
+/* Enable dark mode by default */
+:root {
+  color-scheme: dark;
+}
+
 @layer base {
   * {
     @apply border-border;
@@ -108,8 +113,11 @@
   }
 
   body {
-    @apply bg-background text-foreground font-minecraft;
+    @apply bg-minecraft-obsidian text-foreground font-minecraft;
     cursor: url('/cursors/normal.png'), auto;
+    background-image: url('/images/minecraft-dark-pattern.png');
+    background-repeat: repeat;
+    background-size: 100px;
   }
 
   body:active {
@@ -125,11 +133,22 @@
   }
 }
 
+/* 3D Minecraft Button Styles */
 .minecraft-btn {
-  @apply font-minecraft uppercase text-white py-2 px-4 border-b-4 border-r-4 border-black/30 bg-minecraft-grass hover:bg-minecraft-grass/90 active:translate-y-1 active:translate-x-1 active:border-b-2 active:border-r-2 transition-all duration-100 inline-block;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  @apply font-minecraft uppercase text-white py-2 px-4 border-b-4 border-r-4 border-minecraft-grass-dark bg-minecraft-grass shadow-minecraft-btn hover:bg-minecraft-grass/90 active:translate-y-1 active:translate-x-1 active:border-b-2 active:border-r-2 transition-all duration-100 inline-block;
   position: relative;
   overflow: hidden;
+  transform: translateZ(0);
+}
+
+.minecraft-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 .minecraft-btn::after {
@@ -148,10 +167,20 @@
 }
 
 .minecraft-btn-secondary {
-  @apply font-minecraft uppercase text-white py-2 px-4 border-b-4 border-r-4 border-black/30 bg-minecraft-stone hover:bg-minecraft-stone/90 active:translate-y-1 active:translate-x-1 active:border-b-2 active:border-r-2 transition-all duration-100 inline-block;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  @apply font-minecraft uppercase text-white py-2 px-4 border-b-4 border-r-4 border-minecraft-stone-dark bg-minecraft-stone shadow-minecraft-btn hover:bg-minecraft-stone/90 active:translate-y-1 active:translate-x-1 active:border-b-2 active:border-r-2 transition-all duration-100 inline-block;
   position: relative;
   overflow: hidden;
+  transform: translateZ(0);
+}
+
+.minecraft-btn-secondary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 .minecraft-btn-secondary::after {
@@ -170,10 +199,21 @@
 }
 
 .minecraft-btn-gold {
-  @apply font-minecraft uppercase text-white py-2 px-4 border-b-4 border-r-4 border-black/30 bg-minecraft-gold hover:bg-minecraft-gold/90 active:translate-y-1 active:translate-x-1 active:border-b-2 active:border-r-2 transition-all duration-100 inline-block;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  @apply font-minecraft uppercase text-white py-2 px-4 border-b-4 border-r-4 border-minecraft-gold-dark bg-minecraft-gold shadow-minecraft-btn hover:bg-minecraft-gold/90 active:translate-y-1 active:translate-x-1 active:border-b-2 active:border-r-2 transition-all duration-100 inline-block;
   position: relative;
   overflow: hidden;
+  color: #5D3C1C;
+  transform: translateZ(0);
+}
+
+.minecraft-btn-gold::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .minecraft-btn-gold::after {
@@ -191,16 +231,32 @@
   top: 0;
 }
 
+/* Minecraft Container Style */
 .minecraft-container {
-  @apply border-4 border-minecraft-stone bg-minecraft-dirt/70 p-4;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  @apply border-4 border-minecraft-stone-dark bg-minecraft-obsidian/90 p-4 shadow-minecraft;
+  box-shadow: 
+    0 4px 0 0 #222,
+    0 -2px 0 0 #444,
+    2px 0 0 0 #444,
+    -2px 0 0 0 #222;
 }
 
+.minecraft-card {
+  @apply bg-minecraft-obsidian border-4 border-minecraft-stone-dark transition-all duration-300 shadow-minecraft;
+  transform: translateZ(0);
+}
+
+.minecraft-card:hover {
+  transform: translateY(-8px) translateZ(10px);
+  box-shadow: 0 16px 30px -6px rgba(0, 0, 0, 0.3), 0 8px 12px -2px rgba(0, 0, 0, 0.2);
+}
+
+/* 3D Pixel Elements */
 .pixel-border {
   box-shadow: 
-    0 -4px 0 0 #000, 
+    0 -4px 0 0 #222, 
     0 4px 0 0 #000,
-    -4px 0 0 0 #000, 
+    -4px 0 0 0 #222, 
     4px 0 0 0 #000;
 }
 
@@ -212,15 +268,39 @@
 }
 
 .pixel-text-shadow {
-  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.7);
 }
 
+/* 3D Transform Effects */
+.minecraft-3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.minecraft-3d-element {
+  transform: translateZ(20px);
+  transition: transform 0.3s ease;
+}
+
+.minecraft-3d-element:hover {
+  transform: translateZ(30px) scale(1.05);
+}
+
+/* Torch Effect */
+.minecraft-torch {
+  @apply animate-torch-flicker;
+  border-radius: 50%;
+  background: radial-gradient(#f80, transparent 70%);
+}
+
+/* Parallax Effect */
 .parallax-layer {
   will-change: transform;
 }
 
+/* Minecraft Input Style */
 .minecraft-input {
-  @apply font-minecraft bg-white/90 border-2 border-black p-2 outline-none rounded-none focus:border-minecraft-gold transition-colors duration-300;
+  @apply font-minecraft bg-minecraft-obsidian-light border-2 border-minecraft-stone-dark p-2 outline-none rounded-none focus:border-minecraft-gold transition-colors duration-300 text-white;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -232,18 +312,6 @@
 .no-scrollbar {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
-}
-
-/* Card hover effect */
-.minecraft-card {
-  @apply bg-white border-4 border-minecraft-stone transition-all duration-300;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  transform: translateY(0);
-}
-
-.minecraft-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 /* Section transitions */
@@ -264,8 +332,8 @@
 }
 
 .pixel-image:hover {
-  filter: brightness(1.1) contrast(1.1);
-  transform: scale(1.05);
+  filter: brightness(1.2) contrast(1.1);
+  transform: scale(1.05) translateZ(10px);
 }
 
 /* Button press animation */
@@ -280,9 +348,9 @@
 
 /* Minecraft block animation */
 @keyframes block-hover {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-  100% { transform: translateY(0); }
+  0% { transform: translateY(0) translateZ(0); }
+  50% { transform: translateY(-5px) translateZ(10px); }
+  100% { transform: translateY(0) translateZ(0); }
 }
 
 .block-hover {
@@ -320,11 +388,12 @@
 /* Team member card hover */
 .team-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform: translateZ(0);
 }
 
 .team-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  transform: translateY(-8px) translateZ(20px) scale(1.02);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
 }
 
 /* Improved nav item hover */
@@ -347,4 +416,59 @@
 
 .nav-item:hover::after {
   width: 100%;
+}
+
+/* Torch light effect */
+.torch-light {
+  position: relative;
+}
+
+.torch-light::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, rgba(255,180,0,0.7) 0%, rgba(255,180,0,0) 70%);
+  filter: blur(5px);
+  z-index: 1;
+  animation: torch-flicker 2s ease-in-out infinite;
+}
+
+/* Rain overlay effect */
+.minecraft-rain-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/images/minecraft-rain.png');
+  background-size: 256px;
+  opacity: 0.1;
+  pointer-events: none;
+  animation: minecraft-rain 10s linear infinite;
+  z-index: 10;
+}
+
+/* Diamond Ore Glow Effect */
+.diamond-ore-glow {
+  box-shadow: 0 0 15px 5px rgba(91, 225, 230, 0.3);
+  animation: diamond-glow 3s ease-in-out infinite;
+}
+
+@keyframes diamond-glow {
+  0%, 100% { box-shadow: 0 0 15px 5px rgba(91, 225, 230, 0.3); }
+  50% { box-shadow: 0 0 20px 8px rgba(91, 225, 230, 0.5); }
+}
+
+/* Redstone Ore Glow Effect */
+.redstone-ore-glow {
+  box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0.3);
+  animation: redstone-glow 2s ease-in-out infinite;
+}
+
+@keyframes redstone-glow {
+  0%, 100% { box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0.3); }
+  50% { box-shadow: 0 0 20px 8px rgba(255, 0, 0, 0.5); }
 }

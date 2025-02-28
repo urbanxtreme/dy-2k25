@@ -23,53 +23,71 @@ interface EventCardProps {
 const EventCard = ({ event }: EventCardProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   
+  const getCategoryColor = (category: string) => {
+    const colors: {[key: string]: string} = {
+      'Creative': 'bg-minecraft-emerald border-minecraft-emerald-dark',
+      'Art': 'bg-minecraft-diamond border-minecraft-diamond-dark',
+      'Technical': 'bg-minecraft-redstone border-minecraft-redstone-dark',
+      'Gaming': 'bg-minecraft-gold border-minecraft-gold-dark',
+      'Workshops': 'bg-minecraft-iron border-minecraft-iron-dark',
+      'Music': 'bg-minecraft-water border-minecraft-water-dark',
+      'default': 'bg-minecraft-grass border-minecraft-grass-dark'
+    };
+    
+    return colors[category] || colors.default;
+  };
+  
   return (
     <div 
-      className={`minecraft-card overflow-hidden ${
-        isExpanded ? 'transform translate-y-0 scale-[1.02]' : ''
+      className={`minecraft-card overflow-hidden transform transition-all duration-300 ${
+        isExpanded ? 'translate-y-0 scale-[1.02] z-10' : ''
       }`}
+      style={{ 
+        transform: isExpanded ? 'translateZ(30px)' : 'translateZ(0)',
+        boxShadow: isExpanded ? '0 25px 50px rgba(0,0,0,0.4)' : undefined 
+      }}
     >
       <div className="relative overflow-hidden group">
-        <div className="absolute top-0 left-0 bg-minecraft-dirt px-3 py-1 z-10 border-b-2 border-r-2 border-black/30">
-          <span className="font-pixel text-white uppercase text-xs">{event.category}</span>
+        <div className={`absolute top-0 left-0 px-3 py-1 z-10 border-b-2 border-r-2 text-white ${getCategoryColor(event.category)}`}>
+          <span className="font-pixel uppercase text-xs">{event.category}</span>
         </div>
         <img 
           src={event.image} 
           alt={event.title} 
           className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       </div>
       
-      <div className="p-5">
-        <h3 className="font-minecraft text-xl mb-3 text-minecraft-obsidian">{event.title}</h3>
+      <div className="p-5 bg-minecraft-obsidian-light">
+        <h3 className="font-minecraft text-xl mb-3 text-white pixel-text-shadow">{event.title}</h3>
         
-        <div className="flex items-center text-sm mb-2">
+        <div className="flex items-center text-sm mb-2 text-white/80">
           <Calendar size={16} className="mr-2 text-minecraft-grass" />
           <span>{event.date}</span>
         </div>
         
-        <div className="flex items-center text-sm mb-4">
+        <div className="flex items-center text-sm mb-4 text-white/80">
           <Clock size={16} className="mr-2 text-minecraft-grass" />
           <span>{event.time}</span>
         </div>
         
         {isExpanded && (
           <div className="animate-block-build overflow-hidden">
-            <p className="mb-4 text-sm leading-relaxed">{event.description}</p>
+            <p className="mb-4 text-sm leading-relaxed text-white/90">{event.description}</p>
             
-            <div className="bg-minecraft-dirt/20 p-4 mb-5 border-l-4 border-minecraft-dirt rounded">
-              <div className="flex items-center text-sm mb-3">
+            <div className="bg-minecraft-obsidian/60 p-4 mb-5 border-l-4 border-minecraft-grass rounded">
+              <div className="flex items-center text-sm mb-3 text-white/90">
                 <MapPin size={16} className="mr-2 text-minecraft-grass" />
                 <span><strong>Venue:</strong> {event.venue}</span>
               </div>
               
-              <div className="flex items-center text-sm mb-3">
+              <div className="flex items-center text-sm mb-3 text-white/90">
                 <Users size={16} className="mr-2 text-minecraft-grass" />
                 <span><strong>Team:</strong> {event.capacity}</span>
               </div>
               
-              <div className="flex items-center text-sm">
+              <div className="flex items-center text-sm text-white/90">
                 <Award size={16} className="mr-2 text-minecraft-gold" />
                 <span><strong>Prizes:</strong> {event.prizes}</span>
               </div>
@@ -100,6 +118,14 @@ const EventCard = ({ event }: EventCardProps) => {
           </PixelButton>
         )}
       </div>
+      
+      {/* Add special effect based on category */}
+      {event.category === 'Technical' && (
+        <div className="absolute top-0 right-0 m-1 redstone-ore-glow w-2 h-2 rounded-full bg-minecraft-redstone"></div>
+      )}
+      {event.category === 'Art' && (
+        <div className="absolute top-0 right-0 m-1 diamond-ore-glow w-2 h-2 rounded-full bg-minecraft-diamond"></div>
+      )}
     </div>
   );
 };
