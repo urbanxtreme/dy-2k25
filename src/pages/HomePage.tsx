@@ -1,9 +1,9 @@
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PixelButton from '@/components/PixelButton';
 import MinecraftCharacter from '@/components/MinecraftCharacter';
-import { Calendar, Clock, MapPin, ChevronRight } from 'lucide-react';
+import { Calendar, Clock, MapPin, ChevronDown, ArrowRight, Star } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -12,6 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
 const HomePage = () => {
   const parallaxRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [visibleSections, setVisibleSections] = useState<string[]>([]);
   
   useEffect(() => {
     // Parallax effect for hero section
@@ -38,22 +39,31 @@ const HomePage = () => {
     sectionRefs.current.forEach((section, index) => {
       if (!section) return;
       
-      gsap.fromTo(
-        section,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          scrollTrigger: {
-            trigger: section,
-            start: "top 80%",
-            end: "bottom 20%",
-            toggleActions: "play none none reverse"
-          }
-        }
-      );
+      const sectionId = section.getAttribute('data-section-id') || String(index);
+      
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top 80%",
+        end: "bottom 20%",
+        onEnter: () => {
+          setVisibleSections(prev => [...prev, sectionId]);
+          
+          gsap.to(section, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power2.out",
+            stagger: 0.2
+          });
+        },
+        onLeaveBack: () => setVisibleSections(prev => prev.filter(id => id !== sectionId))
+      });
     });
+    
+    // Clean up ScrollTrigger on component unmount
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
   }, []);
   
   const addToSectionRefs = (el: HTMLDivElement | null) => {
@@ -62,12 +72,16 @@ const HomePage = () => {
     }
   };
   
+  const isVisible = (sectionId: string) => {
+    return visibleSections.includes(sectionId);
+  };
+  
   return (
     <div className="overflow-hidden">
       {/* Hero Section */}
       <div ref={parallaxRef} className="relative h-screen overflow-hidden">
         <div className="parallax-layer absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-minecraft-sky"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-minecraft-sky to-[#67a9ff]"></div>
         </div>
         <div className="parallax-layer absolute inset-0 z-10">
           <div className="absolute inset-0 bg-[url('/images/minecraft-clouds.png')] bg-repeat-x bg-contain opacity-80"></div>
@@ -80,16 +94,18 @@ const HomePage = () => {
         </div>
         
         <div className="relative z-40 flex flex-col items-center justify-center h-full px-4 text-center">
-          <h1 className="font-pixel text-4xl md:text-6xl lg:text-7xl text-white mb-6 pixel-text-shadow">
-            <span className="text-minecraft-grass">Mine</span>
-            <span className="text-minecraft-gold">Fest</span>
-            <span className="block mt-2 text-white">2024</span>
-          </h1>
+          <div className="animate-float">
+            <h1 className="font-pixel text-4xl md:text-6xl lg:text-7xl text-white mb-6 pixel-text-shadow shimmer-effect">
+              <span className="text-minecraft-grass">Mine</span>
+              <span className="text-minecraft-gold">Fest</span>
+              <span className="block mt-3 text-white">2024</span>
+            </h1>
+          </div>
           <p className="font-minecraft text-xl md:text-2xl text-white mb-8 max-w-2xl pixel-text-shadow">
             Join us for an epic two-day college fest themed around Minecraft!
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <PixelButton variant="primary">
+            <PixelButton variant="primary" className="pulse">
               Register Now
             </PixelButton>
             <Link to="/events">
@@ -100,47 +116,55 @@ const HomePage = () => {
           </div>
           
           <div className="absolute bottom-8 animate-bounce">
-            <ChevronRight size={40} className="text-white rotate-90" />
+            <ChevronDown size={40} className="text-white" />
           </div>
         </div>
       </div>
       
       {/* About Section */}
-      <div ref={addToSectionRefs} className="py-16 px-4 bg-white">
+      <div 
+        ref={addToSectionRefs} 
+        data-section-id="about"
+        className={`py-16 px-4 bg-white transition-all duration-700 opacity-0 transform translate-y-10 ${
+          isVisible('about') ? 'opacity-100 translate-y-0' : ''
+        }`}
+      >
         <div className="container mx-auto">
           <div className="flex flex-col md:flex-row items-center gap-8">
             <div className="w-full md:w-1/2">
-              <h2 className="font-minecraft text-3xl mb-6 text-minecraft-obsidian">
-                <span className="bg-minecraft-grass text-white px-3 py-1 mr-2">About</span>
-                MineFest
-              </h2>
-              <p className="mb-4">
+              <div className="border-l-4 border-minecraft-grass pl-4 mb-6">
+                <h2 className="font-minecraft text-3xl mb-2 text-minecraft-obsidian">
+                  About <span className="bg-minecraft-grass text-white px-3 py-1">MineFest</span>
+                </h2>
+                <p className="text-minecraft-stone">The ultimate Minecraft college experience</p>
+              </div>
+              <p className="mb-4 leading-relaxed">
                 Welcome to MineFest 2024, the most exciting college festival of the year! 
                 Get ready for two days of intense competitions, creative workshops, and 
                 unforgettable experiences – all themed around the world's most popular 
                 sandbox game.
               </p>
-              <p className="mb-6">
+              <p className="mb-6 leading-relaxed">
                 Whether you're a hardcore gamer, a coding whiz, or a creative artist, 
                 MineFest has something special for everyone. Join us as we transform our 
                 campus into an interactive Minecraft world!
               </p>
-              <div className="bg-minecraft-dirt/20 p-4 border-l-4 border-minecraft-dirt">
-                <div className="flex items-center mb-2">
-                  <Calendar size={20} className="mr-2 text-minecraft-grass" />
+              <div className="bg-minecraft-dirt/20 p-5 border-l-4 border-minecraft-dirt rounded-r shadow-md">
+                <div className="flex items-center mb-3">
+                  <Calendar size={22} className="mr-3 text-minecraft-grass" />
                   <span><strong>Date:</strong> May 15-16, 2024</span>
                 </div>
-                <div className="flex items-center mb-2">
-                  <Clock size={20} className="mr-2 text-minecraft-grass" />
+                <div className="flex items-center mb-3">
+                  <Clock size={22} className="mr-3 text-minecraft-grass" />
                   <span><strong>Time:</strong> 9:00 AM - 8:00 PM</span>
                 </div>
                 <div className="flex items-center">
-                  <MapPin size={20} className="mr-2 text-minecraft-grass" />
+                  <MapPin size={22} className="mr-3 text-minecraft-grass" />
                   <span><strong>Venue:</strong> University Main Campus</span>
                 </div>
               </div>
             </div>
-            <div className="w-full md:w-1/2 h-96 bg-minecraft-dirt/10 border-4 border-minecraft-stone">
+            <div className="w-full md:w-1/2 h-96">
               <MinecraftCharacter />
             </div>
           </div>
@@ -148,34 +172,58 @@ const HomePage = () => {
       </div>
       
       {/* Events Preview */}
-      <div ref={addToSectionRefs} className="py-16 px-4 bg-minecraft-dirt/10">
+      <div 
+        ref={addToSectionRefs} 
+        data-section-id="events"
+        className={`py-16 px-4 bg-minecraft-dirt/10 transition-all duration-700 opacity-0 transform translate-y-10 ${
+          isVisible('events') ? 'opacity-100 translate-y-0' : ''
+        }`}
+      >
         <div className="container mx-auto">
-          <h2 className="font-minecraft text-3xl mb-8 text-center text-minecraft-obsidian">
-            <span className="bg-minecraft-grass text-white px-3 py-1 mr-2">Featured</span>
-            Events
-          </h2>
+          <div className="text-center mb-10">
+            <h2 className="font-minecraft text-3xl mb-3 inline-block relative">
+              <span className="bg-minecraft-grass text-white px-3 py-1 mr-2">Featured</span>
+              Events
+              <div className="absolute -right-8 -top-8">
+                <Star size={24} className="text-minecraft-gold animate-pulse" />
+              </div>
+            </h2>
+            <p className="text-lg max-w-2xl mx-auto">Check out these amazing events you don't want to miss!</p>
+          </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuredEvents.map((event, index) => (
-              <div key={index} className="bg-white border-4 border-minecraft-stone hover:-translate-y-2 transition-transform duration-300">
-                <div className="relative">
+              <div 
+                key={index} 
+                className="minecraft-card group hover:z-10"
+                style={{ 
+                  animationDelay: `${index * 0.1}s`,
+                  transform: `translateY(${isVisible('events') ? '0' : '20px'})`,
+                  opacity: isVisible('events') ? 1 : 0,
+                  transition: `transform 0.5s ease ${index * 0.1}s, opacity 0.5s ease ${index * 0.1}s`
+                }}
+              >
+                <div className="relative overflow-hidden">
                   <div className="absolute top-0 left-0 bg-minecraft-grass px-3 py-1 z-10 border-b-2 border-r-2 border-black/30">
                     <span className="font-pixel text-white uppercase text-xs">{event.category}</span>
                   </div>
                   <img 
                     src={event.image} 
                     alt={event.title} 
-                    className="w-full h-48 object-cover"
+                    className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
-                <div className="p-4">
+                <div className="p-5">
                   <h3 className="font-minecraft text-xl mb-2">{event.title}</h3>
                   <p className="text-sm mb-4 line-clamp-2">{event.description}</p>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-minecraft-dirt font-bold">{event.date}</span>
+                    <span className="text-sm text-minecraft-dirt font-bold flex items-center">
+                      <Calendar size={14} className="mr-1" /> {event.date}
+                    </span>
                     <Link to="/events">
-                      <PixelButton variant="secondary" className="text-sm px-3 py-1">
-                        Details
+                      <PixelButton variant="secondary" className="text-sm px-3 py-1 flex items-center">
+                        Details <ArrowRight size={14} className="ml-1" />
                       </PixelButton>
                     </Link>
                   </div>
@@ -184,9 +232,9 @@ const HomePage = () => {
             ))}
           </div>
           
-          <div className="text-center mt-10">
+          <div className="text-center mt-12">
             <Link to="/events">
-              <PixelButton variant="gold">
+              <PixelButton variant="gold" className="text-lg px-8 py-3 shadow-lg">
                 View All Events
               </PixelButton>
             </Link>
@@ -195,23 +243,30 @@ const HomePage = () => {
       </div>
       
       {/* Interactive Map Preview */}
-      <div ref={addToSectionRefs} className="py-16 px-4 bg-white">
+      <div 
+        ref={addToSectionRefs} 
+        data-section-id="map"
+        className={`py-16 px-4 bg-white transition-all duration-700 opacity-0 transform translate-y-10 ${
+          isVisible('map') ? 'opacity-100 translate-y-0' : ''
+        }`}
+      >
         <div className="container mx-auto text-center">
           <h2 className="font-minecraft text-3xl mb-6 text-minecraft-obsidian">
             <span className="bg-minecraft-grass text-white px-3 py-1 mr-2">Interactive</span>
             MineFest Map
           </h2>
-          <p className="max-w-2xl mx-auto mb-8">
+          <p className="max-w-2xl mx-auto mb-8 text-lg">
             Explore our interactive Minecraft-style map to discover all event locations!
             Click on buildings to learn more about different event categories.
           </p>
-          <div className="relative h-72 bg-minecraft-dirt/10 border-4 border-minecraft-stone mb-8">
-            <div className="absolute inset-0 bg-[url('/images/minecraft-map-preview.jpg')] bg-cover bg-center opacity-70"></div>
+          <div className="relative h-80 sm:h-96 bg-minecraft-dirt/10 border-4 border-minecraft-stone mb-8 rounded overflow-hidden shadow-xl group">
+            <div className="absolute inset-0 bg-[url('/images/minecraft-map-preview.jpg')] bg-cover bg-center opacity-70 transition-transform duration-700 group-hover:scale-110"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="bg-minecraft-dirt/80 p-6 border-4 border-minecraft-stone">
-                <h3 className="font-minecraft text-2xl text-white mb-4">Explore The Map</h3>
+              <div className="bg-minecraft-dirt/80 p-6 border-4 border-minecraft-stone rounded shadow-lg transform transition-transform duration-300 group-hover:scale-105">
+                <h3 className="font-minecraft text-2xl text-white mb-4 pixel-text-shadow">Explore The Map</h3>
                 <Link to="/map">
-                  <PixelButton variant="gold">
+                  <PixelButton variant="gold" className="pulse">
                     Open Map
                   </PixelButton>
                 </Link>
@@ -222,7 +277,13 @@ const HomePage = () => {
       </div>
       
       {/* Sponsors */}
-      <div ref={addToSectionRefs} className="py-16 px-4 bg-minecraft-dirt/10">
+      <div 
+        ref={addToSectionRefs}
+        data-section-id="sponsors"
+        className={`py-16 px-4 bg-minecraft-dirt/10 transition-all duration-700 opacity-0 transform translate-y-10 ${
+          isVisible('sponsors') ? 'opacity-100 translate-y-0' : ''
+        }`}
+      >
         <div className="container mx-auto text-center">
           <h2 className="font-minecraft text-3xl mb-10 text-minecraft-obsidian">
             <span className="bg-minecraft-grass text-white px-3 py-1 mr-2">Our</span>
@@ -231,18 +292,27 @@ const HomePage = () => {
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {sponsors.map((sponsor, index) => (
-              <div key={index} className="bg-white p-6 border-4 border-minecraft-stone hover:-translate-y-2 transition-transform duration-300">
+              <div 
+                key={index} 
+                className="bg-white p-6 border-4 border-minecraft-stone transition-all duration-300 hover:-translate-y-2 hover:shadow-xl rounded"
+                style={{ 
+                  animationDelay: `${index * 0.1}s`,
+                  transform: `translateY(${isVisible('sponsors') ? '0' : '20px'})`,
+                  opacity: isVisible('sponsors') ? 1 : 0,
+                  transition: `transform 0.5s ease ${index * 0.1}s, opacity 0.5s ease ${index * 0.1}s`
+                }}
+              >
                 <img 
                   src={sponsor.logo} 
                   alt={sponsor.name} 
-                  className="h-16 mx-auto"
+                  className="h-16 mx-auto mb-3 transition-transform duration-300 hover:scale-110"
                 />
-                <h3 className="font-minecraft mt-4">{sponsor.name}</h3>
+                <h3 className="font-minecraft">{sponsor.name}</h3>
               </div>
             ))}
           </div>
           
-          <div className="mt-12">
+          <div className="mt-12 bg-white/70 p-6 border-4 border-minecraft-stone inline-block rounded shadow-lg">
             <h3 className="font-minecraft text-xl mb-4">Interested in Sponsoring?</h3>
             <Link to="/about">
               <PixelButton variant="secondary">
@@ -254,16 +324,31 @@ const HomePage = () => {
       </div>
       
       {/* CTA Section */}
-      <div ref={addToSectionRefs} className="py-20 px-4 bg-minecraft-obsidian text-white text-center">
+      <div 
+        ref={addToSectionRefs}
+        data-section-id="cta"
+        className={`py-20 px-4 bg-gradient-to-b from-minecraft-obsidian to-minecraft-obsidian/90 text-white text-center transition-all duration-700 opacity-0 transform translate-y-10 ${
+          isVisible('cta') ? 'opacity-100 translate-y-0' : ''
+        }`}
+      >
         <div className="container mx-auto">
-          <h2 className="font-pixel text-4xl mb-6">Ready to Join MineFest 2024?</h2>
-          <p className="font-minecraft text-xl mb-8 max-w-2xl mx-auto">
-            Don't miss out on the most exciting college fest of the year!
-            Register now to participate in events and workshops.
-          </p>
-          <PixelButton variant="gold" className="text-lg px-8 py-3">
-            Register Now
-          </PixelButton>
+          <div className="max-w-3xl mx-auto relative">
+            <div className="absolute -top-10 -left-10 text-minecraft-gold opacity-50">
+              <Star size={40} className="animate-pulse" />
+            </div>
+            <div className="absolute -bottom-10 -right-10 text-minecraft-gold opacity-50">
+              <Star size={40} className="animate-pulse" />
+            </div>
+            
+            <h2 className="font-pixel text-4xl md:text-5xl mb-6 pixel-text-shadow shimmer-effect">Ready to Join MineFest 2024?</h2>
+            <p className="font-minecraft text-xl mb-8 max-w-2xl mx-auto">
+              Don't miss out on the most exciting college fest of the year!
+              Register now to participate in events and workshops.
+            </p>
+            <PixelButton variant="gold" className="text-lg px-8 py-3 shadow-xl pulse">
+              Register Now
+            </PixelButton>
+          </div>
         </div>
       </div>
     </div>

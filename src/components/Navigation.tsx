@@ -1,10 +1,11 @@
 
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
   const navItems = [
@@ -18,22 +19,46 @@ const Navigation = () => {
   useEffect(() => {
     // Close mobile menu when route changes
     setIsMenuOpen(false);
+    
+    // Handle scroll events for header appearance
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, [location.pathname]);
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-minecraft-dirt border-b-4 border-minecraft-stone px-4 py-2">
+    <header 
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        isScrolled 
+          ? 'bg-minecraft-dirt/95 backdrop-blur-sm shadow-lg py-1' 
+          : 'bg-minecraft-dirt py-2'
+      } border-b-4 border-minecraft-stone px-4`}
+    >
       <div className="container mx-auto flex justify-between items-center">
-        <Link to="/" className="font-pixel text-2xl md:text-3xl text-white pixel-text-shadow flex items-center">
+        <Link 
+          to="/" 
+          className="font-pixel text-2xl md:text-3xl text-white pixel-text-shadow flex items-center shimmer-effect transition-transform duration-300 hover:scale-105"
+        >
           <span className="text-minecraft-grass">Mine</span>
           <span className="text-minecraft-gold">Fest</span>
-          <span className="ml-2 text-sm bg-minecraft-redstone text-white px-2 py-0.5">2024</span>
+          <span className="ml-2 text-sm bg-minecraft-redstone text-white px-2 py-0.5 transform rotate-2 hover:rotate-0 transition-transform duration-300">2024</span>
         </Link>
         
         {/* Desktop Navigation */}
         <nav className="hidden md:block">
-          <ul className="flex space-x-1">
+          <ul className="flex space-x-2">
             {navItems.map((item) => (
-              <li key={item.name}>
+              <li key={item.name} className="nav-item">
                 <Link 
                   to={item.path}
                   className={`font-minecraft px-3 py-2 block uppercase text-sm transition-all duration-200 ${
@@ -51,29 +76,43 @@ const Navigation = () => {
         
         {/* Mobile Menu Button */}
         <button 
-          className="md:hidden text-white"
+          className="md:hidden text-white rounded-full p-2 hover:bg-minecraft-stone/30 transition-colors duration-200"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          {isMenuOpen ? (
+            <X size={24} className="animate-in fade-in" />
+          ) : (
+            <Menu size={24} className="animate-in fade-in" />
+          )}
         </button>
       </div>
       
       {/* Mobile Navigation */}
       {isMenuOpen && (
         <nav className="md:hidden bg-minecraft-dirt border-t-2 border-minecraft-stone animate-block-build">
-          <ul className="px-4 py-2">
-            {navItems.map((item) => (
-              <li key={item.name} className="mb-1 last:mb-0">
+          <ul className="px-4 py-4">
+            {navItems.map((item, index) => (
+              <li 
+                key={item.name} 
+                className="mb-2 last:mb-0"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
                 <Link 
                   to={item.path}
-                  className={`font-minecraft px-3 py-2 block uppercase text-sm ${
+                  className={`font-minecraft px-3 py-3 block uppercase text-sm ${
                     location.pathname === item.path 
                       ? 'bg-minecraft-grass text-white border-b-2 border-black/30' 
                       : 'text-white hover:bg-minecraft-stone/50'
-                  }`}
+                  } rounded transition-all duration-200 flex items-center justify-between`}
                 >
-                  {item.name}
+                  <span>{item.name}</span>
+                  <ChevronDown 
+                    size={16} 
+                    className={`transition-transform duration-200 ${
+                      location.pathname === item.path ? 'rotate-180' : 'rotate-0'
+                    }`}
+                  />
                 </Link>
               </li>
             ))}
