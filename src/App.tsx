@@ -29,7 +29,7 @@ const App = () => {
         <Sonner />
         <BrowserRouter>
           <div className="flex flex-col min-h-screen bg-minecraft-obsidian">
-            {/* Rain overlay effect */}
+            {/* Magenta/Cyan particle effect overlay */}
             <div className="minecraft-rain-overlay fixed inset-0 pointer-events-none z-[1]"></div>
             
             <Navigation />

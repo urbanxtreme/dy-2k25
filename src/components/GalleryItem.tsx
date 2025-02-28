@@ -12,7 +12,7 @@ const GalleryItem = ({ image, title, description }: GalleryItemProps) => {
   
   return (
     <div 
-      className="relative overflow-hidden bg-minecraft-obsidian-light border-4 border-minecraft-stone-dark rounded shadow-minecraft minecraft-3d transform transition-all duration-300"
+      className="relative overflow-hidden bg-minecraft-obsidian-light border-4 border-minecraft-magenta-dark rounded shadow-minecraft minecraft-3d transform transition-all duration-300"
       style={{ 
         transform: isHovered ? 'translateZ(20px) scale(1.03)' : 'translateZ(0)',
         boxShadow: isHovered ? '0 20px 25px rgba(0,0,0,0.4)' : undefined
@@ -37,17 +37,17 @@ const GalleryItem = ({ image, title, description }: GalleryItemProps) => {
         <p className="text-sm text-white/90">{description}</p>
       </div>
       
-      {/* Pixelated corner effect on hover */}
+      {/* Pixelated corner effect on hover with our new colors */}
       <div className={`absolute inset-0 pointer-events-none transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="absolute top-0 left-0 w-4 h-4 border-t-4 border-l-4 border-minecraft-grass"></div>
-        <div className="absolute top-0 right-0 w-4 h-4 border-t-4 border-r-4 border-minecraft-grass"></div>
-        <div className="absolute bottom-0 left-0 w-4 h-4 border-b-4 border-l-4 border-minecraft-grass"></div>
-        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-4 border-r-4 border-minecraft-grass"></div>
+        <div className="absolute top-0 left-0 w-4 h-4 border-t-4 border-l-4 border-minecraft-magenta"></div>
+        <div className="absolute top-0 right-0 w-4 h-4 border-t-4 border-r-4 border-minecraft-cyan"></div>
+        <div className="absolute bottom-0 left-0 w-4 h-4 border-b-4 border-l-4 border-minecraft-cyan"></div>
+        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-4 border-r-4 border-minecraft-magenta"></div>
       </div>
       
-      {/* Add a glowing effect */}
+      {/* Add a glowing effect with our magenta color */}
       {isHovered && (
-        <div className="absolute inset-0 pointer-events-none border-2 border-minecraft-grass/30 rounded"></div>
+        <div className="absolute inset-0 pointer-events-none border-2 border-minecraft-magenta/30 rounded"></div>
       )}
     </div>
   );

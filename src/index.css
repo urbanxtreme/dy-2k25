@@ -71,16 +71,16 @@
     --popover: 224 14% 15%;
     --popover-foreground: 220 10% 90%;
 
-    --primary: 142 70% 45%;
+    --primary: 295 84% 60%; /* Changed to magenta */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 34 70% 35%;
+    --secondary: 196 94% 48%; /* Changed to cyan */
     --secondary-foreground: 0 0% 100%;
 
     --muted: 225 14% 20%;
     --muted-foreground: 220 10% 60%;
 
-    --accent: 198 93% 60%;
+    --accent: 295 84% 60%; /* Changed to magenta */
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 85% 60%;
@@ -88,16 +88,16 @@
 
     --border: 240 3.7% 25%;
     --input: 240 3.7% 25%;
-    --ring: 142 70% 45%;
+    --ring: 295 84% 60%; /* Changed to magenta */
 
     --sidebar-background: 240 5.9% 12%;
     --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary: 295 84% 60%; /* Changed to magenta */
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 3.7% 15.9%;
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 295 84% 60%; /* Changed to magenta */
   }
 }
 
@@ -133,9 +133,9 @@
   }
 }
 
-/* 3D Minecraft Button Styles */
+/* 3D Minecraft Button Styles - Updated with magenta/cyan */
 .minecraft-btn {
-  @apply font-minecraft uppercase text-white py-2 px-4 border-b-4 border-r-4 border-minecraft-grass-dark bg-minecraft-grass shadow-minecraft-btn hover:bg-minecraft-grass/90 active:translate-y-1 active:translate-x-1 active:border-b-2 active:border-r-2 transition-all duration-100 inline-block;
+  @apply font-minecraft uppercase text-white py-2 px-4 border-b-4 border-r-4 border-minecraft-magenta-dark bg-minecraft-magenta shadow-minecraft-btn hover:bg-minecraft-magenta/90 active:translate-y-1 active:translate-x-1 active:border-b-2 active:border-r-2 transition-all duration-100 inline-block;
   position: relative;
   overflow: hidden;
   transform: translateZ(0);
@@ -167,7 +167,7 @@
 }
 
 .minecraft-btn-secondary {
-  @apply font-minecraft uppercase text-white py-2 px-4 border-b-4 border-r-4 border-minecraft-stone-dark bg-minecraft-stone shadow-minecraft-btn hover:bg-minecraft-stone/90 active:translate-y-1 active:translate-x-1 active:border-b-2 active:border-r-2 transition-all duration-100 inline-block;
+  @apply font-minecraft uppercase text-white py-2 px-4 border-b-4 border-r-4 border-minecraft-cyan-dark bg-minecraft-cyan shadow-minecraft-btn hover:bg-minecraft-cyan/90 active:translate-y-1 active:translate-x-1 active:border-b-2 active:border-r-2 transition-all duration-100 inline-block;
   position: relative;
   overflow: hidden;
   transform: translateZ(0);
@@ -231,9 +231,9 @@
   top: 0;
 }
 
-/* Minecraft Container Style */
+/* Minecraft Container Style - Updated border colors */
 .minecraft-container {
-  @apply border-4 border-minecraft-stone-dark bg-minecraft-obsidian/90 p-4 shadow-minecraft;
+  @apply border-4 border-minecraft-magenta-dark bg-minecraft-obsidian/90 p-4 shadow-minecraft;
   box-shadow: 
     0 4px 0 0 #222,
     0 -2px 0 0 #444,
@@ -242,7 +242,7 @@
 }
 
 .minecraft-card {
-  @apply bg-minecraft-obsidian border-4 border-minecraft-stone-dark transition-all duration-300 shadow-minecraft;
+  @apply bg-minecraft-obsidian border-4 border-minecraft-cyan-dark transition-all duration-300 shadow-minecraft;
   transform: translateZ(0);
 }
 
@@ -286,11 +286,11 @@
   transform: translateZ(30px) scale(1.05);
 }
 
-/* Torch Effect */
+/* Torch Effect - Updated with magenta */
 .minecraft-torch {
-  @apply animate-torch-flicker;
+  @apply animate-pixel-glow-magenta;
   border-radius: 50%;
-  background: radial-gradient(#f80, transparent 70%);
+  background: radial-gradient(#D946EF, transparent 70%);
 }
 
 /* Parallax Effect */
@@ -298,9 +298,9 @@
   will-change: transform;
 }
 
-/* Minecraft Input Style */
+/* Minecraft Input Style - Updated focus color */
 .minecraft-input {
-  @apply font-minecraft bg-minecraft-obsidian-light border-2 border-minecraft-stone-dark p-2 outline-none rounded-none focus:border-minecraft-gold transition-colors duration-300 text-white;
+  @apply font-minecraft bg-minecraft-obsidian-light border-2 border-minecraft-stone-dark p-2 outline-none rounded-none focus:border-minecraft-magenta transition-colors duration-300 text-white;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -396,7 +396,7 @@
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
 }
 
-/* Improved nav item hover */
+/* Improved nav item hover - Updated underline color to magenta */
 .nav-item {
   position: relative;
   transition: all 0.3s ease;
@@ -409,7 +409,7 @@
   left: 50%;
   width: 0;
   height: 2px;
-  background-color: #67C52A;
+  background-color: #D946EF; /* Changed to magenta */
   transition: all 0.3s ease;
   transform: translateX(-50%);
 }
@@ -418,7 +418,7 @@
   width: 100%;
 }
 
-/* Torch light effect */
+/* Torch light effect - Updated color to magenta */
 .torch-light {
   position: relative;
 }
@@ -430,7 +430,7 @@
   left: 0;
   width: 20px;
   height: 20px;
-  background: radial-gradient(circle, rgba(255,180,0,0.7) 0%, rgba(255,180,0,0) 70%);
+  background: radial-gradient(circle, rgba(217,70,239,0.7) 0%, rgba(217,70,239,0) 70%); /* Changed to magenta */
   filter: blur(5px);
   z-index: 1;
   animation: torch-flicker 2s ease-in-out infinite;
@@ -451,24 +451,25 @@
   z-index: 10;
 }
 
-/* Diamond Ore Glow Effect */
-.diamond-ore-glow {
-  box-shadow: 0 0 15px 5px rgba(91, 225, 230, 0.3);
-  animation: diamond-glow 3s ease-in-out infinite;
+/* Magenta Ore Glow Effect */
+.magenta-ore-glow {
+  box-shadow: 0 0 15px 5px rgba(217, 70, 239, 0.3);
+  animation: pixel-glow-magenta 3s ease-in-out infinite;
 }
 
-@keyframes diamond-glow {
-  0%, 100% { box-shadow: 0 0 15px 5px rgba(91, 225, 230, 0.3); }
-  50% { box-shadow: 0 0 20px 8px rgba(91, 225, 230, 0.5); }
+/* Cyan Ore Glow Effect */
+.cyan-ore-glow {
+  box-shadow: 0 0 15px 5px rgba(14, 165, 233, 0.3);
+  animation: pixel-glow-cyan 3s ease-in-out infinite;
 }
 
-/* Redstone Ore Glow Effect */
-.redstone-ore-glow {
-  box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0.3);
-  animation: redstone-glow 2s ease-in-out infinite;
+/* Updated glowing effects */
+@keyframes magenta-glow {
+  0%, 100% { box-shadow: 0 0 15px 5px rgba(217, 70, 239, 0.3); }
+  50% { box-shadow: 0 0 20px 8px rgba(217, 70, 239, 0.5); }
 }
 
-@keyframes redstone-glow {
-  0%, 100% { box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0.3); }
-  50% { box-shadow: 0 0 20px 8px rgba(255, 0, 0, 0.5); }
+@keyframes cyan-glow {
+  0%, 100% { box-shadow: 0 0 15px 5px rgba(14, 165, 233, 0.3); }
+  50% { box-shadow: 0 0 20px 8px rgba(14, 165, 233, 0.5); }
 }

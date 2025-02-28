@@ -92,7 +92,11 @@ export default {
                     'redstone-dark': '#C30000',
                     'netherite': '#342324',
                     'emerald': '#17DD62',
-                    'emerald-dark': '#11A549'
+                    'emerald-dark': '#11A549',
+                    'magenta': '#D946EF', // Added magenta color
+                    'magenta-dark': '#A921C5', // Added darker magenta for buttons
+                    'cyan': '#0EA5E9', // Added cyan color
+                    'cyan-dark': '#0284C7' // Added darker cyan for buttons
                 }
 			},
 			borderRadius: {
@@ -164,6 +168,14 @@ export default {
                 'torch-flicker': {
                     '0%, 100%': { boxShadow: '0 0 15px 5px rgba(255, 160, 10, 0.6)' },
                     '50%': { boxShadow: '0 0 25px 8px rgba(255, 160, 10, 0.8)' }
+                },
+                'pixel-glow-magenta': {
+                    '0%, 100%': { boxShadow: '0 0 15px 5px rgba(217, 70, 239, 0.3)' },
+                    '50%': { boxShadow: '0 0 25px 8px rgba(217, 70, 239, 0.5)' }
+                },
+                'pixel-glow-cyan': {
+                    '0%, 100%': { boxShadow: '0 0 15px 5px rgba(14, 165, 233, 0.3)' },
+                    '50%': { boxShadow: '0 0 25px 8px rgba(14, 165, 233, 0.5)' }
                 }
 			},
 			animation: {
@@ -178,7 +190,9 @@ export default {
                 'pickaxe-swing': 'pickaxe-swing 0.5s ease-in-out',
                 'minecraft-rain': 'minecraft-rain 10s linear infinite',
                 '3d-float': '3d-float 4s ease-in-out infinite',
-                'torch-flicker': 'torch-flicker 2s ease-in-out infinite'
+                'torch-flicker': 'torch-flicker 2s ease-in-out infinite',
+                'pixel-glow-magenta': 'pixel-glow-magenta 3s ease-in-out infinite',
+                'pixel-glow-cyan': 'pixel-glow-cyan 3s ease-in-out infinite'
 			},
             boxShadow: {
                 'minecraft': '5px 5px 0px rgba(0, 0, 0, 0.2)',
