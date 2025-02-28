@@ -40,18 +40,18 @@ const Navigation = () => {
     <header 
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-minecraft-bedrock/95 backdrop-blur-sm shadow-lg py-1' 
-          : 'bg-minecraft-bedrock py-2'
-      } border-b-4 border-minecraft-magenta px-4`}
+          ? 'bg-minecraft-dirt/95 backdrop-blur-sm shadow-lg py-1' 
+          : 'bg-minecraft-dirt py-2'
+      } border-b-4 border-minecraft-stone px-4`}
     >
       <div className="container mx-auto flex justify-between items-center">
         <Link 
           to="/" 
-          className="font-pixel text-2xl md:text-3xl text-white pixel-text-shadow flex items-center shimmer-effect transition-transform duration-300 hover:scale-105 minecraft-3d-element"
+          className="font-pixel text-2xl md:text-3xl text-white pixel-text-shadow flex items-center shimmer-effect transition-transform duration-300 hover:scale-105"
         >
-          <span className="text-minecraft-magenta">Mine</span>
-          <span className="text-minecraft-cyan">Fest</span>
-          <span className="ml-2 text-sm bg-minecraft-magenta text-white px-2 py-0.5 transform rotate-2 hover:rotate-0 transition-transform duration-300">2024</span>
+          <span className="text-minecraft-grass">Mine</span>
+          <span className="text-minecraft-gold">Fest</span>
+          <span className="ml-2 text-sm bg-minecraft-redstone text-white px-2 py-0.5 transform rotate-2 hover:rotate-0 transition-transform duration-300">2024</span>
         </Link>
         
         {/* Desktop Navigation */}
@@ -63,8 +63,8 @@ const Navigation = () => {
                   to={item.path}
                   className={`font-minecraft px-3 py-2 block uppercase text-sm transition-all duration-200 ${
                     location.pathname === item.path 
-                      ? 'bg-minecraft-magenta text-white border-b-2 border-minecraft-magenta-dark shadow-minecraft' 
-                      : 'text-white hover:bg-minecraft-obsidian-light'
+                      ? 'bg-minecraft-grass text-white border-b-2 border-black/30' 
+                      : 'text-white hover:bg-minecraft-stone/50'
                   }`}
                 >
                   {item.name}
@@ -76,7 +76,7 @@ const Navigation = () => {
         
         {/* Mobile Menu Button */}
         <button 
-          className="md:hidden text-white rounded-full p-2 hover:bg-minecraft-magenta/20 transition-colors duration-200"
+          className="md:hidden text-white rounded-full p-2 hover:bg-minecraft-stone/30 transition-colors duration-200"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         >
@@ -90,7 +90,7 @@ const Navigation = () => {
       
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <nav className="md:hidden bg-minecraft-bedrock border-t-2 border-minecraft-magenta/50 animate-block-build">
+        <nav className="md:hidden bg-minecraft-dirt border-t-2 border-minecraft-stone animate-block-build">
           <ul className="px-4 py-4">
             {navItems.map((item, index) => (
               <li 
@@ -102,8 +102,8 @@ const Navigation = () => {
                   to={item.path}
                   className={`font-minecraft px-3 py-3 block uppercase text-sm ${
                     location.pathname === item.path 
-                      ? 'bg-minecraft-magenta text-white border-b-2 border-minecraft-magenta-dark' 
-                      : 'text-white hover:bg-minecraft-cyan/20'
+                      ? 'bg-minecraft-grass text-white border-b-2 border-black/30' 
+                      : 'text-white hover:bg-minecraft-stone/50'
                   } rounded transition-all duration-200 flex items-center justify-between`}
                 >
                   <span>{item.name}</span>
@@ -119,14 +119,6 @@ const Navigation = () => {
           </ul>
         </nav>
       )}
-
-      {/* Add torch lights with magenta/cyan glow */}
-      <div className="absolute left-2 top-1/2 -translate-y-1/2 w-4 h-8 hidden md:block">
-        <div className="magenta-ore-glow w-4 h-4 bg-minecraft-magenta/70"></div>
-      </div>
-      <div className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-8 hidden md:block">
-        <div className="cyan-ore-glow w-4 h-4 bg-minecraft-cyan/70"></div>
-      </div>
     </header>
   );
 };

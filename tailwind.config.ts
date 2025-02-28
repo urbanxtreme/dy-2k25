@@ -65,38 +65,18 @@ export default {
 				},
                 minecraft: {
                     'dirt': '#8B5A2B',
-                    'dirt-dark': '#5D3C1C',
                     'grass': '#67C52A',
-                    'grass-dark': '#4A9223',
                     'stone': '#7F7F7F',
-                    'stone-dark': '#4A4A4A',
                     'wood': '#A0522D',
-                    'wood-dark': '#6E3A1F',
                     'water': '#3B9AE0',
-                    'water-dark': '#2A72AC',
                     'lava': '#DF4E0A',
-                    'lava-dark': '#A13907',
                     'sky': '#99CCFF',
-                    'sky-dark': '#1D2033',
                     'obsidian': '#1D1A21',
-                    'obsidian-light': '#2A2530',
-                    'bedrock': '#101010',
                     'gold': '#FCEB3F',
-                    'gold-dark': '#D1B62C',
                     'iron': '#C8C8C8',
-                    'iron-dark': '#9B9B9B',
                     'coal': '#2E2E2E',
                     'diamond': '#5BE1E6',
-                    'diamond-dark': '#3BACB0',
-                    'redstone': '#FF0000',
-                    'redstone-dark': '#C30000',
-                    'netherite': '#342324',
-                    'emerald': '#17DD62',
-                    'emerald-dark': '#11A549',
-                    'magenta': '#D946EF', // Added magenta color
-                    'magenta-dark': '#A921C5', // Added darker magenta for buttons
-                    'cyan': '#0EA5E9', // Added cyan color
-                    'cyan-dark': '#0284C7' // Added darker cyan for buttons
+                    'redstone': '#FF0000'
                 }
 			},
 			borderRadius: {
@@ -155,27 +135,6 @@ export default {
                     '0%': { transform: 'rotate(0deg)' },
                     '50%': { transform: 'rotate(-20deg)' },
                     '100%': { transform: 'rotate(0deg)' }
-                },
-                'minecraft-rain': {
-                    '0%': { backgroundPosition: '0% 0%' },
-                    '100%': { backgroundPosition: '0% 100%' }
-                },
-                '3d-float': {
-                    '0%': { transform: 'translateZ(0) translateY(0)' },
-                    '50%': { transform: 'translateZ(20px) translateY(-10px)' },
-                    '100%': { transform: 'translateZ(0) translateY(0)' }
-                },
-                'torch-flicker': {
-                    '0%, 100%': { boxShadow: '0 0 15px 5px rgba(255, 160, 10, 0.6)' },
-                    '50%': { boxShadow: '0 0 25px 8px rgba(255, 160, 10, 0.8)' }
-                },
-                'pixel-glow-magenta': {
-                    '0%, 100%': { boxShadow: '0 0 15px 5px rgba(217, 70, 239, 0.3)' },
-                    '50%': { boxShadow: '0 0 25px 8px rgba(217, 70, 239, 0.5)' }
-                },
-                'pixel-glow-cyan': {
-                    '0%, 100%': { boxShadow: '0 0 15px 5px rgba(14, 165, 233, 0.3)' },
-                    '50%': { boxShadow: '0 0 25px 8px rgba(14, 165, 233, 0.5)' }
                 }
 			},
 			animation: {
@@ -187,20 +146,8 @@ export default {
                 'block-build': 'block-build 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
                 'block-break': 'block-break 0.3s ease-out forwards',
                 'minecraft-bounce': 'minecraft-bounce 2s ease-in-out infinite',
-                'pickaxe-swing': 'pickaxe-swing 0.5s ease-in-out',
-                'minecraft-rain': 'minecraft-rain 10s linear infinite',
-                '3d-float': '3d-float 4s ease-in-out infinite',
-                'torch-flicker': 'torch-flicker 2s ease-in-out infinite',
-                'pixel-glow-magenta': 'pixel-glow-magenta 3s ease-in-out infinite',
-                'pixel-glow-cyan': 'pixel-glow-cyan 3s ease-in-out infinite'
-			},
-            boxShadow: {
-                'minecraft': '5px 5px 0px rgba(0, 0, 0, 0.2)',
-                'minecraft-inset': 'inset 2px 2px 0px rgba(255, 255, 255, 0.25), inset -2px -2px 0px rgba(0, 0, 0, 0.25)',
-                'minecraft-btn': '5px 5px 0px rgba(0, 0, 0, 0.25), inset 1px 1px 0px rgba(255, 255, 255, 0.15), inset -1px -1px 0px rgba(0, 0, 0, 0.15)',
-                'minecraft-3d': '0 10px 20px rgba(0, 0, 0, 0.4), 0 6px 6px rgba(0, 0, 0, 0.3), 0 -3px 0px rgba(255, 255, 255, 0.1) inset',
-                'torch': '0 0 15px 5px rgba(255, 160, 10, 0.6)'
-            }
+                'pickaxe-swing': 'pickaxe-swing 0.5s ease-in-out'
+			}
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
