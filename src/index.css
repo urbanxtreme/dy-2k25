@@ -1,84 +1,95 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'MinecraftPixel';
+  src: url('/fonts/minecraft_pixel.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MinecraftRegular';
+  src: url('/fonts/minecraft_regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 35 10% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 35 10% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 35 10% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 100 75% 40%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 30 60% 35%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 210 10% 90%;
+    --muted-foreground: 35 10% 30%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 210 75% 60%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 85% 50%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 35 10% 80%;
+    --input: 35 10% 80%;
+    --ring: 100 75% 40%;
 
-    --radius: 0.5rem;
+    --radius: 0rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 35 10% 10%;
+    --foreground: 35 10% 95%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 35 10% 15%;
+    --card-foreground: 35 10% 95%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 35 10% 15%;
+    --popover-foreground: 35 10% 95%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 100 75% 40%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 30 60% 35%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 210 30% 20%;
+    --muted-foreground: 35 10% 70%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 210 75% 60%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 85% 50%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 35 10% 25%;
+    --input: 35 10% 25%;
+    --ring: 100 75% 40%;
+
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -93,9 +104,77 @@
 @layer base {
   * {
     @apply border-border;
+    image-rendering: pixelated;
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-minecraft;
+    cursor: url('/cursors/normal.png'), auto;
   }
+
+  body:active {
+    cursor: url('/cursors/clicking.png'), auto;
+  }
+
+  button, a {
+    cursor: url('/cursors/pointer.png'), pointer;
+  }
+
+  button:active, a:active {
+    cursor: url('/cursors/clicking.png'), pointer;
+  }
+}
+
+.minecraft-btn {
+  @apply font-minecraft uppercase text-white py-2 px-4 border-b-4 border-r-4 border-black/30 bg-minecraft-grass hover:bg-minecraft-grass/90 active:translate-y-1 active:translate-x-1 active:border-b-2 active:border-r-2 transition-all duration-100 inline-block;
+}
+
+.minecraft-btn-secondary {
+  @apply font-minecraft uppercase text-white py-2 px-4 border-b-4 border-r-4 border-black/30 bg-minecraft-stone hover:bg-minecraft-stone/90 active:translate-y-1 active:translate-x-1 active:border-b-2 active:border-r-2 transition-all duration-100 inline-block;
+}
+
+.minecraft-btn-gold {
+  @apply font-minecraft uppercase text-white py-2 px-4 border-b-4 border-r-4 border-black/30 bg-minecraft-gold hover:bg-minecraft-gold/90 active:translate-y-1 active:translate-x-1 active:border-b-2 active:border-r-2 transition-all duration-100 inline-block;
+}
+
+.minecraft-container {
+  @apply border-4 border-minecraft-stone bg-minecraft-dirt/70 p-4;
+}
+
+.pixel-border {
+  box-shadow: 
+    0 -4px 0 0 #000, 
+    0 4px 0 0 #000,
+    -4px 0 0 0 #000, 
+    4px 0 0 0 #000;
+}
+
+.pixel-corner {
+  clip-path: polygon(
+    0 4px, 4px 4px, 4px 0, calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px, 100% calc(100% - 4px), 
+    calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 4px calc(100% - 4px), 0 calc(100% - 4px)
+  );
+}
+
+.pixel-text-shadow {
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+}
+
+.parallax-layer {
+  will-change: transform;
+}
+
+.minecraft-input {
+  @apply font-minecraft bg-white/90 border-2 border-black p-2 outline-none rounded-none focus:border-minecraft-gold transition-colors duration-300;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
