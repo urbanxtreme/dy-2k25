@@ -81,6 +81,7 @@ const HomePage = () => {
       {/* Hero Section */}
       <div ref={parallaxRef} className="relative h-screen overflow-hidden">
         <div className="parallax-layer absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-t from-minecraft-sky to-[navy]"></div>
           <div className="absolute inset-0 bg-[url('/and.jpg')] bg-repeat-x bg-cover filter blur-[5px] bg-size-[150%]"></div>
         </div>
         <div className="parallax-layer absolute inset-0 z-10">
