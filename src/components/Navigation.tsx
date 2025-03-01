@@ -54,9 +54,9 @@ const Navigation = () => {
         
         {/* Desktop Navigation */}
         <nav className="hidden md:block mx-auto">
-          <ul className="flex justify-center space-x-2">
+          <ul className="flex justify-center space-x-5">
             {navItems.map((item) => (
-              <li key={item.name} className="nav-item">
+              <li key={item.name} className="nav-item text-center">
                 <Link 
                   to={item.path}
                   className={`font-minecraft px-3 py-2 block uppercase text-sm transition-all duration-200 ${

@@ -133,8 +133,8 @@ const HomePage = () => {
           <div className="flex flex-col md:flex-row items-center gap-8">
             <div className="w-full md:w-1/2">
               <div className="border-l-4 border-minecraft-grass pl-4 mb-6">
-                <h2 className="font-minecraft text-3xl mb-2 text-minecraft-obsidian">
-                  About <span className="bg-minecraft-grass text-white px-3 py-1">Daksha Yanthra</span>
+                <h2 className="font-minecraft text-3xl mb-2 text-black">
+                  About <span className="text-minecraft-grass">Daksha Yanthra</span>
                 </h2>
                 <p className="text-minecraft-stone">The ultimate Minecraft college experience</p>
               </div>
@@ -181,8 +181,7 @@ Join us as we embark on an unforgettable journey through creativity, engineering
         <div className="container mx-auto">
           <div className="text-center mb-10">
             <h2 className="font-minecraft text-3xl mb-3 inline-block relative">
-              <span className="bg-minecraft-grass text-white px-3 py-1 mr-2">Featured</span>
-              Events
+              <span className="text-green-500 px-3 py-1 mr-2">Featured Events</span>
               <div className="absolute -right-8 -top-8">
                 <Star size={24} className="text-minecraft-gold animate-pulse" />
               </div>
@@ -357,24 +356,24 @@ Join us as we embark on an unforgettable journey through creativity, engineering
 // Sample data
 const featuredEvents = [
   {
-    title: "Minecraft Building Competition",
-    category: "Creative",
-    description: "Show off your architectural skills in this epic building contest!",
-    date: "May 15, 2024",
+    title: "Hackathon",
+    category: "Technical",
+    description: "Develop innovative solutions and win exciting prizes in this thrilling competition!",
+    date: "Marh 24, 2025",
     image: "/images/event-building.jpg"
   },
   {
-    title: "Pixel Art Challenge",
-    category: "Art",
-    description: "Create stunning pixel art designs and win amazing prizes!",
-    date: "May 15, 2024",
+    title: "Fashion Show",
+    category: "Cultural",
+    description: "Show off your fashion skills and win exciting prizes in this exciting competition!",
+    date: "March 25, 2025",
     image: "/images/event-pixel.jpg"
   },
   {
-    title: "Coding Quest",
+    title: "Project Expo",
     category: "Technical",
-    description: "Solve programming challenges and puzzles in this exciting competition!",
-    date: "May 16, 2024",
+    description: "Showcase your projects and innovations in this exciting competition!",
+    date: "March 24, 2025",
     image: "/images/event-coding.jpg"
   }
 ];
