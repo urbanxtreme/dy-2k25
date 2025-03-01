@@ -47,7 +47,7 @@ const Navigation = () => {
       <div className="container mx-auto flex justify-between items-center">
         <Link 
           to="/" 
-          className="font-pixel text-2xl md:text-3xl text-white pixel-text-shadow flex items-center shimmer-effect transition-transform duration-300 hover:scale-105"
+          className="font-pixel text-2xl md:text-3xl text-white pixel-text-shadow shimmer-effect transition-transform duration-300 hover:scale-105"
         >
           <span className="text-minecraft-grass">Mine</span>
           <span className="text-minecraft-gold">Fest</span>
