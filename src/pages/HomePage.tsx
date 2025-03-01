@@ -82,6 +82,7 @@ const HomePage = () => {
       <div ref={parallaxRef} className="relative h-screen overflow-hidden">
         <div className="parallax-layer absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-t from-minecraft-sky to-[navy]"></div>
+          <div className="absolute inset-0 bg-[url('/and.jpg')] bg-repeat-x bg-cover filter blur-[5px] bg-size-[150%]"></div>
         </div>
         <div className="parallax-layer absolute inset-0 z-10">
           <div className="absolute inset-0 bg-[url('/images/minecraft-clouds.png')] bg-repeat-x bg-contain opacity-80"></div>
@@ -139,20 +140,19 @@ const HomePage = () => {
                 <p className="text-minecraft-stone">The ultimate Minecraft college experience</p>
               </div>
               <p className="mb-4 leading-relaxed">
-                Welcome to MineFest 2024, the most exciting college festival of the year! 
-                Get ready for two days of intense competitions, creative workshops, and 
-                unforgettable experiences – all themed around the world's most popular 
-                sandbox game.
+              Experience the fusion of creativity, technology, and limitless possibilities as the College of Engineering Attingal presents the most awaited Techno-Cultural Fest: Daksha Yanthra 2025!
+
+Step into a world where pixels become masterpieces, redstone powers innovation, and every block holds the potential for greatness. From mind-blowing tech challenges to intense hackathons, each event is designed to push the boundaries of what can be built, coded, and imagined.
               </p>
               <p className="mb-6 leading-relaxed">
-                Whether you're a hardcore gamer, a coding whiz, or a creative artist, 
-                MineFest has something special for everyone. Join us as we transform our 
-                campus into an interactive Minecraft world!
+              As you explore this vibrant landscape, you’ll witness a seamless fusion of skill and strategy, where visionaries craft the future—one block at a time. Whether you're competing, collaborating, or just placing your first block, this is your chance to mine ideas, craft solutions, and engineer a world of infinite possibilities.
+
+Join us as we embark on an unforgettable journey through creativity, engineering, and the spirit of innovation.
               </p>
               <div className="bg-minecraft-dirt/20 p-5 border-l-4 border-minecraft-dirt rounded-r shadow-md">
                 <div className="flex items-center mb-3">
                   <Calendar size={22} className="mr-3 text-minecraft-grass" />
-                  <span><strong>Date:</strong> May 15-16, 2024</span>
+                  <span><strong>Date:</strong> March 15-16, 2025</span>
                 </div>
                 <div className="flex items-center mb-3">
                   <Clock size={22} className="mr-3 text-minecraft-grass" />
@@ -160,7 +160,7 @@ const HomePage = () => {
                 </div>
                 <div className="flex items-center">
                   <MapPin size={22} className="mr-3 text-minecraft-grass" />
-                  <span><strong>Venue:</strong> University Main Campus</span>
+                  <span><strong>Venue:</strong> College Campus</span>
                 </div>
               </div>
             </div>
@@ -246,7 +246,7 @@ const HomePage = () => {
       <div 
         ref={addToSectionRefs} 
         data-section-id="map"
-        className={`py-16 px-4 bg-white transition-all duration-700 opacity-0 transform translate-y-10 ${
+        className={`py-16 px-4 bg-[url('/bg2.png')] bg-cover bg-center transition-all duration-700 opacity-0 transform translate-y-10 ${
           isVisible('map') ? 'opacity-100 translate-y-0' : ''
         }`}
       >
