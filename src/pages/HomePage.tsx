@@ -81,7 +81,7 @@ const HomePage = () => {
       {/* Hero Section */}
       <div ref={parallaxRef} className="relative h-screen overflow-hidden">
         <div className="parallax-layer absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-t from-minecraft-sky to-[#67a9ff]"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-minecraft-sky to-[navy]"></div>
         </div>
         <div className="parallax-layer absolute inset-0 z-10">
           <div className="absolute inset-0 bg-[url('/images/minecraft-clouds.png')] bg-repeat-x bg-contain opacity-80"></div>
@@ -96,9 +96,9 @@ const HomePage = () => {
         <div className="relative z-40 flex flex-col items-center justify-center h-full px-4 text-center">
           <div className="animate-float">
             <h1 className="font-pixel text-4xl md:text-6xl lg:text-7xl text-white mb-6 pixel-text-shadow shimmer-effect">
-              <span className="text-minecraft-grass">Mine</span>
-              <span className="text-minecraft-gold">Fest</span>
-              <span className="block mt-3 text-white">2024</span>
+              <span className="text-minecraft-grass">Daksha </span>
+              <span className="text-minecraft-gold">Yanthra</span>
+              <span className="block mt-3 text-white">2025</span>
             </h1>
           </div>
           <p className="font-minecraft text-xl md:text-2xl text-white mb-8 max-w-2xl pixel-text-shadow">
@@ -134,7 +134,7 @@ const HomePage = () => {
             <div className="w-full md:w-1/2">
               <div className="border-l-4 border-minecraft-grass pl-4 mb-6">
                 <h2 className="font-minecraft text-3xl mb-2 text-minecraft-obsidian">
-                  About <span className="bg-minecraft-grass text-white px-3 py-1">MineFest</span>
+                  About <span className="bg-minecraft-grass text-white px-3 py-1">Daksha Yanthra</span>
                 </h2>
                 <p className="text-minecraft-stone">The ultimate Minecraft college experience</p>
               </div>
