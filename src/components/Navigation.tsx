@@ -40,8 +40,8 @@ const Navigation = () => {
     <header 
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-minecraft-dirt/95 backdrop-blur-sm shadow-lg py-1' 
-          : 'bg-minecraft-dirt py-2'
+          ? 'bg-black/25 backdrop-blur-sm shadow-lg py-1' 
+          : 'bg-transparent py-2'
       } border-b-4 border-minecraft-stone px-4`}
     >
       <div className="container mx-auto flex justify-between items-center">
@@ -49,9 +49,7 @@ const Navigation = () => {
           to="/" 
           className="font-pixel text-2xl md:text-3xl text-white pixel-text-shadow flex items-center shimmer-effect transition-transform duration-300 hover:scale-105"
         >
-          <span className="text-minecraft-grass">Mine</span>
-          <span className="text-minecraft-gold">Fest</span>
-          <span className="ml-2 text-sm bg-minecraft-redstone text-white px-2 py-0.5 transform rotate-2 hover:rotate-0 transition-transform duration-300">2024</span>
+          <img src="/DY25.png" alt="DY25" className="w-8 h-8" />
         </Link>
         
         {/* Desktop Navigation */}

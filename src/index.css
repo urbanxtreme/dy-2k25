@@ -1,19 +1,18 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @font-face {
-  font-family: 'MinecraftPixel';
-  src: url('/fonts/minecraft_pixel.woff2') format('woff2');
+  font-family: "Mojangles";
+  src: url("/fonts/mojangle/mojangles.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'MinecraftRegular';
-  src: url('/fonts/minecraft_regular.woff2') format('woff2');
+  font-family: "Mojangles";
+  src: url("/fonts/mojangle/mojangles.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -103,43 +102,69 @@
 
 @layer base {
   * {
-    @apply border-border;
+    border: var(--border);
     image-rendering: pixelated;
   }
 
   body {
-    @apply bg-background text-foreground font-minecraft;
-    cursor: url('/cursors/normal.png'), auto;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-minecraft);
+    cursor: url("/cursors/normal.png"), auto;
   }
 
   body:active {
-    cursor: url('/cursors/clicking.png'), auto;
+    cursor: url("/cursors/clicking.png"), auto;
   }
 
-  button, a {
-    cursor: url('/cursors/pointer.png'), pointer;
+  button,
+  a {
+    cursor: url("/cursors/pointer.png"), pointer;
   }
 
-  button:active, a:active {
-    cursor: url('/cursors/clicking.png'), pointer;
+  button:active,
+  a:active {
+    cursor: url("/cursors/clicking.png"), pointer;
   }
 }
 
+
+
 .minecraft-btn {
-  @apply font-minecraft uppercase text-white py-2 px-4 border-b-4 border-r-4 border-black/30 bg-minecraft-grass hover:bg-minecraft-grass/90 active:translate-y-1 active:translate-x-1 active:border-b-2 active:border-r-2 transition-all duration-100 inline-block;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  font-family: "MinecraftRegular", "mojangles";
+  text-transform: uppercase;
+  color: #ffffff;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-bottom-width: 4px;
+  border-bottom-style: solid;
+  border-bottom-color: rgba(0, 0, 0, 0.3);
+  border-right-width: 4px;
+  border-right-style: solid;
+  border-right-color: rgba(0, 0, 0, 0.3);
+  background-color: #34c759;
+  transition: all 0.1s ease-in-out;
+  display: inline-block;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
   position: relative;
   overflow: hidden;
 }
 
 .minecraft-btn::after {
-  content: '';
+  content: "";
   position: absolute;
   top: -100%;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.2) 0%,
+    transparent 100%
+  );
   transition: top 0.3s ease;
 }
 
@@ -148,20 +173,40 @@
 }
 
 .minecraft-btn-secondary {
-  @apply font-minecraft uppercase text-white py-2 px-4 border-b-4 border-r-4 border-black/30 bg-minecraft-stone hover:bg-minecraft-stone/90 active:translate-y-1 active:translate-x-1 active:border-b-2 active:border-r-2 transition-all duration-100 inline-block;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  font-family: var(--font-minecraft);
+  text-transform: uppercase;
+  color: #ffffff;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-bottom-width: 4px;
+  border-bottom-style: solid;
+  border-bottom-color: rgba(0, 0, 0, 0.3);
+  border-right-width: 4px;
+  border-right-style: solid;
+  border-right-color: rgba(0, 0, 0, 0.3);
+  background-color: var(--minecraft-stone);
+  transition: all 0.1s ease-in-out;
+  display: inline-block;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
   position: relative;
   overflow: hidden;
 }
 
 .minecraft-btn-secondary::after {
-  content: '';
+  content: "";
   position: absolute;
   top: -100%;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.2) 0%,
+    transparent 100%
+  );
   transition: top 0.3s ease;
 }
 
@@ -170,20 +215,45 @@
 }
 
 .minecraft-btn-gold {
-  @apply font-minecraft uppercase text-white py-2 px-4 border-b-4 border-r-4 border-black/30 bg-minecraft-gold hover:bg-minecraft-gold/90 active:translate-y-1 active:translate-x-1 active:border-b-2 active:border-r-2 transition-all duration-100 inline-block;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  font-family: var(--font-minecraft);
+  text-transform: uppercase;
+  color: #ffffff;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-bottom-width: 4px;
+  border-bottom-style: solid;
+  border-bottom-color: rgba(0, 0, 0, 0.3);
+  border-right-width: 4px;
+  border-right-style: solid;
+  border-right-color: rgba(0, 0, 0, 0.3);
+  background-color: #ffd700; /* added background color */
+  transition: all 0.1s ease-in-out;
+  display: inline-block;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
   position: relative;
   overflow: hidden;
 }
 
+.minecraft-btn-gold:hover {
+  background-color: #ffd700; /* added hover background color */
+  transition: all 0.1s ease-in-out;
+}
+
 .minecraft-btn-gold::after {
-  content: '';
+  content: "";
   position: absolute;
   top: -100%;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.3) 0%,
+    transparent 100%
+  );
   transition: top 0.3s ease;
 }
 
@@ -192,22 +262,33 @@
 }
 
 .minecraft-container {
-  @apply border-4 border-minecraft-stone bg-minecraft-dirt/70 p-4;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-width: 4px;
+  border-style: solid;
+  border-color: black;
+  background-color: rgba(green, 0.7);
+  padding: 4px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 .pixel-border {
-  box-shadow: 
-    0 -4px 0 0 #000, 
-    0 4px 0 0 #000,
-    -4px 0 0 0 #000, 
-    4px 0 0 0 #000;
+  box-shadow: 0 -4px 0 0 #000, 0 4px 0 0 #000, -4px 0 0 0 #000, 4px 0 0 0 #000;
 }
 
 .pixel-corner {
   clip-path: polygon(
-    0 4px, 4px 4px, 4px 0, calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px, 100% calc(100% - 4px), 
-    calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 4px calc(100% - 4px), 0 calc(100% - 4px)
+    0 4px,
+    4px 4px,
+    4px 0,
+    calc(100% - 4px) 0,
+    calc(100% - 4px) 4px,
+    100% 4px,
+    100% calc(100% - 4px),
+    calc(100% - 4px) calc(100% - 4px),
+    calc(100% - 4px) 100%,
+    4px 100%,
+    4px calc(100% - 4px),
+    0 calc(100% - 4px)
   );
 }
 
@@ -220,7 +301,17 @@
 }
 
 .minecraft-input {
-  @apply font-minecraft bg-white/90 border-2 border-black p-2 outline-none rounded-none focus:border-minecraft-gold transition-colors duration-300;
+  font-family: 'Minecraft'; /* assuming font-minecraft is a custom font family */
+  background-color: rgba(255, 255, 255, 0.9); /* bg-white/90 */
+  border: 2px solid #000; /* border-2 border-black */
+  padding: 2px; /* p-2 */
+  outline: none; /* outline-none */
+  border-radius: 0; /* rounded-none */
+  transition: color 300ms; /* transition-colors duration-300 */
+}
+
+.minecraft-input:focus {
+  border-color: #ffd700; /* border-minecraft-gold */
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -230,20 +321,26 @@
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .no-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 /* Card hover effect */
 .minecraft-card {
-  @apply bg-white border-4 border-minecraft-stone transition-all duration-300;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  background-color: #ffffff;
+  border-width: 4px;
+  border-style: solid;
+  border-color: var(--minecraft-stone);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
   transform: translateY(0);
 }
 
 .minecraft-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 /* Section transitions */
@@ -275,14 +372,21 @@
 
 .btn-press:active {
   transform: translateY(2px);
-  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1),
+    0 1px 2px -1px rgba(0, 0, 0, 0.06);
 }
 
 /* Minecraft block animation */
 @keyframes block-hover {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-  100% { transform: translateY(0); }
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 .block-hover {
@@ -296,7 +400,7 @@
 }
 
 .shimmer-effect::after {
-  content: '';
+  content: "";
   position: absolute;
   top: -100%;
   left: -100%;
@@ -313,8 +417,12 @@
 }
 
 @keyframes shimmer {
-  0% { transform: translateX(-100%) rotate(30deg); }
-  100% { transform: translateX(100%) rotate(30deg); }
+  0% {
+    transform: translateX(-100%) rotate(30deg);
+  }
+  100% {
+    transform: translateX(100%) rotate(30deg);
+  }
 }
 
 /* Team member card hover */
@@ -324,7 +432,8 @@
 
 .team-card:hover {
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 /* Improved nav item hover */
@@ -334,13 +443,13 @@
 }
 
 .nav-item::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 50%;
   width: 0;
   height: 2px;
-  background-color: #67C52A;
+  background-color: #67c52a;
   transition: all 0.3s ease;
   transform: translateX(-50%);
 }

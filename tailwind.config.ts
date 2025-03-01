@@ -85,8 +85,8 @@ export default {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			fontFamily: {
-				pixel: ['MinecraftPixel', 'monospace'],
-				minecraft: ['MinecraftRegular', 'sans-serif']
+				pixel: ['MinecraftPixel', 'mojangles'],
+				minecraft: ['MinecraftRegular', 'mojangles']
 			},
 			keyframes: {
 				'accordion-down': {

@@ -81,7 +81,7 @@ const HomePage = () => {
       {/* Hero Section */}
       <div ref={parallaxRef} className="relative h-screen overflow-hidden">
         <div className="parallax-layer absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-t from-minecraft-sky to-[navy]"></div>
+          <div className="absolute inset-0 bg-[url('/and.jpg')] bg-repeat-x bg-cover filter blur-[5px] bg-size-[150%]"></div>
         </div>
         <div className="parallax-layer absolute inset-0 z-10">
           <div className="absolute inset-0 bg-[url('/images/minecraft-clouds.png')] bg-repeat-x bg-contain opacity-80"></div>
@@ -246,7 +246,7 @@ const HomePage = () => {
       <div 
         ref={addToSectionRefs} 
         data-section-id="map"
-        className={`py-16 px-4 bg-white transition-all duration-700 opacity-0 transform translate-y-10 ${
+        className={`py-16 px-4 bg-[url('/bg2.png')] bg-cover bg-center transition-all duration-700 opacity-0 transform translate-y-10 ${
           isVisible('map') ? 'opacity-100 translate-y-0' : ''
         }`}
       >
