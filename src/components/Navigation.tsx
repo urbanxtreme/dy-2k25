@@ -53,8 +53,8 @@ const Navigation = () => {
         </Link>
         
         {/* Desktop Navigation */}
-        <nav className="hidden md:block">
-          <ul className="flex space-x-2">
+        <nav className="hidden md:block mx-auto">
+          <ul className="flex justify-center space-x-2">
             {navItems.map((item) => (
               <li key={item.name} className="nav-item">
                 <Link 

@@ -22,7 +22,7 @@
   :root {
     --background: 0 0% 100%;
     --foreground: 35 10% 15%;
-
+    --font-minecraft: "Mojangles", sans-serif;
     --card: 0 0% 100%;
     --card-foreground: 35 10% 15%;
 
