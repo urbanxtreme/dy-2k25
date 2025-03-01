@@ -49,7 +49,7 @@ const Navigation = () => {
           to="/" 
           className="font-pixel text-2xl md:text-3xl text-white pixel-text-shadow flex items-center shimmer-effect transition-transform duration-300 hover:scale-105"
         >
-          <img src="/DY25.png" alt="DY25" className="w-8 h-8" />
+          <img src="/images/DY25.png" alt="DY25" className="w-20 h-20" />
         </Link>
         
         {/* Desktop Navigation */}

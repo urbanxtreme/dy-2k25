@@ -81,7 +81,7 @@ const HomePage = () => {
       {/* Hero Section */}
       <div ref={parallaxRef} className="relative h-screen overflow-hidden">
         <div className="parallax-layer absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-[url('/and.jpg')] bg-repeat-x bg-cover filter blur-[5px] bg-size-[150%]"></div>
+          <div className="absolute inset-0 bg-[url('/images/and.jpg')] bg-repeat-x bg-cover filter blur-[5px] bg-size-[150%]"></div>
         </div>
         <div className="parallax-layer absolute inset-0 z-10">
           <div className="absolute inset-0 bg-[url('/images/minecraft-clouds.png')] bg-repeat-x bg-contain opacity-80"></div>
@@ -151,7 +151,7 @@ Join us as we embark on an unforgettable journey through creativity, engineering
               <div className="bg-minecraft-dirt/20 p-5 border-l-4 border-minecraft-dirt rounded-r shadow-md">
                 <div className="flex items-center mb-3">
                   <Calendar size={22} className="mr-3 text-minecraft-grass" />
-                  <span><strong>Date:</strong> March 15-16, 2025</span>
+                  <span><strong>Date:</strong> March 24-25, 2025</span>
                 </div>
                 <div className="flex items-center mb-3">
                   <Clock size={22} className="mr-3 text-minecraft-grass" />
@@ -245,7 +245,7 @@ Join us as we embark on an unforgettable journey through creativity, engineering
       <div 
         ref={addToSectionRefs} 
         data-section-id="map"
-        className={`py-16 px-4 bg-[url('/bg2.png')] bg-cover bg-center transition-all duration-700 opacity-0 transform translate-y-10 ${
+        className={`py-16 px-4 bg-[url('/images/bg2.png')] bg-cover bg-center transition-all duration-700 opacity-0 transform translate-y-10 ${
           isVisible('map') ? 'opacity-100 translate-y-0' : ''
         }`}
       >
