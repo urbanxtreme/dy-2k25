@@ -250,10 +250,9 @@ Join us as we embark on an unforgettable journey through creativity, engineering
       >
         <div className="container mx-auto text-center">
           <h2 className="font-minecraft text-3xl mb-6 text-minecraft-obsidian">
-            <span className="bg-minecraft-grass text-white px-3 py-1 mr-2">Interactive</span>
-            MineFest Map
+            <span className="text-yellow-500 px-3 py-1 mr-2">Interactive MineFest Map</span>
           </h2>
-          <p className="max-w-2xl mx-auto mb-8 text-lg">
+          <p className="text-yellow-500 max-w-2xl mx-auto mb-8 text-lg">
             Explore our interactive Minecraft-style map to discover all event locations!
             Click on buildings to learn more about different event categories.
           </p>

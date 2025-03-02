@@ -16,42 +16,6 @@ export default {
 			padding: '10rem 0rem',
 			screens: {
 				// '2xl': '1400px',
-				maxHeight: {
-					'2xs': '4rem',
-					'xs': '6rem',
-					'sm': '8rem',
-					'md': '10rem',
-					'lg': '12rem',
-					'xl': '14rem',
-					'2xl': '16rem',
-					'3xl': '20rem',
-					'4xl': '24rem',
-					'5xl': '30rem',
-					'6xl': '36rem',
-					'7xl': '42rem',
-					'8xl': '48rem',
-					'9xl': '54rem',
-					full: '100vh'
-				},
-				minHeight: {
-					'none': 'none',
-					'2xs': '4rem',
-					'xs': '6rem',
-					'sm': '8rem',
-					'md': '10rem',
-					'lg': '12rem',
-					'xl': '14rem',
-					'2xl': '16rem',
-					'3xl': '20rem',
-					'4xl': '24rem',
-					'5xl': '30rem',
-					'6xl': '36rem',
-					'7xl': '42rem',
-					'8xl': '48rem',
-					'9xl': '54rem',
-					full: '100vh'
-	
-				},
 			},
 		},
 		extend: {
