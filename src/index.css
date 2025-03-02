@@ -11,6 +11,15 @@
 }
 
 @font-face {
+  font-family: "Minercraftory";
+  src: url("/fonts/Minercraftory.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+@font-face {
   font-family: "Mojangles";
   src: url("/fonts/mojangle/mojangles.ttf") format("truetype");
   font-weight: normal;

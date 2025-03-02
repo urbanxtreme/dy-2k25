@@ -121,7 +121,7 @@ const MinecraftCharacter = ({ className = "" }: MinecraftCharacterProps) => {
       <div
         ref={containerRef}
         className={`w-full h-full ${className}`}
-        style={{ minHeight: "600px", marginTop: "-80px" }} // Increased minHeight and added negative margin
+        style={{ minHeight: "700px" }} // Increased minHeight and added negative margin
       ></div>
 
       <div className="absolute bottom-4 right-4 bg-white/80 p-2 text-black text-xs rounded shadow-lg">

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daksha Yanthra 25</title>
+    <style>
+        :root {
+            --primary-color: #25D366;
+            --accent-color: #833AB4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .hero-section {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transform: scale(0.9);
+            animation: heroReveal 2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            animation-delay: 0.5s;
+        }
+
+        .content-wrapper {
+            position: relative;
+            padding: 40px 20px;
+            text-align: center;
+            opacity: 0;
+            animation: contentReveal 1.5s ease-out forwards;
+            animation-delay: 2s;
+        }
+
+        .title {
+            font-size: 4rem;
+            letter-spacing: 4px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, #fff, #aaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: titleReveal 1s ease-out forwards;
+            animation-delay: 2.5s;
+        }
+
+        .subtitle {
+            font-size: 2rem;
+            color: #ccc;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+            animation-delay: 3s;
+        }
+
+        .contact-list {
+            display: grid;
+            gap: 1.5rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        .contact-item {
+            font-size: 1.2rem;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: itemReveal 0.8s ease-out forwards;
+        }
+
+        .contact-item:nth-child(1) { animation-delay: 3.2s; }
+        .contact-item:nth-child(2) { animation-delay: 3.4s; }
+        .contact-item:nth-child(3) { animation-delay: 3.6s; }
+
+        .contact-item:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .whatsapp-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .whatsapp-link:hover {
+            color: #1da851;
+        }
+
+        .instagram-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 35px;
+            border-radius: 30px;
+            background: linear-gradient(45deg, #405DE6, #833AB4, #C13584, #E1306C, #FD1D1D);
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: transform 0.3s;
+            opacity: 0;
+            animation: btnReveal 1s ease-out forwards;
+            animation-delay: 3.8s;
+        }
+
+        .instagram-btn:hover {
+            transform: scale(1.05) rotate(-2deg);
+        }
+
+        @keyframes heroReveal {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes contentReveal {
+            to { opacity: 1; }
+        }
+
+        @keyframes titleReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes itemReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes btnReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            .subtitle {
+                font-size: 1.5rem;
+            }
+            .contact-item {
+                font-size: 1rem;
+            }
+            .hero-section {
+                height: 70vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero-section">
+        <img src="reveal.png" alt="Daksha Yanthra 25" class="hero-image">
+    </section>
+
+    <div class="content-wrapper">
+        <h1 class="title">Daksha Yanthra 25</h1>
+        <h2 class="subtitle">FANK</h2>
+
+        <div class="contact-list">
+            <div class="contact-item">
+                Roshan Syed - <a href="https://wa.me/919995898789" class="whatsapp-link">9995898789</a>
+            </div>
+            <div class="contact-item">
+                Jithu N Biju - <a href="https://wa.me/919400469980" class="whatsapp-link">9400469980</a>
+            </div>
+            <div class="contact-item">
+                SOURAV S - <a href="https://wa.me/917012140973" class="whatsapp-link">7012140973</a>
+            </div>
+        </div>
+
+        <a href="https://instagram.com/your_instagram" target="_blank" class="instagram-btn">
+            Follow on Instagram
+        </a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Preload image
+            const img = new Image();
+            img.src = 'reveal.png';
+            img.onload = () => {
+                document.body.classList.add('loaded');
+            };
+        });
+    </script>
+</body>
+</html>
