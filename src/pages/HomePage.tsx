@@ -105,9 +105,11 @@ const HomePage = () => {
             Join us for an epic two-day college fest themed around Minecraft!
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <PixelButton variant="primary" className="pulse">
-              Register Now
-            </PixelButton>
+            <Link to="/events">
+              <PixelButton variant="primary" className="pulse">
+                Register Now
+              </PixelButton>
+            </Link>
             <Link to="/events">
               <PixelButton variant="gold">
                 Explore Events
@@ -337,7 +339,7 @@ Join us as we embark on an unforgettable journey through creativity, engineering
               <Star size={40} className="animate-pulse" />
             </div>
             
-            <h2 className="font-pixel text-4xl md:text-5xl mb-6 pixel-text-shadow shimmer-effect">Ready to Join MineFest 2024?</h2>
+            <h2 className="font-pixel text-4xl md:text-5xl mb-6 pixel-text-shadow shimmer-effect">Ready to Join Daksha Yanthra 2025?</h2>
             <p className="font-minecraft text-xl mb-8 max-w-2xl mx-auto">
               Don't miss out on the most exciting college fest of the year!
               Register now to participate in events and workshops.

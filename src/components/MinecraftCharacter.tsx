@@ -15,21 +15,16 @@ const MinecraftCharacter = ({ className = "" }: MinecraftCharacterProps) => {
 
     // Scene setup
     const scene = new THREE.Scene();
-    
-    // Sky Background
-    const skyColor = new THREE.Color(0x87CEEB);
-    const groundColor = new THREE.Color(0x228B22);
-    scene.background = skyColor;
-    scene.fog = new THREE.Fog(skyColor, 5, 15);
+    scene.background = new THREE.Color(0xffffff); // Pure white background
 
     // Camera setup
     const camera = new THREE.PerspectiveCamera(
       45,
-      containerRef.current.clientWidth / containerRef.current.clientHeight,
+      containerRef.current.clientWidth * 1.1 / containerRef.current.clientHeight * 1.1,
       0.1,
       1000
     );
-    camera.position.set(5, 8, 25);
+    camera.position.set(0, 0, 5);
 
     // Renderer setup
     const renderer = new THREE.WebGLRenderer({
@@ -41,7 +36,6 @@ const MinecraftCharacter = ({ className = "" }: MinecraftCharacterProps) => {
       containerRef.current.clientHeight
     );
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.shadowMap.enabled = true;
     containerRef.current.innerHTML = "";
     containerRef.current.appendChild(renderer.domElement);
     rendererRef.current = renderer;
@@ -52,48 +46,26 @@ const MinecraftCharacter = ({ className = "" }: MinecraftCharacterProps) => {
     controls.dampingFactor = 0.05;
     controls.minDistance = 3;
     controls.maxDistance = 8;
-    controls.maxPolarAngle = Math.PI / 1.5;
     controls.enablePan = false;
     controls.autoRotate = true;
-    controls.autoRotateSpeed = 1;
+    controls.autoRotateSpeed = 5;
 
-    // Create 3D Image Frame
+    // Create 3D Image
     const create3DImage = (texture: THREE.Texture) => {
       const aspectRatio = texture.image.width / texture.image.height;
-      const depth = 0.2;
+      const geometry = new THREE.PlaneGeometry(4 * aspectRatio, 4); // Increased size from 4 to 6
       
-      // Create box geometry with image on front/back
-      const geometry = new THREE.BoxGeometry(3 * aspectRatio, 3, depth);
-      
-      // Brighter materials
-      const frontMaterial = new THREE.MeshPhongMaterial({
+      // Create double-sided material
+      const material = new THREE.MeshStandardMaterial({
         map: texture,
+        side: THREE.DoubleSide,
         transparent: true,
-        emissive: 0x444444,
-        emissiveIntensity: 0.5,
-        side: THREE.DoubleSide
+        roughness: 0.1,
+        metalness: 0.1
       });
 
-      const edgeMaterial = new THREE.MeshPhongMaterial({
-        color: 0xFFFFFF,
-        emissive: 0x888888,
-        emissiveIntensity: 0.3
-      });
-
-      const materials = [
-        edgeMaterial, // Right
-        edgeMaterial, // Left
-        edgeMaterial, // Top
-        edgeMaterial, // Bottom
-        frontMaterial, // Front
-        frontMaterial // Back
-      ];
-
-      const imageFrame = new THREE.Mesh(geometry, materials);
-      imageFrame.castShadow = true;
-      imageFrame.receiveShadow = true;
-      imageFrame.position.set(0, 1.5, 0);
-      scene.add(imageFrame);
+      const imageMesh = new THREE.Mesh(geometry, material);
+      scene.add(imageMesh);
     };
 
     // Load image texture
@@ -106,50 +78,12 @@ const MinecraftCharacter = ({ className = "" }: MinecraftCharacterProps) => {
     });
 
     // Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
     scene.add(ambientLight);
 
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 1.2);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
     directionalLight.position.set(5, 5, 5);
-    directionalLight.castShadow = true;
     scene.add(directionalLight);
-
-    // Create grassy ground
-    const groundGeometry = new THREE.PlaneGeometry(20, 20);
-    const groundTexture = new THREE.CanvasTexture(createGrassTexture());
-    groundTexture.wrapS = THREE.RepeatWrapping;
-    groundTexture.wrapT = THREE.RepeatWrapping;
-    groundTexture.repeat.set(10, 10);
-
-    const groundMaterial = new THREE.MeshStandardMaterial({
-      map: groundTexture,
-      roughness: 0.9,
-      metalness: 0.1
-    });
-
-    const ground = new THREE.Mesh(groundGeometry, groundMaterial);
-    ground.rotation.x = -Math.PI / 2;
-    ground.receiveShadow = true;
-    scene.add(ground);
-
-    // Add clouds
-    const cloudGeometry = new THREE.SphereGeometry(1, 32, 32);
-    const cloudMaterial = new THREE.MeshPhongMaterial({
-      color: 0xffffff,
-      transparent: true,
-      opacity: 0.8
-    });
-
-    for(let i = 0; i < 5; i++) {
-      const cloud = new THREE.Mesh(cloudGeometry, cloudMaterial);
-      cloud.position.set(
-        Math.random() * 15 - 7.5,
-        5 + Math.random() * 3,
-        Math.random() * 15 - 7.5
-      );
-      cloud.scale.set(0.5 + Math.random(), 0.2, 0.5 + Math.random());
-      scene.add(cloud);
-    }
 
     // Animation loop
     const animate = () => {
@@ -182,42 +116,15 @@ const MinecraftCharacter = ({ className = "" }: MinecraftCharacterProps) => {
     };
   }, []);
 
-  // Helper function to create grass texture
-  const createGrassTexture = () => {
-    const canvas = document.createElement('canvas');
-    canvas.width = 256;
-    canvas.height = 256;
-    const ctx = canvas.getContext('2d');
-    
-    if (ctx) {
-      // Base grass color
-      ctx.fillStyle = '#2d5a27';
-      ctx.fillRect(0, 0, 256, 256);
-
-      // Add grass blades
-      ctx.strokeStyle = '#3c6b32';
-      ctx.lineWidth = 2;
-      for(let i = 0; i < 100; i++) {
-        ctx.beginPath();
-        const x = Math.random() * 256;
-        const y = Math.random() * 256;
-        ctx.moveTo(x, y);
-        ctx.lineTo(x + (Math.random() - 0.5) * 10, y - 10);
-        ctx.stroke();
-      }
-    }
-    return canvas;
-  };
-
   return (
     <div className="relative">
       <div
         ref={containerRef}
-        className={`w-full h-full ${className} rounded border-4 border-minecraft-stone shadow-lg`}
-        style={{ minHeight: "400px" }}
+        className={`w-full h-full ${className}`}
+        style={{ minHeight: "600px", marginTop: "-80px" }} // Increased minHeight and added negative margin
       ></div>
 
-      <div className="absolute bottom-4 right-4 bg-minecraft-dirt/80 p-2 text-white text-xs rounded shadow">
+      <div className="absolute bottom-4 right-4 bg-white/80 p-2 text-black text-xs rounded shadow-lg">
         <p>Click & drag to rotate</p>
         <p>Scroll to zoom</p>
       </div>

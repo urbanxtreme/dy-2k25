@@ -9,11 +9,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <h3 className="font-minecraft text-xl mb-4">
-              <span className="text-minecraft-grass">Mine</span>
-              <span className="text-minecraft-gold">Fest</span>
-              <span className="ml-2 text-sm bg-minecraft-redstone text-white px-2 py-0.5">2024</span>
+              <span className="text-minecraft-grass">Daksha </span>
+              <span className="text-minecraft-gold">Yanthra</span>
+              <span className="ml-2 text-sm bg-minecraft-redstone text-white px-2 py-0.5">2025</span>
             </h3>
-            <p className="mb-4">A two-day college fest themed around Minecraft, featuring technical and cultural events!</p>
+            <p className="mb-4">Experience the fusion of creativity, technology, and limitless possibilities.</p>
             <div className="flex space-x-4">
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-minecraft-gold transition-colors duration-200">
                 <Facebook size={20} />
@@ -60,19 +60,19 @@ const Footer = () => {
               </div>
               <div className="flex items-center">
                 <Phone size={16} className="mr-2 text-minecraft-gold" />
-                <a href="tel:+123456789" className="hover:text-minecraft-gold transition-colors duration-200">+1 (234) 567-8900</a>
+                <a href="tel:++91 9995898789" className="hover:text-minecraft-gold transition-colors duration-200">+91 9995898789</a>
               </div>
               <p>
-                MineFest College Campus,<br />
-                Block Avenue, Pixel City,<br />
-                MC 12345
+                College of Engineering Attingal,<br />
+                Near Attingal Bus Stand,<br />
+                Kerala-695101
               </p>
             </div>
           </div>
         </div>
         
         <div className="border-t border-minecraft-stone/50 mt-8 pt-6 text-center">
-          <p>&copy; {new Date().getFullYear()} MineFest College Fest. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Daksha Yanthra. All rights reserved.</p>
           <p className="text-sm mt-2">
             <Link to="/privacy" className="hover:text-minecraft-gold transition-colors duration-200 mr-4">Privacy Policy</Link>
             <Link to="/terms" className="hover:text-minecraft-gold transition-colors duration-200">Terms of Service</Link>
