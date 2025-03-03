@@ -39,7 +39,7 @@ const Navigation = () => {
           >
             <img src="/images/DY25.png" alt="DY25" className="w-20 h-20" />
           </Link>
-          
+
           {/* Mobile-only Registration Button */}
           <Link
             to="/register"
@@ -118,7 +118,7 @@ const Navigation = () => {
                   to={item.path}
                   className={`font-minecraft px-3 py-3 block uppercase text-sm ${
                     location.pathname === item.path
-                      ? "bg-minecraft-grass text-white border-b-2 border-black/30"
+                      ? "bg-navy text-white border-b-2 border-black/30"
                       : "text-white hover:bg-minecraft-stone/50"
                   } rounded transition-all duration-200 flex items-center justify-between`}
                 >
