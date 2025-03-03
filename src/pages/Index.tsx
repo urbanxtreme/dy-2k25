@@ -13,7 +13,7 @@ const Index = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-minecraft-dirt">
       <div className="text-center">
-        <h1 className="text-4xl font-minecraft text-white mb-4">Loading MineFest...</h1>
+        <h1 className="text-4xl font-minecraft text-white mb-4">Loading DY2K25...</h1>
         <p className="text-xl text-white">Please wait while we fetch the blocks...</p>
       </div>
     </div>

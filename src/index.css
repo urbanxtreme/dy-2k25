@@ -107,7 +107,7 @@
   }
 
   body {
-    background-color: var(--background);
+    background-color: black;
     color: var(--foreground);
     font-family: var(--font-minecraft);
     cursor: url("/cursors/normal.png"), auto;

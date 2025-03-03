@@ -1,19 +1,51 @@
 import { useEffect, useRef } from 'react';
 import ContactForm from '@/components/ContactForm';
-import { Facebook, Twitter, Instagram, Youtube, Mail, Phone, Users, Calendar, Award } from 'lucide-react';
+import { Facebook, Twitter, Instagram, Youtube, Mail, Phone, Users, Calendar, Award, Video } from 'lucide-react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger'; 
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import  VideoComponent  from '../components/VideoComponent';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const AboutPage = () => {
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const dakshaRef = useRef<HTMLHeadingElement | null>(null);
+  const yanthraRef = useRef<HTMLHeadingElement | null>(null);
   const headingRef = useRef<HTMLHeadingElement | null>(null); // Ref for the heading
-  const smokeContainerRef = useRef<HTMLDivElement | null>(null); // Ref for the smoke effect container
 
   useEffect(() => {
+    // Pop animation for "Daksha"
+    if (dakshaRef.current) {
+      gsap.fromTo(
+        dakshaRef.current,
+        { scale: 0, opacity: 0 },
+        {
+          scale: 1,
+          opacity: 1,
+          duration: 0.8,
+          ease: 'elastic.out(1, 1)',
+          delay: 0.5,
+        }
+      );
+    }
+
+    // Pop animation for "Yanthra"
+    if (yanthraRef.current) {
+      gsap.fromTo(
+        yanthraRef.current,
+        { scale: 0, opacity: 0 },
+        {
+          scale: 1,
+          opacity: 1,
+          duration: 0.8,
+          ease: 'elastic.out(1, 0.5)',
+          delay: 0.5,
+        }
+      );
+    }
+
     // Animate sections on scroll
-    sectionRefs.current.forEach((section, index) => {
+    sectionRefs.current.forEach((section) => {
       if (!section) return;
 
       gsap.fromTo(
@@ -32,7 +64,6 @@ const AboutPage = () => {
         }
       );
     });
-
     // Stamping animation for the heading with smoke effect
     if (headingRef.current) {
 
@@ -65,63 +96,60 @@ const AboutPage = () => {
   };
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        padding: "7rem 1rem",
-        backgroundImage: "url('/images/minecraft-bg.webp')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
-      <div className="container mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="font-minecraft font-bold text-[#F7DC6F] text-4xl mb-4" style={{ textShadow: "0 0 5px #FFA500, 0 0 10px #FFC107, 0 0 15px #FFA500", display: "inline" }}>
-            Daksha&nbsp;
-          </h1>
-          <h1 className="font-minecraft font-bold text-[#33CC33] text-4xl mb-4" style={{ textShadow: "0 0 10px #000000aa", display: "inline" }}>
-            Yanthra
-          </h1>
-          <p
-            className="max-w-2xl mx-auto"
-            style={{ transition: 'opacity 0.3s ease-in-out, transform 0.3s ease-in-out' }}
-            ref={(el) => {
-              if (!el) return;
-              const text = el.textContent as string;
-              const characters = text.split('');
-              const spans = characters.map((character) => `<span>${character}</span>`);
-              el.innerHTML = spans.join('');
-              const charactersElements = el.children;
-              gsap.set(charactersElements, { opacity: 0, x: -50 });
-              gsap.fromTo(
-                charactersElements,
-                { opacity: 0, x: -50 },
-                {
-                  opacity: 1,
-                  x: 0,
-                  duration: 0.6,
-                  ease: 'power1.inOut',
-                  stagger: 0.02,
-                  scrollTrigger: {
-                    trigger: el,
-                    start: 'top 80%',
-                    end: 'bottom 20%',
-                    toggleActions: 'play none none reverse',
-                  },
-                }
-              );
-            }}
-          >
-            Learn more about Daksha Yanthra and get in touch with our team!
-          </p>
+    <div className="relative">
+      <div
+        style={{
+          position: 'fixed',
+          top: -80,
+          left: 170,
+          width: '80%',
+          height: '80%',
+          zIndex: -1, // Place the video behind everything
+        }}
+      >
+        <VideoComponent/>
+      </div>
+      {/* Static Background */}
+      <div
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          backgroundImage: "url('./images/About page - BG-DY 2 1.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          zIndex: -2,
+        }}
+      />
+      
+    
+      {/* Interactive Content */}
+      <div className="relative z-10">
+        {/* Centered Heading Container */}
+        <div className="container mx-auto flex items-center justify-center h-screen">
+          <div className="text-center mb-12">
+            <h1 ref={dakshaRef} className="font-minecraft font-bold text-[#F7DC6F] text-7xl mb-4" style={{ textShadow: "0 0 5px #FFA500, 0 0 10px #FFC107, 0 0 15px #FFA500" }}
+            >
+              Daksha&nbsp;
+            </h1>
+            
+            <h1 ref={yanthraRef} className="font-minecraft font-bold text-[#33CC33] text-7xl mb-4 inline" style={{ textShadow: "0 0 10px #000000aa" }}
+            >
+              Yanthra
+            </h1>
+          
+            <p className="max-w-2xl mx-auto">
+              Learn more about Daksha Yanthra and get in touch with our team!
+            </p>
+          
         </div>
-
+      </div>
         {/* About Section */}
         <div ref={addToSectionRefs} className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          <div className="bg-white/90 border-4 border-minecraft-stone p-6 relative">
-            
-
+          <div className="bg-white/90 border-4 border-minecraft-stone p-6">
             {/* Heading with Stamping Animation */}
             <h2 ref={headingRef} className="font-minecraft text-2xl mb-4 relative z-10">
               About Daksha Yanthra
@@ -285,39 +313,28 @@ const AboutPage = () => {
                     </a>
                   </div>
                 </div>
-              </div>
-            </div>
-
-            <div className="bg-white/90 border-4 border-minecraft-stone p-6">
-              <h3 className="font-minecraft text-xl mb-4">Follow Us</h3>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                <a href="https://facebook.com" className="flex flex-col items-center p-3 bg-minecraft-dirt/20 hover:bg-minecraft-dirt/40">
-                  <Facebook size={24} className="mb-2 text-minecraft-grass" />
-                  <span className="text-sm">Facebook</span>
-                </a>
-                <a href="https://twitter.com" className="flex flex-col items-center p-3 bg-minecraft-dirt/20 hover:bg-minecraft-dirt/40">
-                  <Twitter size={24} className="mb-2 text-minecraft-grass" />
-                  <span className="text-sm">Twitter</span>
-                </a>
-                <a href="https://instagram.com" className="flex flex-col items-center p-3 bg-minecraft-dirt/20 hover:bg-minecraft-dirt/40">
-                  <Instagram size={24} className="mb-2 text-minecraft-grass" />
-                  <span className="text-sm">Instagram</span>
-                </a>
-                <a href="https://youtube.com" className="flex flex-col items-center p-3 bg-minecraft-dirt/20 hover:bg-minecraft-dirt/40">
-                  <Youtube size={24} className="mb-2 text-minecraft-grass" />
-                  <span className="text-sm">YouTube</span>
-                </a>
+                <div className="flex items-center">
+                  
+                  <div>
+                    <span className='font-bold block'>Instagram</span>  
+                      <a href="https://www.instagram.com/dakshayanthra?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" className="hover:text-minecraft-grass transition-colors duration-200">  
+                      <Instagram size={20} className="mr-3 text-minecraft-grass" />
+                      </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-
-          <div>
-            <ContactForm />
-          </div>
+          
+        <div>
+          <ContactForm />
         </div>
       </div>
-
+        
     </div>
+  </div>
+   
+  
   );
 };
 
