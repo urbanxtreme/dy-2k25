@@ -652,7 +652,7 @@ const AboutSection = () => {
               }}
               transition={{ type: "spring", damping: 25 }}
             >
-              <MinecraftCharacter className="w-full h-full object-contain" />
+              {/* <MinecraftCharacter className="w-full h-full object-contain" /> */}
 
               {/* Particle effects around character */}
               {Array(20)
@@ -768,7 +768,7 @@ const AboutSection = () => {
               }
               transition={{ duration: 0.8, delay: 1.2 }}
             >
-              REGISTER NOW
+              {/* REGISTER NOW */}
               {/* Button particle effects */}
               <motion.span
                 className="absolute inset-0 bg-green-500/20 rounded-lg"

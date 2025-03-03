@@ -22,6 +22,10 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import FeaturedEventsSection from "@/components/FeaturedEventsSection";
 import AboutSection from "@/components/AboutSection";
 import InteractiveMapSection from "@/components/InteractiveMapSection";
+import BounceCards from "@/components/BounceCards";
+import BounceCards1 from "@/components/BounceCards1";
+import BounceCards2 from "@/components/BounceCards2";
+import BounceCards3 from "@/components/BounceCards3";
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
@@ -35,6 +39,22 @@ const HomePage = () => {
   const [isFading, setIsFading] = useState(false);
   const [scrollDirection, setScrollDirection] = useState("down");
   const [lastScrollY, setLastScrollY] = useState(0);
+
+  const images = [
+    "https://picsum.photos/400/400?grayscale",
+    "https://picsum.photos/500/500?grayscale",
+    "https://picsum.photos/600/600?grayscale",
+    "https://picsum.photos/700/700?grayscale",
+    "https://picsum.photos/300/300?grayscale",
+  ];
+
+  const transformStyles = [
+    "rotate(5deg) translate(-150px)",
+    "rotate(0deg) translate(-70px)",
+    "rotate(-5deg)",
+    "rotate(5deg) translate(70px)",
+    "rotate(-5deg) translate(150px)",
+  ];
 
   useEffect(() => {
     let isMounted = true;
@@ -414,8 +434,6 @@ const HomePage = () => {
         </div>
       </div>
       <AboutSection />
-      // Replace the entire Events Preview section in your HomePage component
-      with this code:
       {/* Events Preview */}
       <div
         ref={addToSectionRefs}
@@ -425,7 +443,6 @@ const HomePage = () => {
         }`}
       >
         {createPixelBlocks(100)}
-
         {/* Minecraft decorative elements */}
         <div className="absolute top-10 right-20 minecraft-cube w-12 h-12 animate-float z-0">
           <div className="cube-face cube-face-front bg-orange-700"></div>
@@ -435,7 +452,6 @@ const HomePage = () => {
           <div className="cube-face cube-face-top bg-orange-600"></div>
           <div className="cube-face cube-face-bottom bg-orange-900"></div>
         </div>
-
         <div className="absolute bottom-10 left-10 minecraft-cube w-10 h-10 animate-float-slow z-0">
           <div className="cube-face cube-face-front bg-green-700"></div>
           <div className="cube-face cube-face-back bg-green-700"></div>
@@ -444,11 +460,92 @@ const HomePage = () => {
           <div className="cube-face cube-face-top bg-green-600"></div>
           <div className="cube-face cube-face-bottom bg-green-900"></div>
         </div>
-
-        <FeaturedEventsSection featuredEvents={featuredEvents} />
       </div>
-      {/* Interactive Map Preview */}
-      <InteractiveMapSection addToSectionRefs={addToSectionRefs} isVisible={isVisible} />
+      <div
+        ref={addToSectionRefs}
+        data-section-id="events"
+        className={`section-container py-16 px-4 bg-gray-800 transition-all duration-700 opacity-0 transform translate-y-10 relative ${
+          isVisible("events") ? "opacity-100 translate-y-0" : ""
+        }`}
+      >
+        {createPixelBlocks(100)}
+        <div className="container mx-auto text-center">
+          <h2 className="font-minecraft text-3xl mb-12 text-green-500">
+            <span className="bg-green-600 text-white px-3 py-1 mr-2 rounded-lg">
+              Featured
+            </span>
+            Events
+          </h2>
+
+          <div className="grid grid-cols-2 gap-4 justify-center">
+            <BounceCards
+              images={images}
+              containerWidth={800}
+              containerHeight={400}
+              animationDelay={0.5}
+              animationStagger={0.06}
+              transformStyles={[
+                "rotate(3deg) translateX(-200px)",
+                "rotate(-1deg) translateX(-100px)",
+                "rotate(0deg)",
+                "rotate(2deg) translateX(100px)",
+                "rotate(-3deg) translateX(200px)",
+              ]}
+              enableHover={true}
+            />
+            <BounceCards1
+              images={images}
+              containerWidth={800}
+              containerHeight={400}
+              animationDelay={0.5}
+              animationStagger={0.06}
+              transformStyles={[
+                "rotate(3deg) translateX(-200px)",
+                "rotate(-1deg) translateX(-100px)",
+                "rotate(0deg)",
+                "rotate(2deg) translateX(100px)",
+                "rotate(-3deg) translateX(200px)",
+              ]}
+              enableHover={true}
+            />
+            <BounceCards2
+              images={images}
+              containerWidth={800}
+              containerHeight={400}
+              animationDelay={0.5}
+              animationStagger={0.06}
+              transformStyles={[
+                "rotate(3deg) translateX(-200px)",
+                "rotate(-1deg) translateX(-100px)",
+                "rotate(0deg)",
+                "rotate(2deg) translateX(100px)",
+                "rotate(-3deg) translateX(200px)",
+              ]}
+              enableHover={true}
+            />
+            <BounceCards3
+              images={images}
+              containerWidth={800}
+              containerHeight={400}
+              animationDelay={0.5}
+              animationStagger={0.06}
+              transformStyles={[
+                "rotate(3deg) translateX(-200px)",
+                "rotate(-1deg) translateX(-100px)",
+                "rotate(0deg)",
+                "rotate(2deg) translateX(100px)",
+                "rotate(-3deg) translateX(200px)",
+              ]}
+              enableHover={true}
+            />
+          </div>
+        </div>
+      </div>
+      ){/* Interactive Map Preview */}
+      <InteractiveMapSection
+        addToSectionRefs={addToSectionRefs}
+        isVisible={isVisible}
+      />
       {/* Sponsors */}
       {/* Sponsors Section */}
       <div
