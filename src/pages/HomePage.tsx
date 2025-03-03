@@ -39,13 +39,12 @@ const HomePage = () => {
   const [isFading, setIsFading] = useState(false);
   const [scrollDirection, setScrollDirection] = useState("down");
   const [lastScrollY, setLastScrollY] = useState(0);
-
   const images = [
-    "https://picsum.photos/400/400?grayscale",
-    "https://picsum.photos/500/500?grayscale",
-    "https://picsum.photos/600/600?grayscale",
-    "https://picsum.photos/700/700?grayscale",
-    "https://picsum.photos/300/300?grayscale",
+    "/images/and.jpg",
+    "/images/bg.png",
+    "/images/bg2.png",
+    "/images/newand.jpg",
+    "/images/okk.jpg",
   ];
 
   const transformStyles = [
@@ -478,36 +477,47 @@ const HomePage = () => {
           </h2>
 
           <div className="grid grid-cols-2 gap-4 justify-center">
-            <BounceCards
-              images={images}
-              containerWidth={800}
-              containerHeight={400}
-              animationDelay={0.5}
-              animationStagger={0.06}
-              transformStyles={[
-                "rotate(3deg) translateX(-200px)",
-                "rotate(-1deg) translateX(-100px)",
-                "rotate(0deg)",
-                "rotate(2deg) translateX(100px)",
-                "rotate(-3deg) translateX(200px)",
-              ]}
-              enableHover={true}
-            />
-            <BounceCards1
-              images={images}
-              containerWidth={800}
-              containerHeight={400}
-              animationDelay={0.5}
-              animationStagger={0.06}
-              transformStyles={[
-                "rotate(3deg) translateX(-200px)",
-                "rotate(-1deg) translateX(-100px)",
-                "rotate(0deg)",
-                "rotate(2deg) translateX(100px)",
-                "rotate(-3deg) translateX(200px)",
-              ]}
-              enableHover={true}
-            />
+            <div className="text-center">
+              <h3 className="font-minecraft mb-2 text-2xl text-yellow-500">
+                Technical
+              </h3>
+              <BounceCards
+                images={images}
+                containerWidth={800}
+                containerHeight={400}
+                animationDelay={0.5}
+                animationStagger={0.06}
+                transformStyles={[
+                  "rotate(3deg) translateX(-200px)",
+                  "rotate(-1deg) translateX(-100px)",
+                  "rotate(0deg)",
+                  "rotate(2deg) translateX(100px)",
+                  "rotate(-3deg) translateX(200px)",
+                ]}
+                enableHover={true}
+                onClick={() => window.location.href = "/events"}
+              />
+            </div>
+            <div className="text-center">
+                <h3 className="font-minecraft mb-4 text-2xl text-yellow-500">
+                  Cultural
+                </h3>
+              <BounceCards1
+                images={images}
+                containerWidth={800}
+                containerHeight={400}
+                animationDelay={0.5}
+                animationStagger={0.06}
+                transformStyles={[
+                  "rotate(3deg) translateX(-200px)",
+                  "rotate(-1deg) translateX(-100px)",
+                  "rotate(0deg)",
+                  "rotate(2deg) translateX(100px)",
+                  "rotate(-3deg) translateX(200px)",
+                ]}
+                enableHover={true}
+              />
+            </div>
             <BounceCards2
               images={images}
               containerWidth={800}

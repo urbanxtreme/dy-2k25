@@ -12,7 +12,6 @@ import Countdown from "react-countdown";
 import { motion, AnimatePresence } from "framer-motion";
 import { Tilt } from "react-tilt";
 import { TypeAnimation } from "react-type-animation";
-import confetti from "canvas-confetti";
 import MinecraftCharacter from "@/components/MinecraftCharacter";
 
 // Minecraft quotes to cycle through
@@ -29,7 +28,6 @@ const AboutSection = () => {
   const [isFading, setIsFading] = useState(false);
   const [isVisible, setIsVisible] = useState({});
   const sectionRefs = useRef({});
-  const [showConfetti, setShowConfetti] = useState(false);
   const [hoveredFeature, setHoveredFeature] = useState(null);
 
   // For parallax effect
@@ -68,12 +66,6 @@ const AboutSection = () => {
         entries.forEach((entry) => {
           const id = (entry.target as HTMLElement).dataset.sectionId;
           setIsVisible((prev) => ({ ...prev, [id]: entry.isIntersecting }));
-
-          // Trigger confetti when section becomes visible
-          if (entry.isIntersecting && id === "about" && !showConfetti) {
-            setShowConfetti(true);
-            triggerConfetti();
-          }
         });
       },
       { threshold: 0.2 }
@@ -125,40 +117,6 @@ const AboutSection = () => {
       );
     }
     return blocks;
-  };
-
-  const triggerConfetti = () => {
-    const duration = 3 * 1000;
-    const animationEnd = Date.now() + duration;
-    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
-
-    const randomInRange = (min, max) => Math.random() * (max - min) + min;
-
-    const interval = setInterval(() => {
-      const timeLeft = animationEnd - Date.now();
-
-      if (timeLeft <= 0) {
-        return clearInterval(interval);
-      }
-
-      const particleCount = 50 * (timeLeft / duration);
-
-      // Use different shapes
-      confetti({
-        ...defaults,
-        particleCount,
-        origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
-        colors: ["#4ade80", "#60a5fa", "#f87171", "#a78bfa"],
-        shapes: ["square"],
-      });
-      confetti({
-        ...defaults,
-        particleCount,
-        origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
-        colors: ["#fbbf24", "#c084fc", "#34d399", "#f472b6"],
-        shapes: ["square"],
-      });
-    }, 250);
   };
 
   // Features list with icons and descriptions
@@ -790,10 +748,6 @@ const AboutSection = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
         >
-          <p className="text-gray-400 font-minecraft text-sm mb-2">
-            Scroll for more
-          </p>
-          <ChevronDown size={20} className="text-green-500" />
         </motion.div>
       </div>
 
