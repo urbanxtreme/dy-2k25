@@ -1,49 +1,20 @@
-import { useEffect, useRef } from 'react';
-import ContactForm from '@/components/ContactForm';
-import { Facebook, Twitter, Instagram, Youtube, Mail, Phone, Users, Calendar, Award, Video } from 'lucide-react';
+import { useEffect, useRef ,  useState } from 'react';
+import { Instagram, Mail, Phone, Users, Calendar, Award } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import  VideoComponent  from '../components/VideoComponent';
+import AnimatedContent from '../components/animation'
+import ScrollReveal from '../components/scrollreveal';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const AboutPage = () => {
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const dakshaRef = useRef<HTMLHeadingElement | null>(null);
-  const yanthraRef = useRef<HTMLHeadingElement | null>(null);
+  const [bgOpacity, setBgOpacity] = useState(0);
   const headingRef = useRef<HTMLHeadingElement | null>(null); // Ref for the heading
+  const videoRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    // Pop animation for "Daksha"
-    if (dakshaRef.current) {
-      gsap.fromTo(
-        dakshaRef.current,
-        { scale: 0, opacity: 0 },
-        {
-          scale: 1,
-          opacity: 1,
-          duration: 0.8,
-          ease: 'elastic.out(1, 1)',
-          delay: 0.5,
-        }
-      );
-    }
-
-    // Pop animation for "Yanthra"
-    if (yanthraRef.current) {
-      gsap.fromTo(
-        yanthraRef.current,
-        { scale: 0, opacity: 0 },
-        {
-          scale: 1,
-          opacity: 1,
-          duration: 0.8,
-          ease: 'elastic.out(1, 0.5)',
-          delay: 0.5,
-        }
-      );
-    }
-
     // Animate sections on scroll
     sectionRefs.current.forEach((section) => {
       if (!section) return;
@@ -87,6 +58,13 @@ const AboutPage = () => {
         }
       );
     }
+    ScrollTrigger.create({
+      start: 'top top',
+      end: 'top -100',
+      onUpdate: (self) => {
+        setBgOpacity(self.progress);
+      },
+    });
   }, []);
 
   const addToSectionRefs = (el: HTMLDivElement | null) => {
@@ -97,6 +75,20 @@ const AboutPage = () => {
 
   return (
     <div className="relative">
+      {/* Scroll-based Background Overlay */}
+      <div
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          backgroundColor: 'black',
+          opacity: bgOpacity,
+          zIndex: -1,
+          transition: 'opacity 2s ease-in-out',
+        }}
+      />
       <div
         style={{
           position: 'fixed',
@@ -104,7 +96,7 @@ const AboutPage = () => {
           left: 170,
           width: '80%',
           height: '80%',
-          zIndex: -1, // Place the video behind everything
+          zIndex: -2, // Place the video behind everything
         }}
       >
         <VideoComponent/>
@@ -121,7 +113,7 @@ const AboutPage = () => {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          zIndex: -2,
+          zIndex: -3,
         }}
       />
       
@@ -131,148 +123,173 @@ const AboutPage = () => {
         {/* Centered Heading Container */}
         <div className="container mx-auto flex items-center justify-center h-screen">
           <div className="text-center mb-12">
-            <h1 ref={dakshaRef} className="font-minecraft font-bold text-[#F7DC6F] text-7xl mb-4" style={{ textShadow: "0 0 5px #FFA500, 0 0 10px #FFC107, 0 0 15px #FFA500" }}
+            <h1 className="font-minecraft font-bold text-[#F7DC6F] text-7xl mb-4" style={{ textShadow: "0 0 5px #FFA500, 0 0 10px #FFC107, 0 0 15px #FFA500" }}
             >
-              Daksha&nbsp;
+              <AnimatedContent
+                distance={150}
+                direction="vertical"
+                reverse={false}
+                config={{ tension: 80, friction: 20 }}
+                initialOpacity={0.2}
+                animateOpacity
+                scale={1.1}
+              >
+                <div>Daksha&nbsp;</div>
+              </AnimatedContent>
             </h1>
             
-            <h1 ref={yanthraRef} className="font-minecraft font-bold text-[#33CC33] text-7xl mb-4 inline" style={{ textShadow: "0 0 10px #000000aa" }}
+            <h1 className="font-minecraft font-bold text-[#33CC33] text-7xl mb-4 inline" style={{ textShadow: "0 0 10px #000000aa" }}
             >
-              Yanthra
+              <AnimatedContent
+                distance={150}
+                direction="vertical"
+                reverse={false}
+                config={{ tension: 80, friction: 20 }}
+                initialOpacity={0.2}
+                animateOpacity
+                scale={1.1}
+              >
+                <div>Yanthra</div>
+              </AnimatedContent>
             </h1>
-          
-            <p className="max-w-2xl mx-auto">
-              Learn more about Daksha Yanthra and get in touch with our team!
-            </p>
-          
         </div>
       </div>
         {/* About Section */}
+        
         <div ref={addToSectionRefs} className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          <div className="bg-white/90 border-4 border-minecraft-stone p-6">
-            {/* Heading with Stamping Animation */}
-            <h2 ref={headingRef} className="font-minecraft text-2xl mb-4 relative z-10">
-              About Daksha Yanthra
-            </h2>
-            <div>
-              {/* First Paragraph */}
-              <p ref={(el) => {
-                if (!el) return;
-                const text = "\u00A0\u00A0\u00A0\u00A0Experience the fusion of creativity, technology, and limitless possibilities as the College of Engineering Attingal presents the most awaited Techno-Cultural Fest: Daksha Yanthra 2025!";
-                const characters = text.split('');
-                const spans = characters.map((character) => `<span>${character}</span>`);
-                el.innerHTML = spans.join('');
-                const charactersElements = el.children;
-                gsap.set(charactersElements, { opacity: 0, x: -50 });
-                gsap.fromTo(
-                  charactersElements,
-                  { opacity: 0, x: -50 },
-                  {
-                    opacity: 1,
-                    x: 0,
-                    duration: 0.6,
-                    ease: 'power1.inOut',
-                    stagger: 0.02,
-                  }
-                );
-              }} />
+        <ScrollReveal
+                scrollContainerRef={sectionRefs}
+                baseOpacity={0}
+                enableBlur={true}
+                baseRotation={5}
+                blurStrength={10}
+              >
+                <div className="bg-white/90 border-4 border-minecraft-stone p-6">
+                  {/* Heading with Stamping Animation */}
+                  <h2 ref={headingRef} className="font-minecraft text-2xl mb-4 relative z-10">
+                    About Daksha Yanthra
+                  </h2>
+                  <div>
+                    {/* First Paragraph */}
+                    <p ref={(el) => {
+                      if (!el) return;
+                      const text = "\u00A0\u00A0\u00A0\u00A0Experience the fusion of creativity, technology, and limitless possibilities as the College of Engineering Attingal presents the most awaited Techno-Cultural Fest: Daksha Yanthra 2025!";
+                      const characters = text.split('');
+                      const spans = characters.map((character) => `<span>${character}</span>`);
+                      el.innerHTML = spans.join('');
+                      const charactersElements = el.children;
+                      gsap.set(charactersElements, { opacity: 0, x: -50 });
+                      gsap.fromTo(
+                        charactersElements,
+                        { opacity: 0, x: -50 },
+                        {
+                          opacity: 1,
+                          x: 0,
+                          duration: 0.6,
+                          ease: 'power1.inOut',
+                          stagger: 0.02,
+                        }
+                      );
+                    }} />
 
-              {/* Second Paragraph */}
-              <p ref={(el) => {
-                if (!el) return;
-                const text = `\u00A0\u00A0\u00A0\u00A0Step into a world where pixels become masterpieces, redstone powers innovation, and every block holds the potential for greatness. From mind-blowing tech challenges to intense hackathons, each event is designed to push the boundaries of what can be built, coded, and imagined.`;
-                const characters = text.split('');
-                const spans = characters.map((character) => `<span>${character}</span>`);
-                el.innerHTML = spans.join('');
-                const charactersElements = el.children;
-                gsap.set(charactersElements, { opacity: 0, x: -50 });
-                gsap.fromTo(
-                  charactersElements,
-                  { opacity: 0, x: -50 },
-                  {
-                    opacity: 1,
-                    x: 0,
-                    duration: 0.6,
-                    ease: 'power1.inOut',
-                    stagger: 0.02,
-                    delay: 3.5, // Delay to start after the first paragraph
-                  }
-                );
-              }} />
+                    {/* Second Paragraph */}
+                    <p ref={(el) => {
+                      if (!el) return;
+                      const text = `\u00A0\u00A0\u00A0\u00A0Step into a world where pixels become masterpieces, redstone powers innovation, and every block holds the potential for greatness. From mind-blowing tech challenges to intense hackathons, each event is designed to push the boundaries of what can be built, coded, and imagined.`;
+                      const characters = text.split('');
+                      const spans = characters.map((character) => `<span>${character}</span>`);
+                      el.innerHTML = spans.join('');
+                      const charactersElements = el.children;
+                      gsap.set(charactersElements, { opacity: 0, x: -50 });
+                      gsap.fromTo(
+                        charactersElements,
+                        { opacity: 0, x: -50 },
+                        {
+                          opacity: 1,
+                          x: 0,
+                          duration: 0.6,
+                          ease: 'power1.inOut',
+                          stagger: 0.02,
+                          delay: 3.5, // Delay to start after the first paragraph
+                        }
+                      );
+                    }} />
 
-              {/* Third Paragraph */}
-              <p ref={(el) => {
-                if (!el) return;
-                const text = "\u00A0\u00A0\u00A0\u00A0As you explore this vibrant landscape, you’ll witness a seamless fusion of skill and strategy, where visionaries craft the future—one block at a time. Whether you're competing, collaborating, or just placing your first block, this is your chance to mine ideas, craft solutions, and engineer a world of infinite possibilities.";
-                const characters = text.split('');
-                const spans = characters.map((character) => `<span>${character}</span>`);
-                el.innerHTML = spans.join('');
-                const charactersElements = el.children;
-                gsap.set(charactersElements, { opacity: 0, x: -50 });
-                gsap.fromTo(
-                  charactersElements,
-                  { opacity: 0, x: -50 },
-                  {
-                    opacity: 1,
-                    x: 0,
-                    duration: 0.6,
-                    ease: 'power1.inOut',
-                    stagger: 0.02,
-                    delay: 9.0, // Delay to start after the second paragraph
-                  }
-                );
-              }} />
+                    {/* Third Paragraph */}
+                    <p ref={(el) => {
+                      if (!el) return;
+                      const text = "\u00A0\u00A0\u00A0\u00A0As you explore this vibrant landscape, you’ll witness a seamless fusion of skill and strategy, where visionaries craft the future—one block at a time. Whether you're competing, collaborating, or just placing your first block, this is your chance to mine ideas, craft solutions, and engineer a world of infinite possibilities.";
+                      const characters = text.split('');
+                      const spans = characters.map((character) => `<span>${character}</span>`);
+                      el.innerHTML = spans.join('');
+                      const charactersElements = el.children;
+                      gsap.set(charactersElements, { opacity: 0, x: -50 });
+                      gsap.fromTo(
+                        charactersElements,
+                        { opacity: 0, x: -50 },
+                        {
+                          opacity: 1,
+                          x: 0,
+                          duration: 0.6,
+                          ease: 'power1.inOut',
+                          stagger: 0.02,
+                          delay: 9.0, // Delay to start after the second paragraph
+                        }
+                      );
+                    }} />
 
-              {/* Fourth Paragraph */}
-              <p ref={(el) => {
-                if (!el) return;
-                const text = "\u00A0\u00A0\u00A0\u00A0Join us as we embark on an unforgettable journey through creativity, engineering, and the spirit of innovation.";
-                const characters = text.split('');
-                const spans = characters.map((character) => `<span>${character}</span>`);
-                el.innerHTML = spans.join('');
-                const charactersElements = el.children;
-                gsap.set(charactersElements, { opacity: 0, x: -50 });
-                gsap.fromTo(
-                  charactersElements,
-                  { opacity: 0, x: -50 },
-                  {
-                    opacity: 1,
-                    x: 0,
-                    duration: 0.6,
-                    ease: 'power1.inOut',
-                    stagger: 0.02,
-                    delay: 15.5, // Delay to start after the third paragraph
-                  }
-                );
-              }} />
+                    {/* Fourth Paragraph */}
+                    <p ref={(el) => {
+                      if (!el) return;
+                      const text = "\u00A0\u00A0\u00A0\u00A0Join us as we embark on an unforgettable journey through creativity, engineering, and the spirit of innovation.";
+                      const characters = text.split('');
+                      const spans = characters.map((character) => `<span>${character}</span>`);
+                      el.innerHTML = spans.join('');
+                      const charactersElements = el.children;
+                      gsap.set(charactersElements, { opacity: 0, x: -50 });
+                      gsap.fromTo(
+                        charactersElements,
+                        { opacity: 0, x: -50 },
+                        {
+                          opacity: 1,
+                          x: 0,
+                          duration: 0.6,
+                          ease: 'power1.inOut',
+                          stagger: 0.02,
+                          delay: 15.5, // Delay to start after the third paragraph
+                        }
+                      );
+                    }} />
 
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
-              <div className="bg-minecraft-dirt/20 p-4 text-center">
-                <Users size={24} className="mx-auto mb-2 text-minecraft-grass" />
-                <span className="font-bold block">50+</span>
-                <span className="text-sm">Attendees</span>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+                    <div className="bg-minecraft-dirt/20 p-4 text-center">
+                      <Users size={24} className="mx-auto mb-2 text-minecraft-grass" />
+                      <span className="font-bold block">50+</span>
+                      <span className="text-sm">Attendees</span>
+                    </div>
+                    <div className="bg-minecraft-dirt/20 p-4 text-center">
+                      <Calendar size={24} className="mx-auto mb-2 text-minecraft-grass" />
+                      <span className="font-bold block">33+</span>
+                      <span className="text-sm">Events</span>
+                    </div>
+                    <div className="bg-minecraft-dirt/20 p-4 text-center">
+                      <Award size={24} className="mx-auto mb-2 text-minecraft-gold" />
+                      <span className="font-bold block">₹10,000+</span>
+                      <span className="text-sm">In Prizes</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-minecraft-stone">
+                  <img
+                    src="/images/about-team.jpg"
+                    alt="Daksha Yanthra Organizers"
+                    className="w-full h-full object-cover border-4 border-minecraft-stone"
+                  />
               </div>
-              <div className="bg-minecraft-dirt/20 p-4 text-center">
-                <Calendar size={24} className="mx-auto mb-2 text-minecraft-grass" />
-                <span className="font-bold block">33+</span>
-                <span className="text-sm">Events</span>
-              </div>
-              <div className="bg-minecraft-dirt/20 p-4 text-center">
-                <Award size={24} className="mx-auto mb-2 text-minecraft-gold" />
-                <span className="font-bold block">₹10,000+</span>
-                <span className="text-sm">In Prizes</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-minecraft-stone">
-            <img
-              src="/images/about-team.jpg"
-              alt="Daksha Yanthra Organizers"
-              className="w-full h-full object-cover border-4 border-minecraft-stone"
-            />
-          </div>
+            </ScrollReveal>
+          
         </div>
 
         {/* Contact Section */}
@@ -326,9 +343,6 @@ const AboutPage = () => {
             </div>
           </div>
           
-        <div>
-          <ContactForm />
-        </div>
       </div>
         
     </div>

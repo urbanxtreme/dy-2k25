@@ -9,21 +9,16 @@ const VideoComponent: React.FC = () => {
       if (videoRef.current) {
         const video = videoRef.current;
         const scrollPosition = window.scrollY || window.pageYOffset;
-        const windowHeight = window.innerHeight;
-        const videoHeight = video.offsetHeight;
+        const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
 
-        // Calculate the scroll progress within the video's height
-        const scrollProgress = (scrollPosition / videoHeight) * 100;
+        // Calculate the scroll progress as a percentage
+        const scrollProgress = (scrollPosition / documentHeight);
 
-        // Play the video based on scroll progress
-        if (scrollProgress >= 0 && scrollProgress <= 100) {
-          video.currentTime = (scrollProgress / 100) * video.duration;
-          if (video.paused) {
-            video.play();
-          }
-        } else {
-          video.pause();
-        }
+        // Ensure the scroll progress is within the range [0, 1]
+        const clampedScrollProgress = Math.min(Math.max(scrollProgress, 0), 1);
+
+        // Set the video's current time based on the scroll progress
+        video.currentTime = clampedScrollProgress * video.duration;
       }
     };
 

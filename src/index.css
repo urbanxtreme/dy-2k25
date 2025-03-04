@@ -107,11 +107,12 @@
   }
 
   body {
-    background-color: black;
+    background-color: rgb(241, 236, 236);
     color: var(--foreground);
     font-family: var(--font-minecraft);
     cursor: url("/cursors/normal.png"), auto;
   }
+
 
   body:active {
     cursor: url("/cursors/clicking.png"), auto;
@@ -456,4 +457,17 @@
 
 .nav-item:hover::after {
   width: 100%;
+}
+.scroll-reveal {
+  margin: 20px 0;
+}
+
+.scroll-reveal-text {
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+.word {
+  display: inline-block;
 }
