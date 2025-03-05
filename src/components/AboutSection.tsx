@@ -312,7 +312,9 @@ const AboutSection = () => {
                       : { opacity: 0, y: 30 }
                   }
                   transition={{ duration: 0.8, delay: 0.6 }}
-                >
+                ><p className="text-xs text-gray-500 mb-2">
+                Click to add to calendar and view location
+              </p>
                   <div className="space-y-4">
                     <motion.div
                       className="flex items-center bg-gray-800/60 p-3 rounded-lg hover:bg-gray-800/80 transition-colors"
@@ -326,6 +328,7 @@ const AboutSection = () => {
                         damping: 10,
                       }}
                     >
+                      
                       <motion.div
                         animate={{ rotate: [0, 10, 0, -10, 0] }}
                         transition={{ duration: 2, repeat: Infinity }}
@@ -335,12 +338,18 @@ const AboutSection = () => {
                           className="mr-4 text-green-500 shrink-0"
                         />
                       </motion.div>
-                      <div>
-                        <p className="font-minecraft text-lg font-bold text-gray-200">
-                          Date
-                        </p>
-                        <p className="text-gray-400">March 24-25, 2025</p>
-                      </div>
+                      <a
+                        href={`https://calendar.google.com/calendar/r/eventedit?text=Daksha+Yanthra+2025&dates=20250324T000000Z/20250325T000000Z&ctz=Asia/Kolkata&details=&location=&trp=false`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <div>
+                          <p className="font-minecraft text-lg font-bold text-gray-200">
+                            Date
+                          </p>
+                          <p className="text-gray-400">March 24-25, 2025</p>
+                        </div>
+                      </a>
                     </motion.div>
 
                     <motion.div
@@ -397,14 +406,20 @@ const AboutSection = () => {
                           className="mr-4 text-green-500 shrink-0"
                         />
                       </motion.div>
-                      <div>
-                        <p className="font-minecraft text-lg font-bold text-gray-200">
-                          Venue
-                        </p>
-                        <p className="text-gray-400">
-                          College Of Engineering, Attingal
-                        </p>
-                      </div>
+                      <a
+                        href={`https://www.google.com/maps/search/?api=1&query=College+Of+Engineering,+Attingal`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <div>
+                          <p className="font-minecraft text-lg font-bold text-gray-200">
+                            Venue
+                          </p>
+                          <p className="text-gray-400">
+                            College Of Engineering, Attingal
+                          </p>
+                        </div>
+                      </a>
                     </motion.div>
                   </div>
                 </motion.div>

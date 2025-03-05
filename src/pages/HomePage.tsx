@@ -26,6 +26,7 @@ import BounceCards from "@/components/BounceCards";
 import BounceCards1 from "@/components/BounceCards1";
 import BounceCards2 from "@/components/BounceCards2";
 import BounceCards3 from "@/components/BounceCards3";
+import RollingGallery from "@/components/RollingGallery";
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
@@ -495,13 +496,13 @@ const HomePage = () => {
                   "rotate(-3deg) translateX(200px)",
                 ]}
                 enableHover={true}
-                onClick={() => window.location.href = "/events"}
+                onClick={() => (window.location.href = "/events")}
               />
             </div>
             <div className="text-center">
-                <h3 className="font-minecraft mb-4 text-2xl text-yellow-500">
-                  Cultural
-                </h3>
+              <h3 className="font-minecraft mb-4 text-2xl text-yellow-500">
+                Cultural
+              </h3>
               <BounceCards1
                 images={images}
                 containerWidth={800}
@@ -557,96 +558,9 @@ const HomePage = () => {
         isVisible={isVisible}
       />
       {/* Sponsors */}
-      {/* Sponsors Section */}
-      <div
-        ref={addToSectionRefs}
-        data-section-id="sponsors"
-        className={`py-16 px-4 bg-gray-800/90 transition-all duration-700 opacity-0 transform translate-y-10 ${
-          isVisible("sponsors") ? "opacity-100 translate-y-0" : ""
-        }`}
-      >
-        <div className="container mx-auto text-center">
-          <h2 className="font-minecraft text-3xl mb-10 text-green-500">
-            <span className="bg-green-600 text-white px-3 py-1 mr-2 rounded-lg">
-              Our
-            </span>
-            Sponsors
-          </h2>
+      <RollingGallery autoplay={true} pauseOnHover={true} />
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {sponsors.map((sponsor, index) => (
-              <div
-                key={index}
-                className="bg-gray-700 p-6 border-4 border-gray-600 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl rounded-lg"
-                style={{
-                  animationDelay: `${index * 0.1}s`,
-                  transform: `translateY(${
-                    isVisible("sponsors") ? "0" : "20px"
-                  })`,
-                  opacity: isVisible("sponsors") ? 1 : 0,
-                  transition: `transform 0.5s ease ${
-                    index * 0.1
-                  }s, opacity 0.5s ease ${index * 0.1}s`,
-                }}
-              >
-                <img
-                  src={sponsor.logo}
-                  alt={sponsor.name}
-                  className="h-16 mx-auto mb-3 transition-transform duration-300 hover:scale-110"
-                />
-                <h3 className="font-minecraft text-gray-200">{sponsor.name}</h3>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-12 bg-gray-700/70 p-6 border-4 border-gray-600 inline-block rounded-lg shadow-lg">
-            <h3 className="font-minecraft text-xl mb-4 text-gray-200">
-              Interested in Sponsoring?
-            </h3>
-            <Link to="/about">
-              <PixelButton
-                variant="secondary"
-                className="bg-green-600 hover:bg-green-700"
-              >
-                Contact Us
-              </PixelButton>
-            </Link>
-          </div>
-        </div>
-      </div>
-      {/* CTA Section */}
-      <div
-        ref={addToSectionRefs}
-        data-section-id="cta"
-        className={`py-20 px-4 bg-gradient-to-b from-minecraft-obsidian to-minecraft-obsidian/90 text-white text-center transition-all duration-700 opacity-0 transform translate-y-10 ${
-          isVisible("cta") ? "opacity-100 translate-y-0" : ""
-        }`}
-      >
-        <div className="container mx-auto">
-          <div className="max-w-3xl mx-auto relative">
-            <div className="absolute -top-10 -left-10 text-minecraft-gold opacity-50">
-              <Star size={40} className="animate-pulse" />
-            </div>
-            <div className="absolute -bottom-10 -right-10 text-minecraft-gold opacity-50">
-              <Star size={40} className="animate-pulse" />
-            </div>
-
-            <h2 className="font-pixel text-4xl md:text-5xl mb-6 pixel-text-shadow shimmer-effect">
-              Ready to Join Daksha Yanthra 2025?
-            </h2>
-            <p className="font-minecraft text-xl mb-8 max-w-2xl mx-auto">
-              Don't miss out on the most exciting college fest of the year!
-              Register now to participate in events and workshops.
-            </p>
-            <PixelButton
-              variant="gold"
-              className="text-lg px-8 py-3 shadow-xl pulse"
-            >
-              Register Now
-            </PixelButton>
-          </div>
-        </div>
-      </div>
+      
     </div>
   );
 };

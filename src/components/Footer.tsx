@@ -113,10 +113,20 @@ const Footer = () => {
               <div className="flex items-center">
                 <Mail size={16} className="mr-2 text-minecraft-gold" />
                 <a
-                  href="mailto:info@minefest.edu"
+                  href="daksha@ceattingal.ac.in"
                   className="hover:text-minecraft-gold transition-colors duration-200"
                 >
-                  info@minefest.edu
+                  daksha@ceattingal.ac.in 
+                </a>
+              </div>
+
+              <div className="flex items-center">
+                <Mail size={16} className="mr-2 text-minecraft-gold" />
+                <a
+                  href="yanthra@ceattingal.ac.in"
+                  className="hover:text-minecraft-gold transition-colors duration-200"
+                >
+                  yanthra@ceattingal.ac.in
                 </a>
               </div>
               <div className="flex items-center">
@@ -128,13 +138,18 @@ const Footer = () => {
                   +91 9995898789
                 </a>
               </div>
-              <p>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=College+of+Engineering+Attingal,+Kerala-695101"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-minecraft-gold transition-colors duration-200"
+              >
                 College of Engineering Attingal,
                 <br />
                 Near Attingal Bus Stand,
                 <br />
                 Kerala-695101
-              </p>
+              </a>
             </div>
           </div>
         </div>
