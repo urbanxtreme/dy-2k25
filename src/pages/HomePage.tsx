@@ -396,8 +396,7 @@ const HomePage = () => {
             </div>
             <h1 className="font-Minercraftory text-4xl md:text-6xl lg:text-7xl text-white mb-6shimmer-effect">
               <p className="font-minecraft text-xl md:text-2xl text-white mb-8 max-w-2xl">
-                Join us for an epic two-day college fest themed around
-                Minecraft!
+                Join us for the epic college fest on 24 & 25 of this month. Stay Tuned!!
               </p>
             </h1>
           </div>
