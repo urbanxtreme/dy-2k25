@@ -22,11 +22,11 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import FeaturedEventsSection from "@/components/FeaturedEventsSection";
 import AboutSection from "@/components/AboutSection";
 import InteractiveMapSection from "@/components/InteractiveMapSection";
-import BounceCards from "@/components/BounceCards";
 import BounceCards1 from "@/components/BounceCards1";
 import BounceCards2 from "@/components/BounceCards2";
 import BounceCards3 from "@/components/BounceCards3";
 import RollingGallery from "@/components/RollingGallery";
+import FlowingMenu from "@/components/FlowingMenu";
 // Removed unused import
 
 // Register GSAP plugins
@@ -386,14 +386,14 @@ const HomePage = () => {
             >
               <h1 className="font-Minercraftory text-4xl md:text-6xl lg:text-7xl text-white border-b-4 border-white mb-6 pixel-text-shadow shimmer-effect">
                 <span>
-                  <img src="/images/Daksha Yanthra logo 1.png"></img>
+                  <img src="/images/DYN.png"></img>
                 </span>
               </h1>
 
-              <img
+              {/* <img
                 style={{ width: 240 + "px" }}
                 src="/images/2025 - Minecraft Logo.png"
-              ></img>
+              ></img> */}
             </div>
             <h1 className="font-Minercraftory text-4xl md:text-6xl lg:text-7xl text-white mb-6shimmer-effect">
               <p className="font-minecraft text-xl md:text-2xl text-white mb-8 max-w-2xl">
@@ -555,7 +555,7 @@ const HomePage = () => {
         <span className="inline-block">Events</span>
       </h2>
       <div style={{ height: "600px", position: "relative" }}>
-        <BounceCards items={demoItems} />
+        <FlowingMenu items={demoItems} />
       </div>
       {/* Interactive Map Preview */}
       <InteractiveMapSection
@@ -628,7 +628,7 @@ const demoItems = [
 
 const DemoSection = () => (
   <div style={{ height: "600px", position: "relative" }}>
-    <BounceCards items={demoItems} />
+    <FlowingMenu items={demoItems} />
   </div>
 );
 

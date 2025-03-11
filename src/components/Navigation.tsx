@@ -36,25 +36,22 @@ const Navigation = () => {
         <div className="flex items-center gap-4">
           <Link
             to="/"
-            className="font-pixel text-2xl md:text-3xl text-white pixel-text-shadow flex items-center shimmer-effect transition-transform duration-300 hover:scale-105"
+            className="font-pixel text-2xl md:text-3xl text-white pixel-text-shadow flex items-center transition-transform duration-300"
           >
-            <img src="/images/DY25.png" alt="DY25" className="w-20 h-20" />
+            <img
+              src="/images/logolast.svg"
+              alt="DY25"
+              className="w-20 h-13 hover:animate-pulse"
+              onMouseEnter={(e) => {
+                (e.target as HTMLImageElement).src = "/images/DY25.png";
+              }}
+              onMouseLeave={(e) => {
+                (e.target as HTMLImageElement).src = "/images/logolast.svg";
+              }}
+            />
           </Link>
 
           {/* Mobile-only Registration Button */}
-          <Link
-            to="/registeration"
-            className="md:hidden relative group p-1 hover:scale-105 transition-transform duration-200"
-          >
-            <img
-              src="/images/closepetti.png"
-              alt="Register Now"
-              className="w-16 h-16 object-contain"
-            />
-            <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-minecraft-dirt text-white text-xs font-minecraft px-2 py-1 rounded border-2 border-minecraft-stone opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
-              Events
-            </span>
-          </Link>
         </div>
 
         {/* Desktop Navigation */}
@@ -80,19 +77,7 @@ const Navigation = () => {
         {/* Right side - Desktop Registration Button & Mobile Menu */}
         <div className="flex items-center gap-3 ml-4">
           {/* Desktop-only Registration Button */}
-          <Link
-            to="/registeration"
-            className="hidden md:block relative group p-1 hover:scale-105 transition-transform duration-200"
-          >
-            <img
-              src="/images/closepetti.png"
-              alt="Register Now"
-              className="w-24 h-24 object-contain"
-            />
-            <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-minecraft-dirt text-white text-xs font-minecraft px-2 py-1 rounded border-2 border-minecraft-stone opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
-              Events
-            </span>
-          </Link>
+         
 
           {/* Mobile Menu Button */}
           <button

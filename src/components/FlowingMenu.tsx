@@ -3,7 +3,12 @@ import { gsap } from 'gsap';
 
 import './BounceCards.css';
 
-function FlowingMenu() {
+
+interface BounceCardsProps {
+  items: { link: string; text: string; image: string }[];
+}
+
+const FlowingMenu: React.FC<{ items: { link: string; text: string; image: string }[] }> = ({ items }) => {
   // Updated menu items with your desired text and assuming images are in your project folder
   const menuItems = [
     { 
@@ -37,7 +42,6 @@ function FlowingMenu() {
       </nav>
     </div>
   );
-}
 
 function MenuItem({ link, text, image }) {
   const itemRef = React.useRef(null);
@@ -114,5 +118,6 @@ function MenuItem({ link, text, image }) {
     </div>
   );
 }
+};
 
 export default FlowingMenu;
