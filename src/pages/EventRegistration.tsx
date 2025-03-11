@@ -779,17 +779,22 @@ const EventRegistration = () => {
                           </div>
                           <div className="mt-2 flex items-center text-sm">
                             {event.teamEvent ? (
-                              <div className="flex items-center text-yellow-300">
-                                <Users size={16} className="mr-1" />
-                                <span>Team (max {event.maxTeamSize})</span>
-                                <span>Team (min {event.minTeamSize})</span>
-                              </div>
+                              event.maxTeamSize ? (
+                                <div className="flex items-center text-yellow-300">
+                                  <Users size={16} className="mr-1" />
+                                  <span>Team (max {event.maxTeamSize})</span>
+                                </div>
+                              ) : (
+                                <div className="flex items-center text-yellow-300">
+                                  <Users size={16} className="mr-1" />
+                                  <span>Team (min {event.minTeamSize})</span>
+                                </div>
+                              )
                             ) : (
                               <div className="flex items-center text-cyan-300">
                                 <User size={16} className="mr-1" />
                                 <span>Individual</span>
-                              </div>
-                            )}
+                              </div>)}
                           </div>
                           {/* Conditionally show checkmark */}
                           {formData.events.includes(event.id) && (
