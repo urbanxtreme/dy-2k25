@@ -54,46 +54,80 @@ const EventRegistration = () => {
   const [availableEvents] = useState([
     {
       id: 1,
-      name: "Hackathon",
-      category: "Technical",
-      teamEvent: true,
-      maxTeamSize: 4,
+      name: "MX. DY",
+      category: "Cultural",
+      teamEvent: false,
+      
+      
     },
     {
       id: 2,
-      name: "Project Expo",
-      category: "Technical",
-      teamEvent: true,
-      maxTeamSize: 3,
-    },
-    { id: 3, name: "Coding Contest", category: "Technical", teamEvent: false },
-    {
-      id: 4,
-      name: "Fashion Show",
+      name: "LA COUTURE",
       category: "Cultural",
       teamEvent: true,
-      maxTeamSize: 8,
+      minTeamSize: 8,
+      
+    },
+    { id: 3, 
+      name: "BAILAMO", 
+      category: "Cultural",
+      teamEvent: true,
+      minTeamSize: 7,
+    },
+    {
+      id: 4,
+      name: "EUPHONY",
+      category: "Cultural",
+      teamEvent: true,
+      minTeamSize: 4,
     },
     {
       id: 5,
-      name: "Singing Competition",
+      name: "BLOOMER",
       category: "Cultural",
       teamEvent: false,
     },
-    { id: 6, name: "Debate", category: "Cultural", teamEvent: false },
+    { id: 6, 
+      name: "BEAT THE SPOT", 
+      category: "Cultural", 
+      teamEvent: false },
     {
       id: 7,
-      name: "Treasure Hunt",
-      category: "Adventure",
-      teamEvent: true,
-      maxTeamSize: 5,
+      name: "GROOVE",
+      category: "Cultural",
+      teamEvent: false,
     },
     {
       id: 8,
-      name: "Gaming Tournament",
-      category: "Gaming",
+      name: "EL DUETO",
+      category: "Cultural",
       teamEvent: true,
-      maxTeamSize: 4,
+      maxTeamSize: 2,
+    },
+    {
+      id: 9,
+      name: "ONE MIC STAND",
+      category: "Cultural",
+      teamEvent: false,
+    },
+    {
+      id: 10,
+      name: "JAM",
+      category: "Cultural",
+      teamEvent: false,
+    },
+    {
+      id: 11,
+      name: "CAMPUS AMBASSADOR",
+      category: "Cultural",
+      teamEvent: true,
+    },
+    {
+      id: 8,
+      name: "EL DUETO",
+      category: "Cultural",
+      teamEvent: true,
+      maxTeamSize: 2,
     },
   ]);
 
@@ -782,6 +816,7 @@ const EventRegistration = () => {
                               <div className="flex items-center text-yellow-300">
                                 <Users size={16} className="mr-1" />
                                 <span>Team (max {event.maxTeamSize})</span>
+                                ,<span>Team (min{event.minTeamSize}) </span>
                               </div>
                             ) : (
                               <div className="flex items-center text-cyan-300">
