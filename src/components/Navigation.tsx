@@ -13,6 +13,7 @@ const Navigation = () => {
     { name: "Gallery", path: "/gallery" },
     { name: "Interactive Map", path: "/map" },
     { name: "About & Contact", path: "/about" },
+    {name: "Registeration", path: "/event-registration"}
   ];
 
   useEffect(() => {
@@ -42,7 +43,7 @@ const Navigation = () => {
 
           {/* Mobile-only Registration Button */}
           <Link
-            to="/register"
+            to="/registeration"
             className="md:hidden relative group p-1 hover:scale-105 transition-transform duration-200"
           >
             <img
@@ -51,7 +52,7 @@ const Navigation = () => {
               className="w-16 h-16 object-contain"
             />
             <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-minecraft-dirt text-white text-xs font-minecraft px-2 py-1 rounded border-2 border-minecraft-stone opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
-              Register Now
+              Events
             </span>
           </Link>
         </div>
@@ -80,7 +81,7 @@ const Navigation = () => {
         <div className="flex items-center gap-3 ml-4">
           {/* Desktop-only Registration Button */}
           <Link
-            to="/register"
+            to="/registeration"
             className="hidden md:block relative group p-1 hover:scale-105 transition-transform duration-200"
           >
             <img
@@ -89,7 +90,7 @@ const Navigation = () => {
               className="w-24 h-24 object-contain"
             />
             <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-minecraft-dirt text-white text-xs font-minecraft px-2 py-1 rounded border-2 border-minecraft-stone opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
-              Register Now
+              Events
             </span>
           </Link>
 
@@ -142,3 +143,4 @@ const Navigation = () => {
 };
 
 export default Navigation;
+

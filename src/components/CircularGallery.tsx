@@ -1,4 +1,5 @@
 import { useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import {
   Renderer,
   Camera,
@@ -18,6 +19,10 @@ function debounce(func, wait) {
     timeout = setTimeout(() => func.apply(this, args), wait);
   };
 }
+
+// Other utility functions and classes remain the same
+// (lerp, autoBind, createTextTexture, Title, Media, App)
+// ... [keeping all the original code]
 
 function lerp(p1, p2, t) {
   return p1 + (p2 - p1) * t;
@@ -152,6 +157,8 @@ class Media {
   scale: number;
   padding: number;
   width: any;
+  id: number;
+  onClickCallback: Function | null;
   constructor({
     geometry,
     gl,
@@ -167,12 +174,15 @@ class Media {
     textColor,
     borderRadius = 0,
     font,
+    onClickCallback = null,
+    id = index,
   }) {
     this.extra = 0;
     this.geometry = geometry;
     this.gl = gl;
     this.image = image;
     this.index = index;
+    this.id = id;
     this.length = length;
     this.renderer = renderer;
     this.scene = scene;
@@ -183,6 +193,7 @@ class Media {
     this.textColor = textColor;
     this.borderRadius = borderRadius;
     this.font = font;
+    this.onClickCallback = onClickCallback;
     this.createShader();
     this.createMesh();
     this.createTitle();
@@ -305,8 +316,9 @@ class Media {
       }
     }
 
-    this.speed = (scroll.current - scroll.last) * 0.05; // Reduced speed multiplier
-    this.program.uniforms.uTime.value += 0.004;
+    // Further reduced animation speed factor
+    this.speed = (scroll.current - scroll.last) * 0.01; // Reduced from 0.02 to 0.01
+    this.program.uniforms.uTime.value += 0.001; // Reduced from 0.002 to 0.001
     this.program.uniforms.uSpeed.value = this.speed;
 
     const planeOffset = this.plane.scale.x / 2;
@@ -347,6 +359,30 @@ class Media {
     this.widthTotal = this.width * this.length;
     this.x = this.width * this.index;
   }
+  // Check if a point (screen coordinates) is inside this media item
+  hitTest(x, y) {
+    // Convert screen coordinates to clip space
+    const clipX = (x / this.screen.width) * 2 - 1;
+    const clipY = -((y / this.screen.height) * 2 - 1);
+
+    // Get plane world position
+    const planePos = this.plane.position;
+
+    // Calculate boundaries in clip space
+    const halfWidth = this.plane.scale.x / 2;
+    const halfHeight = this.plane.scale.y / 2;
+
+    // Apply rotation to make hit test work with curved items
+    const cos = Math.cos(-this.plane.rotation.z);
+    const sin = Math.sin(-this.plane.rotation.z);
+
+    // Translate point to plane's local space
+    const localX = (clipX - planePos.x) * cos - (clipY - planePos.y) * sin;
+    const localY = (clipX - planePos.x) * sin + (clipY - planePos.y) * cos;
+
+    // Simple AABB test
+    return Math.abs(localX) < halfWidth && Math.abs(localY) < halfHeight;
+  }
 }
 
 class App {
@@ -363,13 +399,23 @@ class App {
   screen: any;
   viewport: any;
   isDown: boolean;
-  start: any;
+  startX: number;
+  startY: number;
+  lastX: number;
+  lastY: number;
+  moveX: number;
+  moveY: number;
+  isDragging: boolean;
+  moveThreshold: number;
+  clickThreshold: number;
   raf: number;
   boundOnResize: any;
   boundOnWheel: any;
   boundOnTouchDown: any;
   boundOnTouchMove: any;
   boundOnTouchUp: any;
+  boundOnClick: any;
+  onClickCallback: Function | null;
   constructor(
     container,
     {
@@ -378,12 +424,27 @@ class App {
       textColor = "#ffffff",
       borderRadius = 0,
       font = "bold 30px DM Sans",
+      onImageClick = null,
     } = { items: [], bend: 1 }
   ) {
     document.documentElement.classList.remove("no-js");
     this.container = container;
-    this.scroll = { ease: 0.05, current: 0, target: 0, last: 0 };
+    // Slow down the scrolling by reducing the ease factor
+    this.scroll = { ease: 0.03, current: 0, target: 0, last: 0 }; // Reduced from 0.05 to 0.03
     this.onCheckDebounce = debounce(this.onCheck, 200);
+    this.onClickCallback = onImageClick;
+
+    // Initialize movement tracking variables
+    this.startX = 0;
+    this.startY = 0;
+    this.lastX = 0;
+    this.lastY = 0;
+    this.moveX = 0;
+    this.moveY = 0;
+    this.isDragging = false;
+    this.moveThreshold = 10; // Minimum movement to be considered a drag
+    this.clickThreshold = 5; // Maximum movement to be considered a click
+
     this.createRenderer();
     this.createCamera();
     this.createScene();
@@ -416,52 +477,64 @@ class App {
   createMedias(items, bend = 1, textColor, borderRadius, font) {
     const defaultItems = [
       {
-        image: `https://picsum.photos/seed/1/800/600?grayscale`,
+        image: "/images/bg.png",
         text: "Bridge",
+        id: 1,
       },
       {
         image: `https://picsum.photos/seed/2/800/600?grayscale`,
         text: "Desk Setup",
+        id: 2,
       },
       {
         image: `https://picsum.photos/seed/3/800/600?grayscale`,
         text: "Waterfall",
+        id: 3,
       },
       {
         image: `https://picsum.photos/seed/4/800/600?grayscale`,
         text: "Strawberries",
+        id: 4,
       },
       {
         image: `https://picsum.photos/seed/5/800/600?grayscale`,
         text: "Deep Diving",
+        id: 5,
       },
       {
         image: `https://picsum.photos/seed/16/800/600?grayscale`,
         text: "Train Track",
+        id: 6,
       },
       {
         image: `https://picsum.photos/seed/17/800/600?grayscale`,
         text: "Santorini",
+        id: 7,
       },
       {
         image: `https://picsum.photos/seed/8/800/600?grayscale`,
         text: "Blurry Lights",
+        id: 8,
       },
       {
         image: `https://picsum.photos/seed/9/800/600?grayscale`,
         text: "New York",
+        id: 9,
       },
       {
         image: `https://picsum.photos/seed/10/800/600?grayscale`,
         text: "Good Boy",
+        id: 10,
       },
       {
         image: `https://picsum.photos/seed/21/800/600?grayscale`,
         text: "Coastline",
+        id: 11,
       },
       {
         image: `https://picsum.photos/seed/12/800/600?grayscale`,
         text: "Palm Trees",
+        id: 12,
       },
     ];
     const galleryItems = items && items.length ? items : defaultItems;
@@ -472,6 +545,7 @@ class App {
         gl: this.gl,
         image: data.image,
         index,
+        id: data.id || index,
         length: this.mediasImages.length,
         renderer: this.renderer,
         scene: this.scene,
@@ -482,27 +556,86 @@ class App {
         textColor,
         borderRadius,
         font,
+        onClickCallback: this.onClickCallback,
       });
     });
   }
   onTouchDown(e) {
     this.isDown = true;
+    this.isDragging = false;
     this.scroll.target = this.scroll.current;
-    this.start = e.touches ? e.touches[0].clientX : e.clientX;
+
+    // Store both x and y coordinates
+    this.startX = this.lastX = e.touches ? e.touches[0].clientX : e.clientX;
+    this.startY = this.lastY = e.touches ? e.touches[0].clientY : e.clientY;
+    this.moveX = 0;
+    this.moveY = 0;
   }
   onTouchMove(e) {
     if (!this.isDown) return;
+
     const x = e.touches ? e.touches[0].clientX : e.clientX;
-    const distance = (this.start - x) * 0.05;
-    this.scroll.target = this.scroll.current + distance;
+    const y = e.touches ? e.touches[0].clientY : e.clientY;
+
+    // Calculate total movement in both directions
+    this.moveX = this.startX - x;
+    this.moveY = this.startY - y;
+
+    // Only consider horizontal movement if it's greater than vertical movement
+    // And only start dragging after passing the threshold
+    if (
+      Math.abs(this.moveX) > Math.abs(this.moveY) &&
+      Math.abs(this.moveX) > this.moveThreshold
+    ) {
+      this.isDragging = true;
+
+      // Further reduce sensitivity
+      const sensitivity = 0.015; // Reduced from 0.025 to 0.015
+      const distance = (this.lastX - x) * sensitivity;
+      this.scroll.target = this.scroll.current + distance;
+      this.lastX = x;
+      this.lastY = y;
+    }
   }
-  onTouchUp() {
+  onTouchUp(e) {
     this.isDown = false;
+
+    // Handle click event if movement was minimal (below threshold)
+    if (
+      !this.isDragging &&
+      Math.abs(this.moveX) < this.clickThreshold &&
+      Math.abs(this.moveY) < this.clickThreshold
+    ) {
+      this.onClick(e);
+    }
+
+    this.isDragging = false;
     this.onCheck();
   }
-  onWheel() {
-    this.scroll.target += 2;
-    this.onCheckDebounce();
+  onClick(e) {
+    if (!this.onClickCallback) return;
+
+    const x = e.touches ? e.changedTouches[0].clientX : e.clientX;
+    const y = e.touches ? e.changedTouches[0].clientY : e.clientY;
+
+    // Find which media item was clicked
+    for (const media of this.medias) {
+      if (media.hitTest(x, y)) {
+        // Call the callback with the media item's ID
+        this.onClickCallback(media.id, media.text, media.image);
+        break;
+      }
+    }
+  }
+  onWheel(e) {
+    // Only respond to horizontal wheel events or when shift key is pressed
+    if (e.shiftKey || Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+      // Determine direction and use a smaller multiplier for smoother scrolling
+      const delta =
+        (Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY) * 0.3; // Reduced from 0.5 to 0.3
+      this.scroll.target += delta;
+      this.onCheckDebounce();
+    }
   }
   onCheck() {
     if (!this.medias || !this.medias[0]) return;
@@ -550,14 +683,22 @@ class App {
     this.boundOnTouchDown = this.onTouchDown.bind(this);
     this.boundOnTouchMove = this.onTouchMove.bind(this);
     this.boundOnTouchUp = this.onTouchUp.bind(this);
+    this.boundOnClick = this.onClick.bind(this);
+
     window.addEventListener("resize", this.boundOnResize);
-    window.addEventListener("mousewheel", this.boundOnWheel);
-    window.addEventListener("wheel", this.boundOnWheel);
+    window.addEventListener("mousewheel", this.boundOnWheel, {
+      passive: false,
+    });
+    window.addEventListener("wheel", this.boundOnWheel, { passive: false });
     window.addEventListener("mousedown", this.boundOnTouchDown);
     window.addEventListener("mousemove", this.boundOnTouchMove);
     window.addEventListener("mouseup", this.boundOnTouchUp);
-    window.addEventListener("touchstart", this.boundOnTouchDown);
-    window.addEventListener("touchmove", this.boundOnTouchMove);
+    window.addEventListener("touchstart", this.boundOnTouchDown, {
+      passive: true,
+    });
+    window.addEventListener("touchmove", this.boundOnTouchMove, {
+      passive: true,
+    });
     window.addEventListener("touchend", this.boundOnTouchUp);
   }
   destroy() {
@@ -587,8 +728,27 @@ export default function CircularGallery({
   textColor = "#ffffff",
   borderRadius = 0.05,
   font = "bold 30px DM Sans",
+  onImageClick = null,
 }) {
   const containerRef = useRef(null);
+  const navigate = useNavigate(); // Use the useNavigate hook
+
+  // Handle image click to navigate to EventRegistration
+  const handleImageClick = (id, text, image) => {
+    // If there's a custom onImageClick handler, call it first
+    if (onImageClick) {
+      onImageClick(id, text, image);
+    }
+    // Navigate to EventRegistration with the event ID
+    navigate(`/event-registration/${id}`, { 
+      state: { 
+        eventId: id, 
+        eventName: text, 
+        eventImage: image 
+      } 
+    });
+  };
+
   useEffect(() => {
     const app = new App(containerRef.current, {
       items,
@@ -596,10 +756,12 @@ export default function CircularGallery({
       textColor,
       borderRadius,
       font,
+      onImageClick: handleImageClick, // Use our navigation handler
     });
     return () => {
       app.destroy();
     };
-  }, [items, bend, textColor, borderRadius, font]);
+  }, [items, bend, textColor, borderRadius, font, onImageClick, navigate]);
+
   return <div className="circular-gallery" ref={containerRef} />;
 }
