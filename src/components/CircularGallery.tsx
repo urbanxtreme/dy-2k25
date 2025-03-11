@@ -477,66 +477,92 @@ class App {
   createMedias(items, bend = 1, textColor, borderRadius, font) {
     const defaultItems = [
       {
-        image: "/images/bg.png",
-        text: "Bridge",
+        image: "/images/daksha/Frame 326.png",
+        text: "MX. DY",
         id: 1,
       },
       {
-        image: `https://picsum.photos/seed/2/800/600?grayscale`,
-        text: "Desk Setup",
+        image: "/images/daksha/Frame 323.png",
+        text: "LA COUTURE",
         id: 2,
       },
       {
-        image: `https://picsum.photos/seed/3/800/600?grayscale`,
-        text: "Waterfall",
+        image: "/images/daksha/Frame 322.png",
+        text: "BAILAMO",
         id: 3,
       },
       {
-        image: `https://picsum.photos/seed/4/800/600?grayscale`,
-        text: "Strawberries",
+        image: "/images/daksha/Frame 324.png",
+        text: "EUPHONY",
         id: 4,
       },
       {
-        image: `https://picsum.photos/seed/5/800/600?grayscale`,
-        text: "Deep Diving",
+        image: "/images/daksha/Frame 330.png",
+        text: "BLOOMER",
         id: 5,
       },
       {
-        image: `https://picsum.photos/seed/16/800/600?grayscale`,
-        text: "Train Track",
+        image: "/images/daksha/Frame 316.png",
+        text: "BEAT THE SPOT",
         id: 6,
       },
       {
-        image: `https://picsum.photos/seed/17/800/600?grayscale`,
-        text: "Santorini",
+        image: "/images/daksha/Frame 329.png",
+        text: "GROOVE",
         id: 7,
       },
       {
-        image: `https://picsum.photos/seed/8/800/600?grayscale`,
-        text: "Blurry Lights",
+        image: "/images/daksha/Frame 320.png",
+        text: "EL DUETO",
         id: 8,
       },
       {
-        image: `https://picsum.photos/seed/9/800/600?grayscale`,
-        text: "New York",
+        image: "/images/daksha/Frame 317.png",
+        text: "ONE MIC STAND",
         id: 9,
       },
       {
-        image: `https://picsum.photos/seed/10/800/600?grayscale`,
-        text: "Good Boy",
+        image: "/images/daksha/Frame 313.png",
+        text: "JAM",
         id: 10,
       },
       {
-        image: `https://picsum.photos/seed/21/800/600?grayscale`,
-        text: "Coastline",
+        image: "/images/daksha/Frame 328.png",
+        text: "CAMPUS AMBASSADOR",
         id: 11,
       },
       {
-        image: `https://picsum.photos/seed/12/800/600?grayscale`,
-        text: "Palm Trees",
+        image: "/images/esports/Frame 321.png",
+        text: "BGMI",
         id: 12,
+
       },
-    ];
+      {
+        image: "/images/esports/Insta 38.png",
+        text: "VALORANT",
+        id: 13,
+        
+      },
+
+      {
+        image: "/images/esports/Insta 39.png",
+        text: "CODM",
+        id: 14,
+        
+      },
+      {
+        image: "/images/esports/Frame 319.png",
+        text: "E-FOOTBALL",
+        id: 15,
+        
+      },   
+      {
+        image: "/images/esports/Frame 318.png",
+        text: "FREEFIRE",
+        id: 16,
+        
+      },
+     ];
     const galleryItems = items && items.length ? items : defaultItems;
     this.mediasImages = galleryItems.concat(galleryItems);
     this.medias = this.mediasImages.map((data, index) => {
