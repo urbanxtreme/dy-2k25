@@ -27,6 +27,7 @@ import BounceCards1 from "@/components/BounceCards1";
 import BounceCards2 from "@/components/BounceCards2";
 import BounceCards3 from "@/components/BounceCards3";
 import RollingGallery from "@/components/RollingGallery";
+// Removed unused import
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
@@ -396,7 +397,8 @@ const HomePage = () => {
             </div>
             <h1 className="font-Minercraftory text-4xl md:text-6xl lg:text-7xl text-white mb-6shimmer-effect">
               <p className="font-minecraft text-xl md:text-2xl text-white mb-8 max-w-2xl">
-                Join us for the epic college fest on 24 & 25 of this month. Stay Tuned!!
+                Join us for the epic college fest on 24 & 25 of this month. Stay
+                Tuned!!
               </p>
             </h1>
           </div>
@@ -460,7 +462,7 @@ const HomePage = () => {
           <div className="cube-face cube-face-bottom bg-green-900"></div>
         </div>
       </div>
-      <div
+      {/* <div
         ref={addToSectionRefs}
         data-section-id="events"
         className={`section-container py-16 px-4 bg-gray-800 transition-all duration-700 opacity-0 transform translate-y-10 relative ${
@@ -469,12 +471,7 @@ const HomePage = () => {
       >
         {createPixelBlocks(100)}
         <div className="container mx-auto text-center">
-          <h2 className="font-minecraft text-3xl mb-12 text-green-500">
-            <span className="bg-green-600 text-white px-3 py-1 mr-2 rounded-lg">
-              Featured
-            </span>
-            Events
-          </h2>
+          
 
           <div className="grid grid-cols-2 gap-4 justify-center">
             <div className="text-center">
@@ -550,16 +547,23 @@ const HomePage = () => {
             />
           </div>
         </div>
+      </div> */}
+      <h2 className="font-minecraft text-3xl mb-12 text-green-500 text-center">
+        <span className="bg-green-600 text-white px-3 py-1 mr-2 rounded-lg inline-block">
+          Featured
+        </span>
+        <span className="inline-block">Events</span>
+      </h2>
+      <div style={{ height: "600px", position: "relative" }}>
+        <BounceCards items={demoItems} />
       </div>
-      ){/* Interactive Map Preview */}
+      {/* Interactive Map Preview */}
       <InteractiveMapSection
         addToSectionRefs={addToSectionRefs}
         isVisible={isVisible}
       />
       {/* Sponsors */}
       <RollingGallery autoplay={true} pauseOnHover={true} />
-
-      
     </div>
   );
 };
@@ -598,5 +602,34 @@ const sponsors = [
   { name: "BlockByte", logo: "/images/sponsor3.png" },
   { name: "CubeCorp", logo: "/images/sponsor4.png" },
 ];
+
+const demoItems = [
+  {
+    link: "#",
+    text: "Mojave",
+    image: "https://picsum.photos/600/400?random=1",
+  },
+  {
+    link: "#",
+    text: "Sonoma",
+    image: "https://picsum.photos/600/400?random=2",
+  },
+  {
+    link: "#",
+    text: "Monterey",
+    image: "https://picsum.photos/600/400?random=3",
+  },
+  {
+    link: "#",
+    text: "Sequoia",
+    image: "https://picsum.photos/600/400?random=4",
+  },
+];
+
+const DemoSection = () => (
+  <div style={{ height: "600px", position: "relative" }}>
+    <BounceCards items={demoItems} />
+  </div>
+);
 
 export default HomePage;

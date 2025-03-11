@@ -790,7 +790,7 @@ const EventRegistration = () => {
                             formData.events.includes(event.id)
                               ? "border-green-500"
                               : "border-gray-600"
-                          } rounded-lg p-4 cursor-pointer transition-all`}
+                          } rounded-lg p-4 cursor-pointer transition-all relative`} // Added 'relative' here
                           onClick={() => handleEventSelect(event.id)}
                         >
                           <div className="flex justify-between">
@@ -825,9 +825,12 @@ const EventRegistration = () => {
                               </div>
                             )}
                           </div>
-                          <div className="absolute bottom-2 right-2">
-                            <Check className="text-green-500" size={20} />
-                          </div>
+                          {/* Conditionally show checkmark */}
+                          {formData.events.includes(event.id) && (
+                            <div className="absolute bottom-2 right-2">
+                              <Check className="text-green-500" size={20} />
+                            </div>
+                          )}
                         </motion.div>
                       ))}
                     </div>
