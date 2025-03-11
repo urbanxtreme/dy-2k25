@@ -12,6 +12,7 @@ import GalleryPage from "./pages/GalleryPage";
 import MapPage from "./pages/MapPage";
 import AboutPage from "./pages/AboutPage";
 import NotFound from "./pages/NotFound";
+import EventRegistration from "./pages/EventRegistration";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,8 @@ const App = () => (
               <Route path="/map" element={<MapPage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="*" element={<NotFound />} />
+              <Route path="/event-registration/:id" element={<EventRegistration />} />
+              <Route path="/event-registration" element={<EventRegistration />} />
             </Routes>
           </main>
           <Footer />

@@ -11,6 +11,14 @@
 }
 
 @font-face {
+  font-family: "Minercraftory";
+  src: url("/fonts/Minercraftory.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "Mojangles";
   src: url("/fonts/mojangle/mojangles.ttf") format("truetype");
   font-weight: normal;
@@ -180,8 +188,6 @@
   }
 }
 
-
-
 .minecraft-btn {
   font-family: "MinecraftRegular", "mojangles";
   text-transform: uppercase;
@@ -273,10 +279,32 @@ button:active, a:active {
   top: 0;
 }
 
+.pluckpluck {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+  width: 70vw;
+}
+
+.upupandaway {
+  animation: zoomies 5s infinite;
+}
+
+@keyframes onetimezoomies {
+  0% {
+    transform: scale(0.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .minecraft-btn-secondary {
   font-family: var(--font-minecraft);
   text-transform: uppercase;
-  color: #ffffff;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-left: 1rem;
@@ -399,6 +427,18 @@ button:active, a:active {
   top: 0;
 }
 
+@keyframes zoomies {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .minecraft-container {
   border-width: 4px;
   border-style: solid;
@@ -438,7 +478,7 @@ button:active, a:active {
 }
 
 .minecraft-input {
-  font-family: 'Minecraft'; /* assuming font-minecraft is a custom font family */
+  font-family: "Minecraft"; /* assuming font-minecraft is a custom font family */
   background-color: rgba(255, 255, 255, 0.9); /* bg-white/90 */
   border: 2px solid #000; /* border-2 border-black */
   padding: 2px; /* p-2 */
