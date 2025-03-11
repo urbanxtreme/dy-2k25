@@ -54,10 +54,10 @@ const EventRegistration = () => {
   const [availableEvents] = useState([
     {
       id: 1,
-      name: "Hackathon",
+      name: "Hello there",
       category: "Technical",
       teamEvent: true,
-      maxTeamSize: 4,
+      minTeamSize: 4,
     },
     {
       id: 2,
@@ -782,6 +782,7 @@ const EventRegistration = () => {
                               <div className="flex items-center text-yellow-300">
                                 <Users size={16} className="mr-1" />
                                 <span>Team (max {event.maxTeamSize})</span>
+                                <span>Team (min {event.minTeamSize})</span>
                               </div>
                             ) : (
                               <div className="flex items-center text-cyan-300">
