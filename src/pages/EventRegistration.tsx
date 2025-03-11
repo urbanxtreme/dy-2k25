@@ -149,13 +149,7 @@ const EventRegistration = () => {
       category: "E SPORTS",
       teamEvent: false,
     },
-    {
-      id: 13,
-      name: "FREEFIRE",
-      category: "E SPORTS",
-      teamEvent: true,
-      maxTeamSize: 4,
-    },
+
   ]);
 
   // Error states
