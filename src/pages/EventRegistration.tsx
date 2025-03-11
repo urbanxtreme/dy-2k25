@@ -197,17 +197,16 @@ const EventRegistration = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-
   const handleTeamChange = (eventId, field, value) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       teams: {
         ...prev.teams,
         [eventId]: {
           ...prev.teams[eventId],
-          [field]: value
-        }
-      }
+          [field]: value,
+        },
+      },
     }));
   };
 
@@ -218,7 +217,7 @@ const EventRegistration = () => {
   //       ...updatedMembers[memberIndex],
   //       [field]: value
   //     };
-      
+
   //     return {
   //       ...prev,
   //       teams: {
@@ -345,24 +344,37 @@ const EventRegistration = () => {
   };
 
   // Add team member
-  const addTeamMember = () => {
-    if (formData.teamMembers.length < 7) {
-      setFormData((prev) => ({
-        ...prev,
-        teamMembers: [...prev.teamMembers, { name: "", email: "", phone: "" }],
-      }));
-    }
+  const addTeamMember = (eventId) => {
+    setFormData((prev) => {
+      const newMember = { name: "", email: "", phone: "" };
+      const newTeams = { ...prev.teams };
+
+      if (prev.useSameTeam) {
+        // Add to all teams
+        Object.keys(newTeams).forEach((teamId) => {
+          newTeams[teamId].members = [...newTeams[teamId].members, newMember];
+        });
+      } else {
+        // Add to single team
+        newTeams[eventId].members = [...newTeams[eventId].members, newMember];
+      }
+
+      return { ...prev, teams: newTeams };
+    });
   };
 
   // Remove team member
   const removeTeamMember = (eventId, index) => {
-    setFormData((prev) => {
-      const updatedTeams = { ...prev.teams };
-      updatedTeams[eventId].members = updatedTeams[eventId].members.filter(
-        (_, i) => i !== index
-      );
-      return { ...prev, teams: updatedTeams };
-    });
+    setFormData((prev) => ({
+      ...prev,
+      teams: {
+        ...prev.teams,
+        [eventId]: {
+          ...prev.teams[eventId],
+          members: prev.teams[eventId].members.filter((_, i) => i !== index),
+        },
+      },
+    }));
   };
 
   // Update team member info
@@ -379,28 +391,35 @@ const EventRegistration = () => {
     }
   };
 
+  // Add these state handlers in your component
+  // Add these state handlers in your component
   const handleTeamMemberChange = (eventId, memberIndex, field, value) => {
     setFormData((prev) => {
-      const updatedTeams = { ...prev.teams };
-      const updatedMembers = [...updatedTeams[eventId]?.members];
-      updatedMembers[memberIndex] = {
-        ...updatedMembers[memberIndex],
-        [field]: value,
-      };
-      updatedTeams[eventId] = {
-        ...updatedTeams[eventId],
-        members: updatedMembers,
-      };
-      return { ...prev, teams: updatedTeams };
-    });
+      const newTeams = { ...prev.teams };
 
-    // Clear team member error if any
-    if (errors[`team-${eventId}-member-${memberIndex}`]) {
-      setErrors((prev) => ({
-        ...prev,
-        [`team-${eventId}-member-${memberIndex}`]: undefined,
-      }));
-    }
+      // If using same team, update all teams
+      if (prev.useSameTeam) {
+        Object.keys(newTeams).forEach((teamId) => {
+          newTeams[teamId] = {
+            ...newTeams[teamId],
+            members: newTeams[teamId].members.map((member, idx) =>
+              idx === memberIndex ? { ...member, [field]: value } : member
+            ),
+          };
+        });
+      }
+      // Otherwise update only the current team
+      else {
+        newTeams[eventId] = {
+          ...newTeams[eventId],
+          members: newTeams[eventId].members.map((member, idx) =>
+            idx === memberIndex ? { ...member, [field]: value } : member
+          ),
+        };
+      }
+
+      return { ...prev, teams: newTeams };
+    });
   };
 
   // Handle form submission
@@ -937,24 +956,33 @@ const EventRegistration = () => {
                               checked={formData.useSameTeam}
                               onChange={(e) => {
                                 const useSame = e.target.checked;
-                                setFormData((prev) => ({
-                                  ...prev,
-                                  useSameTeam: useSame,
-                                  teams: useSame
-                                    ? Object.fromEntries(
-                                        getSelectedEvents()
-                                          .filter((e) => e.teamEvent)
-                                          .map((event) => [
-                                            event.id,
-                                            prev.teams[
-                                              getSelectedEvents().find(
-                                                (e) => e.teamEvent
-                                              )?.id
-                                            ] || { name: "", members: [] },
-                                          ])
-                                      )
-                                    : prev.teams,
-                                }));
+                                const firstTeamEventId =
+                                  getSelectedEvents().find(
+                                    (e) => e.teamEvent
+                                  )?.id;
+
+                                setFormData((prev) => {
+                                  const baseTeam = prev.teams[
+                                    firstTeamEventId
+                                  ] || { name: "", members: [] };
+
+                                  return {
+                                    ...prev,
+                                    useSameTeam: useSame,
+                                    teams: useSame
+                                      ? Object.fromEntries(
+                                          getSelectedEvents()
+                                            .filter((e) => e.teamEvent)
+                                            .map((event) => [
+                                              event.id,
+                                              JSON.parse(
+                                                JSON.stringify(baseTeam)
+                                              ),
+                                            ])
+                                        )
+                                      : prev.teams,
+                                  };
+                                });
                               }}
                               className="form-checkbox h-5 w-5 text-green-500 rounded mr-2"
                             />
@@ -964,191 +992,252 @@ const EventRegistration = () => {
 
                         {getSelectedEvents()
                           .filter((event) => event.teamEvent)
-                          .map((event, index) => (
-                            <div
-                              key={event.id}
-                              className="bg-gray-700 border-2 border-gray-600 rounded-lg p-4"
-                            >
-                              <div className="flex items-center mb-4">
-                                <span className="font-minecraft text-yellow-400 text-lg mr-2">
-                                  {event.name}
-                                </span>
-                                <span
-                                  className={`font-minecraft px-2 py-1 text-xs rounded ${
-                                    event.category === "Technical"
-                                      ? "bg-blue-900 text-blue-300"
-                                      : event.category === "Cultural"
-                                      ? "bg-purple-900 text-purple-300"
-                                      : event.category === "Gaming"
-                                      ? "bg-red-900 text-red-300"
-                                      : "bg-green-900 text-green-300"
-                                  }`}
-                                >
-                                  {event.category}
-                                </span>
-                              </div>
+                          .map((event, index) => {
+                            const teamData = formData.teams[event.id] || {
+                              name: "",
+                              members: [],
+                            };
+                            const isFirstTeam = index === 0;
+                            const maxTeamSize =
+                              event.maxTeamSize || event.minTeamSize * 2;
 
-                              {(index === 0 || !formData.useSameTeam) && (
-                                <div className="space-y-4">
-                                  <div className="form-group">
-                                    <label
-                                      className="block font-minecraft text-white mb-2"
-                                      htmlFor={`teamName-${event.id}`}
-                                    >
-                                      Team Name{" "}
-                                      {formData.useSameTeam &&
-                                        "(Applied to all events)"}
-                                    </label>
-                                    <div className="relative">
-                                      <input
-                                        id={`teamName-${event.id}`}
-                                        name={`teamName-${event.id}`}
-                                        type="text"
-                                        value={
-                                          formData.teams[event.id]?.name || ""
-                                        }
-                                        onChange={(e) =>
-                                          handleTeamChange(
-                                            event.id,
-                                            "name",
-                                            e.target.value
-                                          )
-                                        }
-                                        className={`w-full font-minecraft bg-gray-700 text-white border-2 ${
-                                          errors[`team-${event.id}`]
-                                            ? "border-red-500"
-                                            : "border-gray-600"
-                                        } p-3 rounded-lg focus:border-cyan-500 focus:outline-none transition-all`}
-                                        placeholder="Diamond Miners"
-                                        disabled={
-                                          index > 0 && formData.useSameTeam
-                                        }
-                                      />
-                                      <Users
-                                        className="absolute right-3 top-3 text-gray-400"
-                                        size={20}
-                                      />
+                            return (
+                              <div
+                                key={event.id}
+                                className="bg-gray-700 border-2 border-gray-600 rounded-lg p-4"
+                              >
+                                {/* Event Header */}
+                                <div className="flex items-center mb-4">
+                                  <span className="font-minecraft text-yellow-400 text-lg mr-2">
+                                    {event.name}
+                                  </span>
+                                  <span
+                                    className={`font-minecraft px-2 py-1 text-xs rounded ${
+                                      event.category === "Technical"
+                                        ? "bg-blue-900 text-blue-300"
+                                        : event.category === "Cultural"
+                                        ? "bg-purple-900 text-purple-300"
+                                        : event.category === "Gaming"
+                                        ? "bg-red-900 text-red-300"
+                                        : "bg-green-900 text-green-300"
+                                    }`}
+                                  >
+                                    {event.category}
+                                  </span>
+                                </div>
+
+                                {(isFirstTeam || !formData.useSameTeam) && (
+                                  <div className="space-y-4">
+                                    {/* Team Name Input */}
+                                    <div className="form-group">
+                                      <label className="block font-minecraft text-white mb-2">
+                                        Team Name{" "}
+                                        {formData.useSameTeam &&
+                                          "(Applied to all events)"}
+                                      </label>
+                                      <div className="relative">
+                                        <input
+                                          value={teamData.name}
+                                          // In the team name input's onChange handler, replace with:
+                                          onChange={(e) => {
+                                            const value = e.target.value;
+                                            setFormData((prev) => {
+                                              const newTeams = {
+                                                ...prev.teams,
+                                              };
+
+                                              if (prev.useSameTeam) {
+                                                // Create new object for each team
+                                                Object.keys(newTeams).forEach(
+                                                  (teamId) => {
+                                                    newTeams[teamId] = {
+                                                      ...newTeams[teamId],
+                                                      name: value,
+                                                      members: [
+                                                        ...(newTeams[teamId]
+                                                          .members || []),
+                                                      ], // Preserve members
+                                                    };
+                                                  }
+                                                );
+                                              } else {
+                                                newTeams[event.id] = {
+                                                  ...newTeams[event.id],
+                                                  name: value,
+                                                  members: [
+                                                    ...(newTeams[event.id]
+                                                      ?.members || []),
+                                                  ], // Preserve members // Preserve members
+                                                };
+                                              }
+
+                                              return {
+                                                ...prev,
+                                                teams: newTeams,
+                                              };
+                                            });
+                                          }}
+                                          className="w-full font-minecraft bg-gray-700 text-white border-2 border-gray-600 p-3 rounded-lg focus:border-cyan-500 focus:outline-none transition-all"
+                                          placeholder="Enter team name"
+                                          disabled={
+                                            !isFirstTeam && formData.useSameTeam
+                                          }
+                                        />
+                                        <Users
+                                          className="absolute right-3 top-3 text-gray-400"
+                                          size={20}
+                                        />
+                                      </div>
+                                    </div>
+
+                                    {/* Team Members Section */}
+                                    <div>
+                                      <h3 className="font-minecraft text-white mb-2">
+                                        Team Members{" "}
+                                        {formData.useSameTeam &&
+                                          "(Applied to all events)"}
+                                      </h3>
+
+                                      {teamData.members.map(
+                                        (member, memberIndex) => (
+                                          <div
+                                            key={memberIndex}
+                                            className="mb-4 bg-gray-800 border-2 border-gray-700 rounded-lg p-4"
+                                          >
+                                            {/* Member fields */}
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                              {/* Name Input */}
+                                              <div className="form-group">
+                                                <label className="block font-minecraft text-white mb-2">
+                                                  Full Name
+                                                </label>
+                                                <input
+                                                  type="text"
+                                                  value={member.name}
+                                                  onChange={(e) =>
+                                                    handleTeamMemberChange(
+                                                      event.id,
+                                                      memberIndex,
+                                                      "name",
+                                                      e.target.value
+                                                    )
+                                                  }
+                                                  className="w-full font-minecraft bg-gray-700 text-white border-2 border-gray-600 p-3 rounded-lg focus:border-cyan-500 focus:outline-none transition-all"
+                                                  placeholder="John Doe"
+                                                  disabled={
+                                                    !isFirstTeam &&
+                                                    formData.useSameTeam
+                                                  }
+                                                />
+                                              </div>
+                                              <div className="form-group">
+                                                <label className="block font-minecraft text-white mb-2">
+                                                  Phone Number
+                                                </label>
+                                                <input
+                                                  type="text"
+                                                  value={member.phone}
+                                                  onChange={(e) =>
+                                                    handleTeamMemberChange(
+                                                      event.id,
+                                                      memberIndex,
+                                                      "phone",
+                                                      e.target.value
+                                                    )
+                                                  }
+                                                  className="w-full font-minecraft bg-gray-700 text-white border-2 border-gray-600 p-3 rounded-lg focus:border-cyan-500 focus:outline-none transition-all"
+                                                  placeholder="1234567890"
+                                                  disabled={
+                                                    !isFirstTeam &&
+                                                    formData.useSameTeam
+                                                  }
+                                                />
+                                              </div>
+                                              <div className="form-group">
+                                                <label className="block font-minecraft text-white mb-2">
+                                                  Mail ID
+                                                </label>
+                                                <input
+                                                  type="email"
+                                                  value={member.email}
+                                                  onChange={(e) =>
+                                                    handleTeamMemberChange(
+                                                      event.id,
+                                                      memberIndex,
+                                                      "email",
+                                                      e.target.value
+                                                    )
+                                                  }
+                                                  className="w-full font-minecraft bg-gray-700 text-white border-2 border-gray-600 p-3 rounded-lg focus:border-cyan-500 focus:outline-none transition-all"
+                                                  placeholder="example@example.com"
+                                                  disabled={
+                                                    !isFirstTeam &&
+                                                    formData.useSameTeam
+                                                  }
+                                                />
+                                              </div>
+
+                                              {/* Similar changes for email and phone inputs */}
+                                            </div>
+                                          </div>
+                                        )
+                                      )}
+
+                                      {/* Add Member Button */}
+                                      {teamData.members.length <
+                                        maxTeamSize && (
+                                        <button
+                                          type="button"
+                                          onClick={() => {
+                                            if (formData.useSameTeam) {
+                                              // Add member to all teams
+                                              setFormData((prev) => {
+                                                const newTeams = {
+                                                  ...prev.teams,
+                                                };
+                                                const newMember = {
+                                                  name: "",
+                                                  email: "",
+                                                  phone: "",
+                                                };
+
+                                                Object.keys(newTeams).forEach(
+                                                  (teamId) => {
+                                                    newTeams[teamId].members = [
+                                                      ...newTeams[teamId]
+                                                        .members,
+                                                      newMember,
+                                                    ];
+                                                  }
+                                                );
+
+                                                return {
+                                                  ...prev,
+                                                  teams: newTeams,
+                                                };
+                                              });
+                                            } else {
+                                              addTeamMember(event.id);
+                                            }
+                                          }}
+                                          className="bg-gray-700 border-2 border-gray-600 rounded-lg p-3 w-full font-minecraft text-cyan-400 hover:text-cyan-300 hover:border-cyan-600 transition-colors flex items-center justify-center"
+                                          disabled={
+                                            !isFirstTeam && formData.useSameTeam
+                                          }
+                                        >
+                                          <UserPlus
+                                            className="mr-2"
+                                            size={18}
+                                          />
+                                          Add Team Member
+                                        </button>
+                                      )}
                                     </div>
                                   </div>
-
-                                  <div>
-                                    <h3 className="font-minecraft text-white mb-2">
-                                      Team Members{" "}
-                                      {formData.useSameTeam &&
-                                        "(Applied to all events)"}
-                                    </h3>
-
-                                    {(
-                                      formData.teams[event.id]?.members || []
-                                    ).map((member, memberIndex) => (
-                                      <div
-                                        key={memberIndex}
-                                        className="mb-4 bg-gray-800 border-2 border-gray-700 rounded-lg p-4"
-                                      >
-                                        <div className="flex justify-between items-center mb-2">
-                                          <h4 className="font-minecraft text-white">
-                                            Member #{memberIndex + 1}
-                                          </h4>
-                                          <button
-                                            type="button"
-                                            onClick={() =>
-                                              removeTeamMember(
-                                                event.id,
-                                                memberIndex
-                                              )
-                                            }
-                                            className="text-red-400 hover:text-red-300"
-                                            disabled={
-                                              index > 0 && formData.useSameTeam
-                                            }
-                                          >
-                                            Remove
-                                          </button>
-                                        </div>
-
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                          <div className="form-group">
-                                            <label className="block font-minecraft text-white mb-2">
-                                              Name
-                                            </label>
-                                            <input
-                                              type="text"
-                                              value={member.name}
-                                              onChange={(e) =>
-                                                handleTeamMemberChange(
-                                                  event.id,
-                                                  memberIndex,
-                                                  "name",
-                                                  e.target.value
-                                                )
-                                              }
-                                              className={`w-full font-minecraft bg-gray-700 text-white border-2 ${
-                                                errors[
-                                                  `team-${event.id}-member-${memberIndex}`
-                                                ]
-                                                  ? "border-red-500"
-                                                  : "border-gray-600"
-                                              } p-3 rounded-lg focus:border-cyan-500 focus:outline-none transition-all`}
-                                              placeholder="Team Member Name"
-                                              disabled={
-                                                index > 0 &&
-                                                formData.useSameTeam
-                                              }
-                                            />
-                                          </div>
-                                          <div className="form-group">
-                                            <label className="block font-minecraft text-white mb-2">
-                                              Email
-                                            </label>
-                                            <input
-                                              type="email"
-                                              value={member.email}
-                                              onChange={(e) =>
-                                                handleTeamMemberChange(
-                                                  event.id,
-                                                  memberIndex,
-                                                  "email",
-                                                  e.target.value
-                                                )
-                                              }
-                                              className={`w-full font-minecraft bg-gray-700 text-white border-2 ${
-                                                errors[
-                                                  `team-${event.id}-member-${memberIndex}`
-                                                ]
-                                                  ? "border-red-500"
-                                                  : "border-gray-600"
-                                              } p-3 rounded-lg focus:border-cyan-500 focus:outline-none transition-all`}
-                                              placeholder="member@example.com"
-                                              disabled={
-                                                index > 0 &&
-                                                formData.useSameTeam
-                                              }
-                                            />
-                                          </div>
-                                        </div>
-                                      </div>
-                                    ))}
-
-                                    {(!formData.teams[event.id]?.members ||
-                                      formData.teams[event.id].members.length <
-                                        event.maxTeamSize) && (
-                                      <button
-                                        type="button"
-                                        onClick={addTeamMember}
-                                        className="bg-gray-700 border-2 border-gray-600 rounded-lg p-3 w-full font-minecraft text-cyan-400 hover:text-cyan-300 hover:border-cyan-600 transition-colors flex items-center justify-center"
-                                        disabled={
-                                          index > 0 && formData.useSameTeam
-                                        }
-                                      >
-                                        <UserPlus className="mr-2" size={18} />
-                                        Add Team Member
-                                      </button>
-                                    )}
-                                  </div>
-                                </div>
-                              )}
-                            </div>
-                          ))}
+                                )}
+                              </div>
+                            );
+                          })}
                       </>
                     ) : (
                       <div className="bg-gray-700 border-2 border-gray-600 rounded-lg p-6">
