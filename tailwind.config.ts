@@ -13,10 +13,10 @@ export default {
 	theme: {
 		container: {
 			center: true,
-			padding: '10rem 0rem',
+			padding: '2rem',
 			screens: {
-				// '2xl': '1400px',
-			},
+				'2xl': '1400px'
+			}
 		},
 		extend: {
 			colors: {
