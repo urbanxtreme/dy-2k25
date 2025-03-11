@@ -35,11 +35,6 @@ const EventsPage = () => {
       <div style={{ height: '600px', position: 'relative' }}>
         <CircularGallery bend={1} textColor="#ffffff" borderRadius={0.05} items={undefined} />
       </div>
-      <div className="bg-gray-900 text-white">
-        <div style={{ height: '600px', position: 'relative' }}>
-          <CircularGallery bend={1} textColor="#ffffff" borderRadius={0.05} items={undefined} />
-        </div>
-      </div>
     </div>
   );
 };

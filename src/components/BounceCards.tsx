@@ -3,11 +3,35 @@ import { gsap } from 'gsap';
 
 import './BounceCards.css';
 
-function FlowingMenu({ items = [] }) {
+function FlowingMenu() {
+  // Updated menu items with your desired text and assuming images are in your project folder
+  const menuItems = [
+    { 
+      text: "CULTURAL", 
+      link: "#cultural", 
+      image: "./images/daksha/123.png" // Update path to match your folder structure
+    },
+    { 
+      text: "TECHNICAL", 
+      link: "#technical", 
+      image: "./images/daksha/123.png" // Update path to match your folder structure
+    },
+    { 
+      text: "GAMING", 
+      link: "#gaming", 
+      image: "./images/daksha/123.png" // Update path to match your folder structure
+    },
+    { 
+      text: "WORKSHOPS", 
+      link: "#workshops", 
+      image: "./images/daksha/123.png" // Update path to match your folder structure
+    }
+  ];
+
   return (
     <div className="menu-wrap">
       <nav className="menu">
-        {items.map((item, idx) => (
+        {menuItems.map((item, idx) => (
           <MenuItem key={idx} {...item} />
         ))}
       </nav>
@@ -59,7 +83,8 @@ function MenuItem({ link, text, image }) {
       .to(marqueeInnerRef.current, { y: edge === 'top' ? '101%' : '-101%' }, 0);
   };
 
-  const repeatedMarqueeContent = Array.from({ length: 4 }).map((_, idx) => (
+  // Create more repetitions to ensure continuous looping
+  const repeatedMarqueeContent = Array.from({ length: 8 }).map((_, idx) => (
     <React.Fragment key={idx}>
       <span>{text}</span>
       <div
