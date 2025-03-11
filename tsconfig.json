@@ -9,7 +9,6 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "@types/react-spring": ["node_modules/@types/react-spring"],
     "noImplicitAny": false,
     "noUnusedParameters": false,
     "skipLibCheck": true,
