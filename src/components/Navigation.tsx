@@ -56,7 +56,6 @@ const Navigation = () => {
             </span>
           </Link>
         </div>
-
         {/* Desktop Navigation */}
         <nav className="hidden md:block flex-1 mx-4">
           <ul className="flex justify-center space-x-3 lg:space-x-5">
