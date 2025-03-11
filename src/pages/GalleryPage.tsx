@@ -14,7 +14,7 @@ interface GalleryImage {
   category: string;
 }
 
-const categories = ["All", "Events", "Competitions", "Performances", "Activities"];
+const categories = ["All", "Events", "Competitions", "Performances"];
 
 const GalleryPage = () => {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -115,66 +115,115 @@ const GalleryPage = () => {
 const galleryImages: GalleryImage[] = [
   {
     id: 1,
-    image: "/images/gallery-1.jpg",
+    image: "/images/img01.jpg",
     title: "Building Competition 2023",
     description: "Amazing structures from last year's Minecraft building contest.",
-    category: "Competitions"
+    category: "Performances"
   },
   {
     id: 2,
-    image: "/images/gallery-2.jpg",
+    image: "/images/img02.jpg",
     title: "Coding Challenge Winners",
     description: "The winning team from the programming competition.",
     category: "Competitions"
   },
   {
     id: 3,
-    image: "/images/gallery-3.jpg",
+    image: "/images/img17.JPG",
     title: "MineFest Opening Ceremony",
     description: "The exciting kickoff to last year's event.",
     category: "Events"
   },
   {
     id: 4,
-    image: "/images/gallery-4.jpg",
+    image: "/images/img04.jpg",
     title: "Pixel Art Exhibition",
     description: "Creative pixel artwork displayed throughout the venue.",
-    category: "Activities"
+    category: "Performances"
   },
   {
     id: 5,
-    image: "/images/gallery-5.jpg",
+    image: "/images/img05.jpg",
     title: "Live Music Performance",
     description: "Students performing Minecraft-inspired music.",
     category: "Performances"
   },
   {
     id: 6,
-    image: "/images/gallery-6.jpg",
+    image: "/images/img03.jpg",
     title: "VR Gaming Zone",
     description: "Attendees enjoying virtual reality Minecraft experiences.",
-    category: "Activities"
+    category: "Performances"
   },
   {
     id: 7,
-    image: "/images/gallery-7.jpg",
+    image: "/images/img07.jpg",
     title: "Redstone Workshop",
     description: "Students learning advanced redstone engineering techniques.",
     category: "Events"
   },
   {
     id: 8,
-    image: "/images/gallery-8.jpg",
+    image: "/images/img08 .jpg",
     title: "Costume Contest",
     description: "The amazing Minecraft-themed costumes from last year.",
     category: "Performances"
   },
   {
     id: 9,
-    image: "/images/gallery-9.jpg",
+    image: "/images/img09.JPG",
+    title: "MineFest Afterparty",
+    description: "Celebrating after a successful festival.",
+    category: "Performances"
+  },
+  {
+    id: 10,
+    image: "/images/img10.JPG",
+    title: "MineFest Afterparty",
+    description: "Celebrating after a successful festival.",
+    category: "Performances"
+  },
+  {
+    id: 11,
+    image: "/images/img11.JPG",
     title: "MineFest Afterparty",
     description: "Celebrating after a successful festival.",
     category: "Events"
+  },
+  {
+    id: 12,
+    image: "/images/img12.JPG",
+    title: "MineFest Afterparty",
+    description: "Celebrating after a successful festival.",
+    category: "Performances"
+  },
+  {
+    id: 13,
+    image: "/images/img13.JPG",
+    title: "MineFest Afterparty",
+    description: "Celebrating after a successful festival.",
+    category: "Performances"
+  },
+  {
+    id: 14,
+    image: "/images/img14.JPG",
+    title: "MineFest Afterparty",
+    description: "Celebrating after a successful festival.",
+    category: "Performances"
+  },
+  {
+    id: 15,
+    image: "/images/img15.JPG",
+    title: "MineFest Afterparty",
+    description: "Celebrating after a successful festival.",
+    category: "Performances"
+  },
+  {
+    id: 16,
+    image: "/images/img16.JPG",
+    title: "MineFest Afterparty",
+    description: "Celebrating after a successful festival.",
+    category: "Competitions"
   }
 ];
 
