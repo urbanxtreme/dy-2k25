@@ -13,7 +13,7 @@ const Navigation = () => {
     { name: "Gallery", path: "/gallery" },
     { name: "Interactive Map", path: "/map" },
     { name: "About & Contact", path: "/about" },
-    {name: "Registeration", path: "/event-registration"}
+    { name: "Registeration", path: "/event-registration" },
   ];
 
   useEffect(() => {
@@ -77,7 +77,6 @@ const Navigation = () => {
         {/* Right side - Desktop Registration Button & Mobile Menu */}
         <div className="flex items-center gap-3 ml-4">
           {/* Desktop-only Registration Button */}
-         
 
           {/* Mobile Menu Button */}
           <button
@@ -128,4 +127,3 @@ const Navigation = () => {
 };
 
 export default Navigation;
-
