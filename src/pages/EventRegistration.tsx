@@ -22,6 +22,7 @@ import {
   CreditCard,
   Image as ImageIcon,
   Plus,
+  Receipt,
 } from "lucide-react";
 
 // Register GSAP plugins
@@ -59,7 +60,7 @@ const EventRegistration = () => {
       name: "MX. DY",
       category: "Cultural",
       teamEvent: false,
-      registrationFee: 199,
+      registrationFee: 150,
     },
     {
       id: 2,
@@ -67,7 +68,7 @@ const EventRegistration = () => {
       category: "Cultural",
       teamEvent: true,
       minTeamSize: 8,
-      registrationFee: 199,
+      registrationFee: 150,
     },
     {
       id: 3,
@@ -75,7 +76,7 @@ const EventRegistration = () => {
       category: "Cultural",
       teamEvent: true,
       minTeamSize: 7,
-      registrationFee: 199,
+      registrationFee: 150,
     },
     {
       id: 4,
@@ -83,28 +84,28 @@ const EventRegistration = () => {
       category: "Cultural",
       teamEvent: true,
       minTeamSize: 4,
-      registrationFee: 199,
+      registrationFee: 150,
     },
     {
       id: 5,
       name: "BLOOMER",
       category: "Cultural",
       teamEvent: false,
-      registrationFee: 199,
+      registrationFee: 150,
     },
     {
       id: 6,
       name: "BEAT THE SPOT",
       category: "Cultural",
       teamEvent: false,
-      registrationFee: 199,
+      registrationFee: 150,
     },
     {
       id: 7,
       name: "GROOVE",
       category: "Cultural",
       teamEvent: false,
-      registrationFee: 199,
+      registrationFee: 100,
     },
     {
       id: 8,
@@ -112,28 +113,27 @@ const EventRegistration = () => {
       category: "Cultural",
       teamEvent: true,
       maxTeamSize: 2,
-      registrationFee: 199,
+      registrationFee: 200,
     },
     {
       id: 9,
       name: "ONE MIC STAND",
       category: "Cultural",
       teamEvent: false,
-      registrationFee: 199,
+      registrationFee: 150,
     },
     {
       id: 10,
       name: "JAM",
       category: "Cultural",
       teamEvent: false,
-      registrationFee: 199,
+      registrationFee: 100,
     },
     {
       id: 11,
       name: "CAMPUS AMBASSADOR",
       category: "Cultural",
       teamEvent: false,
-      registrationFee: 199,
     },
     {
       id: 12,
@@ -141,7 +141,7 @@ const EventRegistration = () => {
       category: "E SPORTS",
       teamEvent: true,
       maxTeamSize: 4,
-      registrationFee: 199,
+      registrationFee: 100,
     },
     {
       id: 13,
@@ -149,7 +149,7 @@ const EventRegistration = () => {
       category: "E SPORTS",
       teamEvent: true,
       maxTeamSize: 6,
-      registrationFee: 199,
+      registrationFee: `${300}(per team)`,
     },
     {
       id: 14,
@@ -157,14 +157,14 @@ const EventRegistration = () => {
       category: "E SPORTS",
       teamEvent: true,
       maxTeamSize: 5,
-      registrationFee: 199,
+      registrationFee: `${300}(per team)`,
     },
     {
       id: 15,
       name: "E-FOOTBALL",
       category: "E SPORTS",
       teamEvent: false,
-      registrationFee: 199,
+      registrationFee: 50,
     },
   ]);
 
@@ -947,9 +947,11 @@ const EventRegistration = () => {
                               </div>
                             )}
                           </div>
-                          <div className="mt-2 text-sm text-gray-400">
-                            Registration Fee: ₹{event.registrationFee}
-                          </div>
+                          {event.registrationFee && (
+                            <div className="mt-2 text-sm text-gray-400">
+                              Registration Fee: ₹{event.registrationFee}
+                            </div>
+                          )}
                           {formData.events.includes(event.id) && (
                             <div className="absolute bottom-2 right-2">
                               <Check className="text-green-500" size={20} />
@@ -1291,51 +1293,143 @@ const EventRegistration = () => {
                       Details
                     </h2>
 
-                    <div className="bg-gray-700 p-4 rounded-lg border-2 border-gray-600">
-                      <div className="mb-4">
-                        <h3 className="font-minecraft text-white mb-2">
-                          Payment Instructions
+                    <div className="bg-gray-700 p-4 rounded-lg border-2 border-gray-600 space-y-6">
+                      {/* Fee Breakdown Section */}
+                      <div className="bg-gray-800 p-4 rounded-lg border-2 border-gray-700">
+                        <h3 className="font-minecraft text-yellow-400 mb-4 text-lg">
+                          Fee Breakdown
                         </h3>
-                        <p className="font-minecraft text-gray-400 text-sm">
-                          Amount: ₹199 per event
-                          <br />
-                          UPI ID: collegefest@upi
-                          <br />
-                          Bank: ABC Bank (AC 1234567890)
-                        </p>
+
+                        <div className="space-y-3 mb-4">
+                          {formData.events.map((eventId) => {
+                            const event = availableEvents.find(
+                              (e) => e.id === eventId
+                            );
+                            if (!event) return null;
+
+                            return (
+                              <div
+                                key={eventId}
+                                className="flex justify-between items-center bg-gray-700 px-4 py-3 rounded"
+                              >
+                                <div className="flex items-center">
+                                  <span className="font-minecraft text-gray-300">
+                                    {event.name}
+                                  </span>
+                                  <span
+                                    className={`ml-2 text-xs px-2 py-1 rounded ${
+                                      event.category === "Technical"
+                                        ? "bg-blue-900 text-blue-300"
+                                        : event.category === "Cultural"
+                                        ? "bg-purple-900 text-purple-300"
+                                        : event.category === "Gaming"
+                                        ? "bg-red-900 text-red-300"
+                                        : "bg-green-900 text-green-300"
+                                    }`}
+                                  >
+                                    {event.category}
+                                  </span>
+                                </div>
+                                <span className="font-minecraft text-yellow-400">
+                                  ₹{event.registrationFee}
+                                </span>
+                              </div>
+                            );
+                          })}
+                        </div>
+
+                        <div className="border-t-2 border-gray-600 pt-4">
+                          <div className="flex justify-between items-center">
+                            <span className="font-minecraft text-white text-lg">
+                              Total Amount:
+                            </span>
+                            <span className="font-minecraft text-green-400 text-2xl">
+                              ₹
+                              {formData.events.reduce((total, eventId) => {
+                                const event = availableEvents.find(
+                                  (e) => e.id === eventId
+                                );
+                                return total + (event?.registrationFee || 0);
+                              }, 0)}
+                            </span>
+                          </div>
+                        </div>
                       </div>
 
+                      {/* Payment Instructions */}
+                      <div className="bg-gray-800 p-4 rounded-lg border-2 border-gray-700">
+                        <h3 className="font-minecraft text-yellow-400 mb-3 text-lg">
+                          Payment Instructions
+                        </h3>
+                        <div className="font-minecraft text-gray-400 space-y-2 text-sm">
+                          <p>
+                            ➤ Total Amount: ₹
+                            {formData.events.reduce((total, eventId) => {
+                              const event = availableEvents.find(
+                                (e) => e.id === eventId
+                              );
+                              return total + (event?.registrationFee || 0);
+                            }, 0)}
+                          </p>
+                          <p>
+                            ➤ UPI ID:{" "}
+                            <span className="text-cyan-400">
+                              collegefest@upi
+                            </span>
+                          </p>
+                          <p>➤ Bank Details:</p>
+                          <div className="ml-4">
+                            <p>Bank Name: ABC Bank</p>
+                            <p>Account Number: 1234567890</p>
+                            <p>IFSC Code: ABCD1234567</p>
+                          </div>
+                          <p className="text-red-400">
+                            ⚠️ Please complete payment within 24 hours of
+                            registration
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Transaction ID Input */}
                       <div className="form-group">
                         <label className="block font-minecraft text-white mb-2">
-                          Transaction ID
+                          Transaction ID <span className="text-red-500">*</span>
                         </label>
-                        <input
-                          type="text"
-                          name="paymentTransactionId"
-                          value={formData.paymentTransactionId}
-                          onChange={(e) =>
-                            setFormData((prev) => ({
-                              ...prev,
-                              paymentTransactionId: e.target.value,
-                            }))
-                          }
-                          className={`w-full bg-gray-700 text-white border-2 ${
-                            errors.paymentTransactionId
-                              ? "border-red-500"
-                              : "border-gray-600"
-                          } p-3 rounded-lg focus:border-cyan-500 transition-all`}
-                          placeholder="UPI Transaction ID"
-                        />
+                        <div className="relative">
+                          <input
+                            type="text"
+                            name="paymentTransactionId"
+                            value={formData.paymentTransactionId}
+                            onChange={(e) =>
+                              setFormData((prev) => ({
+                                ...prev,
+                                paymentTransactionId: e.target.value,
+                              }))
+                            }
+                            className={`w-full bg-gray-800 text-white border-2 ${
+                              errors.paymentTransactionId
+                                ? "border-red-500"
+                                : "border-gray-700"
+                            } p-3 rounded-lg focus:border-cyan-500 transition-all font-minecraft`}
+                            placeholder="Enter UPI/Transaction ID"
+                          />
+                          <Receipt
+                            className="absolute right-3 top-3 text-gray-400"
+                            size={20}
+                          />
+                        </div>
                         {errors.paymentTransactionId && (
-                          <p className="text-red-500 text-sm mt-1">
+                          <p className="text-red-500 text-sm mt-2 font-minecraft">
                             {errors.paymentTransactionId}
                           </p>
                         )}
                       </div>
 
-                      <div className="form-group mt-4">
+                      {/* Payment Screenshot Upload */}
+                      <div className="form-group">
                         <label className="block font-minecraft text-white mb-2">
-                          Payment Screenshot
+                          Payment Screenshot{" "}
+                          <span className="text-red-500">*</span>
                         </label>
                         <div className="relative">
                           <input
@@ -1347,31 +1441,45 @@ const EventRegistration = () => {
                           />
                           <label
                             htmlFor="paymentScreenshot"
-                            className={`w-full bg-gray-700 text-white border-2 ${
+                            className={`w-full bg-gray-800 text-white border-2 ${
                               errors.paymentScreenshot
                                 ? "border-red-500"
-                                : "border-gray-600"
-                            } p-3 rounded-lg flex items-center justify-center cursor-pointer hover:bg-gray-600`}
+                                : "border-gray-700"
+                            } p-3 rounded-lg flex items-center justify-center cursor-pointer hover:bg-gray-700 transition-colors font-minecraft`}
                           >
                             <ImageIcon className="mr-2" size={20} />
-                            {paymentPreview ? "Change Image" : "Select Image"}
+                            {paymentPreview
+                              ? "Change Screenshot"
+                              : "Upload Payment Proof"}
                           </label>
-                          {errors.paymentScreenshot && (
-                            <p className="text-red-500 text-sm mt-1">
-                              {errors.paymentScreenshot}
-                            </p>
-                          )}
                         </div>
+                        {errors.paymentScreenshot && (
+                          <p className="text-red-500 text-sm mt-2 font-minecraft">
+                            {errors.paymentScreenshot}
+                          </p>
+                        )}
 
                         {paymentPreview && (
-                          <div className="mt-4 p-2 border-2 border-gray-600 rounded-lg">
+                          <div className="mt-4 p-2 border-2 border-gray-700 rounded-lg">
+                            <h4 className="font-minecraft text-gray-400 mb-2">
+                              Preview:
+                            </h4>
                             <img
                               src={paymentPreview}
                               alt="Payment preview"
-                              className="max-h-48 rounded-lg mx-auto"
+                              className="max-h-48 rounded-lg mx-auto border-2 border-gray-600"
                             />
                           </div>
                         )}
+                      </div>
+
+                      {/* Payment Disclaimer */}
+                      <div className="bg-red-900/20 p-4 rounded-lg border-2 border-red-800">
+                        <p className="font-minecraft text-red-400 text-sm">
+                          <span className="text-lg">⚠️</span> Your registration
+                          will be confirmed only after payment verification.
+                          Keep your transaction ID ready for reference.
+                        </p>
                       </div>
                     </div>
                   </div>
