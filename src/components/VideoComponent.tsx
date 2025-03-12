@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import videobg from '../../public/videos/About-Book-vid.webm';
+import { Container } from 'lucide-react';
 
 const VideoComponent: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -19,6 +20,7 @@ const VideoComponent: React.FC = () => {
 
         // Set the video's current time based on the scroll progress
         video.currentTime = clampedScrollProgress * video.duration;
+        
       }
     };
 

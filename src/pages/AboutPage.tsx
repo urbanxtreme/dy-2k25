@@ -11,8 +11,8 @@ gsap.registerPlugin(ScrollTrigger);
 const AboutPage = () => {
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [bgOpacity, setBgOpacity] = useState(0);
-  const headingRef = useRef<HTMLHeadingElement | null>(null); // Ref for the heading
-  const videoRef = useRef<HTMLDivElement | null>(null);
+  const headingRef = useRef<HTMLHeadingElement >(null);
+  const mainContentRef = useRef<HTMLDivElement >(null);
 
   useEffect(() => {
     // Animate sections on scroll
@@ -35,36 +35,42 @@ const AboutPage = () => {
         }
       );
     });
+
     // Stamping animation for the heading with smoke effect
     if (headingRef.current) {
-
-      // Stamping animation with delay
       gsap.fromTo(
         headingRef.current,
-        { scale: 0, opacity: 0 }, // Start with scale 0 and invisible
+        { scale: 0, opacity: 0 },
         {
-          scale: 1, // Scale up to normal size
-          opacity: 1, // Fade in
-          duration: 0.8, // Animation duration
-          ease: 'elastic.out(1, 0.5)', // Elastic easing for a stamping effect
-          delay: 0.5, // 3-second delay
+          scale: 1,
+          opacity: 1,
+          duration: 0.8,
+          ease: 'elastic.out(1, 0.5)',
+          delay: 0.5,
           scrollTrigger: {
-            trigger: headingRef.current, // Trigger on the heading itself
-            start: 'top 80%', // Start animation when the top of the heading is 80% in view
-            end: 'bottom 20%', // End animation when the bottom of the heading is 20% in view
-            toggleActions: 'play none none reverse', // Play animation on enter, reverse on leave
+            trigger: headingRef.current,
+            start: 'top 80%',
+            end: 'bottom 20%',
+            toggleActions: 'play none none reverse',
           },
-          
         }
       );
     }
+
     ScrollTrigger.create({
       start: 'top top',
       end: 'top -100',
       onUpdate: (self) => {
-        setBgOpacity(self.progress);
+
+        setBgOpacity(self.progress*1.1);
+        const videoContainer:any = document.querySelector('.video-container');
+        if (videoContainer) {
+          videoContainer.style.transform = `perspective(200px) translateZ(${self.progress * 180}px)`;
+        }
+        
       },
     });
+  
   }, []);
 
   const addToSectionRefs = (el: HTMLDivElement | null) => {
@@ -90,13 +96,14 @@ const AboutPage = () => {
         }}
       />
       <div
+        
         style={{
           position: 'fixed',
           top: -80,
           left: 170,
           width: '80%',
           height: '80%',
-          zIndex: -2, // Place the video behind everything
+          zIndex: -2,
         }}
       >
         <VideoComponent/>
@@ -117,43 +124,12 @@ const AboutPage = () => {
         }}
       />
       
-    
       {/* Interactive Content */}
-      <div className="relative z-10">
+      <div ref={mainContentRef} className="relative z-10">
         {/* Centered Heading Container */}
-        <div className="container mx-auto flex items-center justify-center h-screen">
-          <div className="text-center mb-12">
-            <h1 className="font-minecraft font-bold text-[#F7DC6F] text-7xl mb-4" style={{ textShadow: "0 0 5px #FFA500, 0 0 10px #FFC107, 0 0 15px #FFA500" }}
-            >
-              <AnimatedContent
-                distance={150}
-                direction="vertical"
-                reverse={false}
-                config={{ tension: 80, friction: 20 }}
-                initialOpacity={0.2}
-                animateOpacity
-                scale={1.1}
-              >
-                <div>Daksha&nbsp;</div>
-              </AnimatedContent>
-            </h1>
-            
-            <h1 className="font-minecraft font-bold text-[#33CC33] text-7xl mb-4 inline" style={{ textShadow: "0 0 10px #000000aa" }}
-            >
-              <AnimatedContent
-                distance={150}
-                direction="vertical"
-                reverse={false}
-                config={{ tension: 80, friction: 20 }}
-                initialOpacity={0.2}
-                animateOpacity
-                scale={1.1}
-              >
-                <div>Yanthra</div>
-              </AnimatedContent>
-            </h1>
-        </div>
-      </div>
+        <div style={{height: "100vh",
+          width: "100vw",
+        }}></div>
         {/* About Section */}
         
         <div ref={addToSectionRefs} className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
