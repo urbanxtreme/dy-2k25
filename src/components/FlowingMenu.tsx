@@ -13,22 +13,22 @@ const FlowingMenu: React.FC<{ items: { link: string; text: string; image: string
   const menuItems = [
     { 
       text: "CULTURAL", 
-      link: "#cultural", 
+      link: "/events", 
       image: "./images/daksha/123.png" // Update path to match your folder structure
     },
     { 
       text: "TECHNICAL", 
-      link: "#technical", 
+      link: "/events", 
       image: "./images/daksha/123.png" // Update path to match your folder structure
     },
     { 
       text: "GAMING", 
-      link: "#gaming", 
+      link: "/events", 
       image: "./images/daksha/123.png" // Update path to match your folder structure
     },
     { 
       text: "WORKSHOPS", 
-      link: "#workshops", 
+      link: "/events", 
       image: "./images/daksha/123.png" // Update path to match your folder structure
     }
   ];

@@ -320,7 +320,7 @@ const InteractiveMapSection: React.FC<{
         >
           <span className="text-yellow-500 px-6 py-3 bg-gray-800/80 backdrop-blur-sm rounded-xl border-2 border-yellow-600 inline-block">
             <Compass className="inline-block mr-3 mb-1" size={28} />
-            Interactive Festival Map
+            Interactive College Map
           </span>
         </motion.h2>
 

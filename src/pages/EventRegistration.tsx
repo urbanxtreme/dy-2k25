@@ -59,6 +59,7 @@ const EventRegistration = () => {
       name: "MX. DY",
       category: "Cultural",
       teamEvent: false,
+      registrationFee: 199,
     },
     {
       id: 2,
@@ -66,6 +67,7 @@ const EventRegistration = () => {
       category: "Cultural",
       teamEvent: true,
       minTeamSize: 8,
+      registrationFee: 199,
     },
     {
       id: 3,
@@ -73,6 +75,7 @@ const EventRegistration = () => {
       category: "Cultural",
       teamEvent: true,
       minTeamSize: 7,
+      registrationFee: 199,
     },
     {
       id: 4,
@@ -80,19 +83,28 @@ const EventRegistration = () => {
       category: "Cultural",
       teamEvent: true,
       minTeamSize: 4,
+      registrationFee: 199,
     },
     {
       id: 5,
       name: "BLOOMER",
       category: "Cultural",
       teamEvent: false,
+      registrationFee: 199,
     },
-    { id: 6, name: "BEAT THE SPOT", category: "Cultural", teamEvent: false },
+    {
+      id: 6,
+      name: "BEAT THE SPOT",
+      category: "Cultural",
+      teamEvent: false,
+      registrationFee: 199,
+    },
     {
       id: 7,
       name: "GROOVE",
       category: "Cultural",
       teamEvent: false,
+      registrationFee: 199,
     },
     {
       id: 8,
@@ -100,24 +112,28 @@ const EventRegistration = () => {
       category: "Cultural",
       teamEvent: true,
       maxTeamSize: 2,
+      registrationFee: 199,
     },
     {
       id: 9,
       name: "ONE MIC STAND",
       category: "Cultural",
       teamEvent: false,
+      registrationFee: 199,
     },
     {
       id: 10,
       name: "JAM",
       category: "Cultural",
       teamEvent: false,
+      registrationFee: 199,
     },
     {
       id: 11,
       name: "CAMPUS AMBASSADOR",
       category: "Cultural",
       teamEvent: false,
+      registrationFee: 199,
     },
     {
       id: 12,
@@ -125,6 +141,7 @@ const EventRegistration = () => {
       category: "E SPORTS",
       teamEvent: true,
       maxTeamSize: 4,
+      registrationFee: 199,
     },
     {
       id: 13,
@@ -132,6 +149,7 @@ const EventRegistration = () => {
       category: "E SPORTS",
       teamEvent: true,
       maxTeamSize: 6,
+      registrationFee: 199,
     },
     {
       id: 14,
@@ -139,12 +157,14 @@ const EventRegistration = () => {
       category: "E SPORTS",
       teamEvent: true,
       maxTeamSize: 5,
+      registrationFee: 199,
     },
     {
       id: 15,
       name: "E-FOOTBALL",
       category: "E SPORTS",
       teamEvent: false,
+      registrationFee: 199,
     },
   ]);
 
@@ -871,13 +891,12 @@ const EventRegistration = () => {
                     <h2 className="font-minecraft text-xl text-yellow-400 mb-4 border-b-2 border-yellow-400 pb-2">
                       <Calendar className="inline-block mr-2" /> Select Events
                     </h2>
-
                     {errors.events && (
                       <p className="text-red-500 text-sm mb-3 font-minecraft bg-red-900/30 p-2 rounded">
                         {errors.events}
                       </p>
                     )}
-
+                    ...
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {availableEvents.map((event) => (
                         <motion.div
@@ -887,7 +906,7 @@ const EventRegistration = () => {
                             formData.events.includes(event.id)
                               ? "border-green-500"
                               : "border-gray-600"
-                          } rounded-lg p-4 cursor-pointer transition-all relative`} // Added 'relative' here
+                          } rounded-lg p-4 cursor-pointer transition-all relative`}
                           onClick={() => handleEventSelect(event.id)}
                         >
                           <div className="flex justify-between">
@@ -928,7 +947,9 @@ const EventRegistration = () => {
                               </div>
                             )}
                           </div>
-                          {/* Conditionally show checkmark */}
+                          <div className="mt-2 text-sm text-gray-400">
+                            Registration Fee: ₹{event.registrationFee}
+                          </div>
                           {formData.events.includes(event.id) && (
                             <div className="absolute bottom-2 right-2">
                               <Check className="text-green-500" size={20} />
@@ -937,6 +958,7 @@ const EventRegistration = () => {
                         </motion.div>
                       ))}
                     </div>
+                    ...
                   </div>
                 )}
 
