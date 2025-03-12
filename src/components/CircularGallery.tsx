@@ -791,4 +791,4 @@ export default function CircularGallery({
   }, [items, bend, textColor, borderRadius, font, onImageClick, navigate]);
 
   return <div className="circular-gallery" ref={containerRef} />;
-}
+}                       
