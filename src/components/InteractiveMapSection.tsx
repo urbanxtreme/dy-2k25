@@ -19,6 +19,8 @@ import {
 } from "lucide-react";
 
 // Type definitions
+
+
 interface MapPointData {
   id: number;
   x: number;
@@ -54,45 +56,70 @@ const MAP_THEMES = {
 const MAP_POINTS: MapPointData[] = [
   {
     id: 1,
-    x: 25,
+    x: 33,
     y: 30,
-    name: "Main Stage",
-    icon: "🎮",
-    description: "Central hub for keynotes and major announcements.",
+    name: "LAB 1",
+    icon: "🖥",
+    description: "COMPETE WITH FELLOW PEERS",
   },
   {
     id: 2,
-    x: 65,
-    y: 20,
-    name: "Crafting Area",
-    icon: "⚒️",
-    description: "Build with fellow enthusiasts. Competitions every hour.",
+    x: 53,
+    y: 30,
+    name: "LAB 2",
+    icon: "🖥",
+    description: "COMPETE WITH FELLOW PEERS",
   },
   {
     id: 3,
-    x: 40,
+    x: 57,
     y: 70,
-    name: "Pixel Art Gallery",
-    icon: "🎨",
-    description: "Showcasing community artwork and interactive exhibits.",
+    name: "MAIN STAGE",
+    icon: "🏦",
+    description: "Central hub for keynotes and major announcements",
   },
   {
     id: 4,
-    x: 80,
-    y: 60,
-    name: "Battle Arena",
-    icon: "⚔️",
+    x: 70,
+    y: 65,
+    name: "SDPK HALL",
+    icon: "🏢",
     description: "Join PvP tournaments with prizes for top players.",
   },
   {
     id: 5,
-    x: 15,
+    x: 20,
     y: 50,
-    name: "Trading Post",
-    icon: "💎",
+    name: "STAGE 2",
+    icon: "⛩",
     description: "Exchange items and meet with collectors.",
   },
+  {
+    id: 6,
+    x: 33,
+    y: 17,
+    name: "AUDITORIUM ",
+    icon: "🪟",
+    description: "Exchange items and meet with collectors.",
+  },
+  {
+    id: 7,
+    x: 20,
+    y: 25,
+    name: "CANTEEN ",
+    icon: "🍜",
+    description: "EAT FOOD DO NOTHING",
+  },
+  {
+    id: 8,
+    x: 75,
+    y: 65,
+    name: "FOSS LAB",
+    icon: "👩🏿‍💻",
+    description: "Join PvP tournaments with prizes for top players.",
+  },
 ];
+
 
 // Components
 const PixelButton: React.FC<PixelButtonProps> = ({
@@ -320,7 +347,7 @@ const InteractiveMapSection: React.FC<{
         >
           <span className="text-yellow-500 px-6 py-3 bg-gray-800/80 backdrop-blur-sm rounded-xl border-2 border-yellow-600 inline-block">
             <Compass className="inline-block mr-3 mb-1" size={28} />
-            Interactive College Map
+            Interactive Festival Map
           </span>
         </motion.h2>
 
@@ -572,8 +599,8 @@ const InteractiveMapSection: React.FC<{
             variant="primary"
             onClick={() => {
               const link = document.createElement("a");
-              link.href = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjH8fPAAAAAElFTkSuQmCC";
-              link.download = "minecraft_map.png";
+              link.href = "/images/clgmapnew.jpg";
+              link.download = "clgmapnew.jpg";
               document.body.appendChild(link);
               link.click();
               document.body.removeChild(link);

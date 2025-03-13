@@ -625,14 +625,8 @@ const EventRegistration = () => {
       {/* Main Content */}
       <div className="flex-grow relative z-10 pt-12 pb-24 px-4">
         <div className="container mx-auto">
-          <Link
-            to="/"
-            className="inline-flex items-center text-white font-minecraft mb-6"
-          >
-            <ArrowLeft className="mr-2" size={20} />
-            {/* <span>Back to Home</span> */}
-          </Link>
 
+          <div className="h-16"></div>
           <h1 className="font-minecraft text-4xl md:text-5xl text-center text-white mb-4 pixel-text-shadow shimmer-effect">
             Event Registration
           </h1>
