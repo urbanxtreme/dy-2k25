@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import PixelButton from "@/components/PixelButton";
 import MinecraftCharacter from "@/components/MinecraftCharacter";
 import { motion, AnimatePresence } from "framer-motion";
-import { useInView } from "react-intersection-observer";
 import { Heart, Users, ChevronLeft, ChevronRight } from "lucide-react";
 import {
   Calendar,
@@ -16,7 +15,6 @@ import {
   Zap,
 } from "lucide-react";
 import gsap from "gsap";
-import Countdown from "react-countdown";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import FeaturedEventsSection from "@/components/FeaturedEventsSection";

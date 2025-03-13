@@ -1,0 +1,52 @@
+.infinite-menu-container {
+    height: 800px; /* Increased as per your request */
+    position: relative;
+    background-image: url('/images/newand.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+  }
+  
+  #infinite-grid-menu-canvas {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+  }
+  
+  .face-title {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+    font-size: 24px;
+  }
+  
+  .face-description {
+    position: absolute;
+    top: 60px;
+    left: 20px;
+    color: white;
+    font-size: 16px;
+  }
+  
+  .action-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+    color: white;
+  }
+  
+  .face-title.active,
+  .face-description.active,
+  .action-button.active {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+  
+  .face-title.inactive,
+  .face-description.inactive,
+  .action-button.inactive {
+    opacity: 0;
+  }
