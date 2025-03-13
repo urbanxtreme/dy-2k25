@@ -1,0 +1,68 @@
+.gallery-container {
+    padding: 2rem;
+    background-color: red;
+    background-image: url('/images/bgbackhr.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+  }
+  
+  .category-filter {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .category-button {
+    margin: 0 0.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #e0e0e0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .category-button.active,
+  .category-button:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+  
+  .gallery-item {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgb(221, 221, 221);
+    transition: transform 0.3s;
+  }
+  
+  .gallery-item:hover {
+    transform: translateY(-5px);
+  }
+  
+  .gallery-item img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .gallery-item-content {
+    padding: 1rem;
+  }
+  
+  .gallery-item-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .gallery-item-description {
+    font-size: 1rem;
+    color: #666;
+  }
+  
