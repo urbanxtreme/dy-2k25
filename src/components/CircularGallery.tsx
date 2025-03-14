@@ -477,91 +477,91 @@ class App {
   createMedias(items, bend = 1, textColor, borderRadius, font) {
     const defaultItems = [
       {
-        image: "/images/daksha/Frame 326.png",
+        image: "/images/webp/persona.webp",
         text: "MX. DY",
         id: 1,
       },
       {
-        image: "/images/daksha/Frame 323.png",
+        image: "/images/webp/fashion.webp",
         text: "LA COUTURE",
         id: 2,
       },
       {
-        image: "/images/daksha/Frame 322.png",
+        image: "/images/webp/bailamo.webp",
         text: "BAILAMO",
         id: 3,
       },
       {
-        image: "/images/daksha/Frame 324.png",
+        image: "/images/webp/euphony.webp",
         text: "EUPHONY",
         id: 4,
       },
       {
-        image: "/images/daksha/Frame 330.png",
+        image: "/images/webp/bloomer.webp",
         text: "BLOOMER",
         id: 5,
       },
       {
-        image: "/images/daksha/Frame 316.png",
+        image: "/images/webp/beatspot.webp",
         text: "BEAT THE SPOT",
         id: 6,
       },
       {
-        image: "/images/daksha/Frame 329.png",
+        image: "/images/webp/groove.webp",
         text: "GROOVE",
         id: 7,
       },
       {
-        image: "/images/daksha/Frame 320.png",
+        image: "/images/webp/eldueto.webp",
         text: "EL DUETO",
         id: 8,
       },
       {
-        image: "/images/daksha/Frame 317.png",
+        image: "/images/webp/onemicstand.webp",
         text: "ONE MIC STAND",
         id: 9,
       },
       {
-        image: "/images/daksha/Frame 313.png",
+        image: "/images/webp/jam.webp",
         text: "JAM",
         id: 10,
       },
       {
-        image: "/images/daksha/Frame 328.png",
+        image: "/images/webp/ambi.webp",
         text: "CAMPUS AMBASSADOR",
         id: 11,
       },
       {
-        image: "/images/esports/Frame 321.png",
+        image: "/images/webp/bgmi.webp",
         text: "BGMI",
         id: 12,
 
       },
       {
-        image: "/images/esports/Insta 38.png",
+        image: "/images/webp/valo.webp",
         text: "VALORANT",
         id: 13,
         
       },
 
       {
-        image: "/images/esports/Insta 39.png",
+        image: "/images/webp/cod.webp",
         text: "CODM",
         id: 14,
         
       },
       {
-        image: "/images/esports/Frame 319.png",
+        image: "/images/webp/efutball.webp",
         text: "E-FOOTBALL",
         id: 15,
         
       },   
-      {
-        image: "/images/esports/Frame 318.png",
-        text: "FREEFIRE",
-        id: 16,
+      // {
+      //   image: "/images/esports/freefire.webp",
+      //   text: "FREEFIRE",
+      //   id: 16,
         
-      },
+      // },
      ];
     
     const galleryItems = items && items.length ? items : defaultItems;
@@ -616,8 +616,8 @@ class App {
     ) {
       this.isDragging = true;
 
-      // Further reduce sensitivity
-      const sensitivity = 0.015; // Reduced from 0.025 to 0.015
+      // Increase sensitivity
+      const sensitivity = 0.1; // Increased from 0.015 to 0.03
       const distance = (this.lastX - x) * sensitivity;
       this.scroll.target = this.scroll.current + distance;
       this.lastX = x;
@@ -691,10 +691,11 @@ class App {
     }
   }
   update() {
+    // Increase ease factor
     this.scroll.current = lerp(
       this.scroll.current,
       this.scroll.target,
-      this.scroll.ease
+      0.05 // Increased from 0.03 to 0.05
     );
     const direction = this.scroll.current > this.scroll.last ? "right" : "left";
     if (this.medias) {
@@ -764,16 +765,13 @@ export default function CircularGallery({
   const handleImageClick = (id, text, image) => {
     // If there's a custom onImageClick handler, call it first
     if (onImageClick) {
-      onImageClick(id, text, image);
+      // onImageClick(id, text, image);
+      location.href="/event-registration";
+      
     }
     // Navigate to EventRegistration with the event ID
-    navigate(`/event-registration/${id}`, { 
-      state: { 
-        eventId: id, 
-        eventName: text, 
-        eventImage: image 
-      } 
-    });
+
+
   };
 
   useEffect(() => {
@@ -791,4 +789,4 @@ export default function CircularGallery({
   }, [items, bend, textColor, borderRadius, font, onImageClick, navigate]);
 
   return <div className="circular-gallery" ref={containerRef} />;
-}                       
+}

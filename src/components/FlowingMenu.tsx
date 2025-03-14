@@ -11,6 +11,11 @@ interface BounceCardsProps {
 const FlowingMenu: React.FC<{ items: { link: string; text: string; image: string }[] }> = ({ items }) => {
   // Updated menu items with your desired text and assuming images are in your project folder
   const menuItems = [
+    {
+      text: "Campus Ambassador", 
+      link: "/ambi", 
+      image: "./images/daksha/123.png"
+    },
     { 
       text: "CULTURAL", 
       link: "/events", 

@@ -24,6 +24,7 @@ import {
   Plus,
   Receipt,
 } from "lucide-react";
+import { getMySin } from "@/Secrets/authKarma";
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -36,7 +37,7 @@ const EventRegistration = () => {
   const [formSuccess, setFormSuccess] = useState(false);
   const [formError, setFormError] = useState(false);
   const [paymentPreview, setPaymentPreview] = useState<string | null>(null);
-
+  const [sins,setsins] = useState([])
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -52,6 +53,7 @@ const EventRegistration = () => {
     paymentScreenshot: "",
     useSameTeam: false,
     teams: {},
+    referralCode: ""
   });
 
   const [availableEvents] = useState([
@@ -516,6 +518,7 @@ const EventRegistration = () => {
 
   // Setup animations when component mounts
   useEffect(() => {
+
     // Form entrance animation
     gsap.from(".form-container", {
       y: 100,
@@ -1385,6 +1388,7 @@ const EventRegistration = () => {
                       </div>
 
                       {/* Transaction ID Input */}
+
                       <div className="form-group">
                         <label className="block font-minecraft text-white mb-2">
                           Transaction ID <span className="text-red-500">*</span>
@@ -1415,6 +1419,40 @@ const EventRegistration = () => {
                         {errors.paymentTransactionId && (
                           <p className="text-red-500 text-sm mt-2 font-minecraft">
                             {errors.paymentTransactionId}
+                          </p>
+                        )}
+                      </div>
+                      {/* referral */}
+                      <div className="form-group">
+                        <label className="block font-minecraft text-white mb-2">
+                          Referral Code <span className="text-red-500">*</span>
+                        </label>
+                        <div className="relative">
+                          <input
+                            type="text"
+                            name="refCode"
+                            value={formData.referralCode}
+                            onChange={(e) =>
+                              setFormData((prev) => ({
+                                ...prev,
+                                referralCode: e.target.value,
+                              }))
+                            }
+                            className={`w-full bg-gray-800 text-white border-2 ${
+                              errors.referralCode
+                                ? "border-red-500"
+                                : "border-gray-700"
+                            } p-3 rounded-lg focus:border-cyan-500 transition-all font-minecraft`}
+                            placeholder="Enter UPI/Transaction ID"
+                          />
+                          <Receipt
+                            className="absolute right-3 top-3 text-gray-400"
+                            size={20}
+                          />
+                        </div>
+                        {errors.referralCode && (
+                          <p className="text-red-500 text-sm mt-2 font-minecraft">
+                            {errors.referralCode}
                           </p>
                         )}
                       </div>
@@ -1576,6 +1614,7 @@ const EventRegistration = () => {
                         paymentScreenshot: "",
                         useSameTeam: false,
                         teams: {},
+                        referralCode :""
                       });
                       setFormStep(0);
                       setFormSuccess(false);
