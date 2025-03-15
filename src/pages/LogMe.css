@@ -1,0 +1,168 @@
+.pageWrap{
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
+}
+*{
+    user-select: none;
+}
+
+input{
+    width: 100%;
+    user-select: all;
+    background: transparent;
+}
+input:active{
+    outline: none;
+    border:none;
+}
+input:focus{
+    outline: 0px;
+}
+input:-webkit-autofill {
+    background-color: transparent !important;
+    -webkit-box-shadow: 0 0 0px 1000px #2b2b2b inset !important;
+    -webkit-text-fill-color: white !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.spanPP{
+    text-decoration: underline;
+}
+
+.log {
+    width: 60vw;
+    height: 95vh;
+    border: 1px solid grey;
+    background: #1f1f1f;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 24px;
+    box-shadow: 1px 6px 9px inset #0000004a;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    /* padding: 24px; */
+}
+
+.log > header {
+  display: flex;
+  width: 80%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 8px;
+  cursor: default;
+}
+
+.log > header > p {
+  margin: 0px 2px;
+  cursor: pointer;
+  transition: 300ms;
+  font-size:9px;
+}
+
+.log > header > .active {
+    color: white;
+}
+
+.log > header > .inactive {
+    color: rgb(135, 135, 135);
+}
+
+.log > header > .inactive:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+.ioniiii {
+    border-radius: 8px;
+    background: #2b2b2b;
+    padding: 8px 12px;
+    transition: 400ms;
+    border: 1px solid grey;
+    width: 60%;
+}
+
+.ioniiii > .error {
+    color: red;
+    font-size: 10px;
+}
+
+.logik {
+    display: flex;
+    width: 80%;
+    gap: 12px;
+    padding-top: 12px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    height: 90%;
+    justify-content: center;
+    align-items: center;
+}
+
+.logik>img{
+    width: 30%;
+    height: auto;
+}
+
+.butto {
+    background-color: #00368366;
+    border: 1px solid #00deff;
+    color: white;
+    width: 60%;
+    padding: 15px 12px;
+    text-align: center;
+    transition: 200ms;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.butto:hover {
+    background-color: #4560a0;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .log {
+        width: 80vw;
+        height: 90vh;
+    }
+
+    .ioniiii {
+        width: 80%;
+    }
+
+    .butto {
+        width: 80%;
+    }
+}
+
+@media (max-width: 480px) {
+    .log {
+        width: 90vw;
+        height: 90vh;
+    }
+
+    .ioniiii {
+        width: 90%;
+    }
+
+    .butto {
+        width: 90%;
+    }
+}

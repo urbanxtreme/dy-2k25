@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -13,6 +12,8 @@ import MapPage from "./pages/MapPage";
 import AboutPage from "./pages/AboutPage";
 import NotFound from "./pages/NotFound";
 import EventRegistration from "./pages/EventRegistration";
+import LogMeinDaddy from "./pages/login";
+import Campus from "./pages/campus";
 
 const queryClient = new QueryClient();
 
@@ -22,22 +23,31 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <div className="flex flex-col min-h-screen">
-          <Navigation />
-          <main className="flex-grow">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/events" element={<EventsPage />} />
-              <Route path="/gallery" element={<GalleryPage />} />
-              <Route path="/map" element={<MapPage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="*" element={<NotFound />} />
-              <Route path="/event-registration/:id" element={<EventRegistration />} />
-              <Route path="/event-registration" element={<EventRegistration />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
+        <Routes>
+          <Route path="/login" element={<LogMeinDaddy />} />
+          <Route path="/ambi" element={<Campus />}/>
+          <Route
+            path="*"
+            element={
+              <div className="flex flex-col min-h-screen">
+                <Navigation />
+                <main className="flex-grow">
+                  <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/events" element={<EventsPage />} />
+                    <Route path="/gallery" element={<GalleryPage />} />
+                    <Route path="/map" element={<MapPage />} />
+                    <Route path="/about" element={<AboutPage />} />
+                    <Route path="*" element={<NotFound />} />
+                    <Route path="/event-registration/:id" element={<EventRegistration />} />
+                    <Route path="/event-registration" element={<EventRegistration />} />
+                  </Routes>
+                </main>
+                <Footer />
+              </div>
+            }
+          />
+        </Routes>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
