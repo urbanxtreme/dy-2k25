@@ -477,89 +477,203 @@ class App {
   createMedias(items, bend = 1, textColor, borderRadius, font) {
     const defaultItems = [
       {
-        image: "/images/webp/persona.webp",
+        image: "dist/assets/images/webp/persona.webp",
         text: "MX. DY",
         id: 1,
       },
       {
-        image: "/images/webp/fashion.webp",
+        image: "dist/assets/images/webp/fashion.webp",
         text: "LA COUTURE",
         id: 2,
       },
       {
-        image: "/images/webp/bailamo.webp",
+        image: "dist/assets/images/webp/bailamo.webp",
         text: "BAILAMO",
         id: 3,
       },
       {
-        image: "/images/webp/euphony.webp",
+        image: "dist/assets/images/webp/euphony.webp",
         text: "EUPHONY",
         id: 4,
       },
       {
-        image: "/images/webp/bloomer.webp",
+        image: "dist/assets/images/webp/bloomer.webp",
         text: "BLOOMER",
         id: 5,
       },
       {
-        image: "/images/webp/beatspot.webp",
+        image: "dist/assets/images/webp/beatspot.webp",
         text: "BEAT THE SPOT",
         id: 6,
       },
       {
-        image: "/images/webp/groove.webp",
+        image: "dist/assets/images/webp/groove.webp",
         text: "GROOVE",
         id: 7,
       },
       {
-        image: "/images/webp/eldueto.webp",
+        image: "dist/assets/images/webp/eldueto.webp",
         text: "EL DUETO",
         id: 8,
       },
       {
-        image: "/images/webp/onemicstand.webp",
+        image: "dist/assets/images/webp/onemicstand.webp",
         text: "ONE MIC STAND",
         id: 9,
       },
       {
-        image: "/images/webp/jam.webp",
+        image: "dist/assets/images/webp/jam.webp",
         text: "JAM",
         id: 10,
       },
       {
-        image: "/images/webp/ambi.webp",
+        image: "dist/assets/images/webp/ambi.webp",
         text: "CAMPUS AMBASSADOR",
         id: 11,
       },
       {
-        image: "/images/webp/bgmi.webp",
+        image: "dist/assets/images/webp/bgmi.webp",
         text: "BGMI",
         id: 12,
 
       },
       {
-        image: "/images/webp/valo.webp",
+        image: "dist/assets/images/webp/valo.webp",
         text: "VALORANT",
         id: 13,
         
       },
 
       {
-        image: "/images/webp/cod.webp",
+        image: "dist/assets/images/webp/cod.webp",
         text: "CODM",
         id: 14,
         
       },
       {
-        image: "/images/webp/efutball.webp",
+        image: "dist/assets/images/webp/efutball.webp",
         text: "E-FOOTBALL",
         id: 15,
         
       },   
       {
-        image: "/images/Yanthra/All abt Cinema workshop.png",
-        text: "FREEFIRE",
+        image: "dist/assets/images/Yanthra/All abt Cinema workshop.png",
+        text: "All About Cinema",
         id: 16,
+        
+      },
+      {
+        image: "dist/assets/images/Yanthra/Blind Coding.png",
+        text: "Blind Coding",
+        id: 17,
+        
+      },
+      {
+        image: "dist/assets/images/Yanthra/Circuit Debugging.png",
+        text: "Circuit Debugging",
+        id: 18,
+        
+      },
+      {
+        image: "dist/assets/images/Yanthra/Coding Competition.png",
+        text: "Coding Competition",
+        id: 19,
+        
+      },
+      {
+        image: "dist/assets/images/Yanthra/CTF.png",
+        text: "CTF",
+        id: 20,
+        
+      },
+      {
+        image: "dist/assets/images/Yanthra/Data Science workshop.png",
+        text: "Data Science workshop",
+        id: 21,
+        
+      },
+      {
+        image: "dist/assets/images/Yanthra/Debate.png",
+        text: "Debate",
+        id: 22,
+        
+      },
+      {
+        image: "dist/assets/images/Yanthra/Fossathon.png",
+        text: "Fossathon",
+        id: 23,
+        
+      },
+      {
+        image: "dist/assets/images/Yanthra/Impressario.png",
+        text: "Impressario",
+        id: 24,
+        
+      },
+      {
+        image: "dist/assets/images/Yanthra/Line Follower Workshop.png",
+        text: "Line Follower Workshop",
+        id: 25,
+        
+      },
+      {
+        image: "dist/assets/images/Yanthra/Project Expo.png",
+        text: "Project Expo",
+        id: 26,
+        
+      },
+      {
+        image: "dist/assets/images/Yanthra/Public Speaking Workshop.png",
+        text: "Public Speaking Workshop",
+        id: 27,
+        
+      },
+      {
+        image: "dist/assets/images/Yanthra/RJ Hunt.png",
+        text: "RJ Hunt",
+        id: 28,
+        
+      },
+      {
+        image: "dist/assets/images/Yanthra/Sign language and tts ai bot workshop.png",
+        text: "Sign language and tts ai bot workshop",
+        id: 29,
+        
+      },
+      {
+        image: "dist/assets/images/Yanthra/Tech Quiz.png",
+        text: "Tech Quiz",
+        id: 30,
+        
+      },
+      {
+        image: "dist/assets/images/Yanthra/Treasure hunt.png",
+        text: "Treasure Hunt",
+        id: 31,
+        
+      },
+      {
+        image: "dist/assets/images/Yanthra/Type Racing.png",
+        text: "Type Racing",
+        id: 32,
+        
+      },
+      {
+        image: "dist/assets/images/Yanthra/VR Expo.png",
+        text: "VR Expo",
+        id: 33,
+        
+      },
+      {
+        image: "dist/assets/images/Yanthra/Web Dev.png",
+        text: "Web Dev",
+        id: 34,
+        
+      },
+      {
+        image: "dist/assets/images/Yanthra/Web development Workshop.png",
+        text: "Web development Workshop",
+        id: 35,
         
       },
      ];
@@ -759,14 +873,33 @@ const urlMapping = {
   6: "https://link.dakshayanthra.in/BeatTheSpot",
   7: "https://link.dakshayanthra.in/Groove",
   8: "https://link.dakshayanthra.in/ElDueto",
-  9: "https://example.com/9",
-  10: "https://example.com/10",
+  9: "https://link.dakshayanthra.in/OneMicStand",
+  10: "https://link.dakshayanthra.in/JAM",
   11: "https://link.dakshayanthra.in/CA",
-  12: "https://example.com/12",
+  12: "https://docs.google.com/forms/d/e/1FAIpQLScCsE4Be3pRHsA62oLnlmXf9xpuvalZe0AdFOIjYii31d5riA/viewform?usp=dialog#BGMITournament",
   13: "https://docs.google.com/forms/d/e/1FAIpQLSedvBzR7NXWCwOaa5P3cpWw-HKoW_G85lrm7aBspJeaKOiZ9g/viewform?usp=dialog",
   14: "https://docs.google.com/forms/d/e/1FAIpQLSdWPALiPTVn0Nj-xhKEK11V1GbC20HtYo26tKv7rUwxfAyvnw/viewform?usp=header",
   15: "https://docs.google.com/forms/d/e/1FAIpQLSfhYGwsRkw1T2vzNf6AM_GOnA1rPh02ReCj8thTqWRPX5eO-w/viewform?usp=header",
-  16: "https://example.com/16",
+  16: "https://link.dakshayanthra.in/Cinema",
+  17: "https://link.dakshayanthra.in/BlindCode",
+  18: "https://link.dakshayanthra.in/CircuitDebugg",
+  19: "https://link.dakshayanthra.in/CodeClash",
+  20: "https://link.dakshayanthra.in/ArtGallery",
+  21: "https://link.dakshayanthra.in/DataScience",
+  22: "https://link.dakshayanthra.in/TechTalkBattle",
+  23: "https://link.dakshayanthra.in/FOSSathon",
+  24: "https://link.dakshayanthra.in/ArtGallery",
+  25: "https://link.dakshayanthra.in/ArtGallery",
+  26: "https://link.dakshayanthra.in/ArtGallery",
+  27: "https://link.dakshayanthra.in/PublicSpeaking",
+  28: "https://link.dakshayanthra.in/ArtGallery",
+  29: "https://link.dakshayanthra.in/SignLanguageWorkshop",
+  30: "https://link.dakshayanthra.in/TechQuiz",
+  31: "https://link.dakshayanthra.in/ArtGallery",
+  32: "https://link.dakshayanthra.in/TypeRace",
+  33: "https://link.dakshayanthra.in/ArtGallery",
+  34: "https://link.dakshayanthra.in/WebDev",
+  35: "https://link.dakshayanthra.in/WebDevWorkshop",
 };
 
 export default function CircularGallery({
