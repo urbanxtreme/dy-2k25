@@ -556,12 +556,12 @@ class App {
         id: 15,
         
       },   
-      // {
-      //   image: "/images/esports/freefire.webp",
-      //   text: "FREEFIRE",
-      //   id: 16,
+      {
+        image: "/images/Yanthra/All abt Cinema workshop.png",
+        text: "FREEFIRE",
+        id: 16,
         
-      // },
+      },
      ];
     
     const galleryItems = items && items.length ? items : defaultItems;
